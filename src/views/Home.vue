@@ -1,27 +1,35 @@
 <template>
-  <div class="home">
-    <div class="flex justify-center pt-8">
+  <div class="flex flex-col justify-center align-middle home">
+    <div class="grid justify-items-center">
       <div>
-        <img src="../assets/logo.svg" alt="Securious" class="h-48 w-96"/>
+        <router-link to="/"><img src="../assets/logo.svg" alt="Securious" class="h-24"/></router-link>
+      </div>
+      <div class="text-white text-2xl tracking-widest mt-16">WILLKOMMEN</div>
+      <div class="note-text text-white text-center text-sm mt-4">
+        Loggen Sie sich ein oder registrieren Sie sich jetzt, um Ihre Unternehmenssicherheit zu prüfen und zu verbessern!
+      </div>
+      <div class="mt-8 flex space-x-4">
+        <router-link class="border rounded-full text-center  text-sm text-white p-2 w-96" to="/register">REGISTRIEREN</router-link>
+        <router-link class="border rounded-full text-center text-sm text-white p-2 w-96" to="/login">EINLOGGEN</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-
-@Options({
-  components: {
-  },
-})
+import { Vue } from 'vue-class-component';
 export default class Home extends Vue {}
 </script>
 
-<style>
+<style scoped>
 .home {
   background: url("https://app.securious.de/images/common/page-background.png") no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+button:hover {
+  background-color: #fff;
+  color: #1269b8;
 }
 </style>
