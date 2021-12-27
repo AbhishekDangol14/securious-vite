@@ -9,8 +9,8 @@
         Loggen Sie sich ein oder registrieren Sie sich jetzt, um Ihre Unternehmenssicherheit zu prüfen und zu verbessern!
       </div>
       <div class="mt-8 flex space-x-4">
-        <router-link class="border rounded-full text-center  text-sm text-white p-2 w-96" to="/register">REGISTRIEREN</router-link>
-        <router-link class="border rounded-full text-center text-sm text-white p-2 w-96" to="/login">EINLOGGEN</router-link>
+        <router-link class="btn border rounded-full text-center  text-sm text-white p-2 w-96" to="/register">REGISTRIEREN</router-link>
+        <router-link class="btn border rounded-full text-center text-sm text-white p-2 w-96" to="/login">EINLOGGEN</router-link>
       </div>
     </div>
   </div>
@@ -23,12 +23,11 @@ export default class Home extends Vue {}
 
 <style scoped>
 .home {
-  background: url("https://app.securious.de/images/common/page-background.png") no-repeat;
+  background: url("https://app.securious.de/images/common/page-background.png") no-repeat center center;
   background-size: cover;
   min-height: 100vh;
 }
-
-button:hover {
+.btn:hover {
   background-color: #fff;
   color: #1269b8;
 }
