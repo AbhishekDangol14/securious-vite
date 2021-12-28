@@ -6,14 +6,14 @@
             </div>
             <div class="login-form mt-24 max-w-sm flex flex-col ml-40">
                 <div class="form-title">Einloggen</div>
-                <Form class="flex flex-col space-y-3 mt-4" @submit="login">
-                    <Field class="inp rounded-none p-2 text-xs" name="email" type="email" placeholder="Ihre@email.com" required />
-                    <Field class="inp rounded-none p-2 text-xs" name="password" type="password" placeholder="Passwort" />
+                <form class="flex flex-col space-y-3 mt-4" @submit.prevent='login'>
+                    <input class="inp rounded-none p-2 text-xs" name="email" v-model="email" :error="emailError" type="email" placeholder="Ihre@email.com" required/>
+                    <input class="inp rounded-none p-2 text-xs" name="password" v-model="password" :error="passwordError" type="password" placeholder="Passwort" />
                     <div class="link-text text-right text-sm">Passwort vergessen?</div>
                     <div class="grid grid-cols-3">
                         <button class="col-start-2 col-end-2 rounded-full text-white p-2">LOGIN</button>
                     </div>
-                </Form>
+                </form>
                 <div class="register flex justify-center space-x-4 pt-4">
                     <div class="text-xs">
                         Noch kein Account? 
@@ -38,25 +38,40 @@
 </template>
 
 <script lang="ts">
-    import { Field, Form } from 'vee-validate'
     import store from '../store'
-    import router from '../router'
+    import { useForm,useField } from 'vee-validate'
+    import { LOGIN } from '../store/modules/actions.type'
 
     export default{
-        components: {
-            Field,
-            Form,
-        },
-
-        methods: {
-            login(values) {
+        setup() {
+            const { handleSubmit } = useForm();
+            const login = handleSubmit(values =>  {
                 store.dispatch({
-                    type: 'LOGIN',
+                    type: LOGIN,
                     values
-                });
-                router.push('/dashboard')
+                })
+            })
+
+            const email = useField('email', function (value) {
+                if (!value)
+                    return "This field is required"
+                return true
+            })
+
+            const password = useField('password', (value) => {
+                if(!value)
+                    return "This field is required"
+                return true
+            })
+
+            return {
+                login,
+                email: email.value,
+                password: password.value,
+                emailError: email.errorMessage,
+                passwordError: password.errorMessage
             }
-        },
+        }
     };
 </script>
 
