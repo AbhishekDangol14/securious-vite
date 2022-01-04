@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="right_content p-3">
-            <div class="text-white text-center text-2xl pt-20">Schützen Sie Ihr Unternehmen vor Cyber-Angriffen</div>
+            <div class="text-white text-center text-2xl mt-16">Schützen Sie Ihr Unternehmen vor Cyber-Angriffen</div>
             <p class="text-white text-center text-sm pt-4 pl-24 pr-24 pb-6">Mit securious können Sie in einfachen, kleinen Schritten Ihre IT-Sicherheit überprüfen und durch umsetzbare und konkrete Maßnahmen erhöhen. </p>
             <ul class="text-white text-center text-xs space-y-1">
                 <li><i class="fa fa-check"></i>Sie müssen kein IT-Sicherheits-Experte sein.</li>
@@ -39,28 +39,29 @@
 </template>
 
 <script lang="ts">
-    import store from '../store'
     import { useForm,useField } from 'vee-validate'
     import { REGISTER } from '../store/modules/actions.type'
+    import { defineComponent } from 'vue'
+    import store from '@/store'
 
-    export default{
+    export default defineComponent ({
         setup() {
             const { handleSubmit } = useForm();
             
-            const register = handleSubmit((values, {resetForm})=>  {
+            const register = handleSubmit((values, {resetForm}): void =>  {
                 store.dispatch({
                     type: REGISTER,
                     values
                 })
             })
 
-            const email = useField('email', function (value) {
+            const email = useField('email', function (value: {  email: string, password: string }) {
                 if (!value)
                     return "This field is required"
                 return true
             })
 
-            const password = useField('password', (value) => {
+            const password = useField('password', (value: {  email: string, password: string }) => {
                 if(!value)
                     return "This field is required"
                 return true
@@ -71,10 +72,10 @@
                 email: email.value,
                 password: password.value,
                 emailError: email.errorMessage,
-                passwordError: password.errorMessage
+                passwordError: password.errorMessage,
             }
         }
-    };
+    });
 </script>
 
 <style scoped>

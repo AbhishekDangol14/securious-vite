@@ -3,7 +3,7 @@ import { auth_module } from './modules/auth.module'
 
 export default createStore({
   state: {
-    token: ''
+    a: auth_module
   },
   mutations: {
   },

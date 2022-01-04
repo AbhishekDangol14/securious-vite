@@ -3,7 +3,11 @@ module.exports = {
   purge:["./src/**/*.vue"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        '30/2': '15%',
+      }
+    },
   },
   variants: {
     extend: {},

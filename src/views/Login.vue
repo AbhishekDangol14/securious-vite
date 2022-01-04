@@ -52,13 +52,13 @@
                 })
             })
 
-            const email = useField('email', function (value) {
+            const email = useField('email', function (value: {  email: string, password: string }) {
                 if (!value)
                     return "This field is required"
                 return true
             })
 
-            const password = useField('password', (value) => {
+            const password = useField('password', (value: {  email: string, password: string }) => {
                 if(!value)
                     return "This field is required"
                 return true
