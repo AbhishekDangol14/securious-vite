@@ -4,7 +4,7 @@
             <img src="../assets/views/securious-logo.svg">
         </div>
         <div class="border-line pt-4"><hr></div>
-        <Menu />
+        <Menu v-for="item in menuItems" :item="item" v-bind:key="item.label" />
     </div>
 </template>
 
@@ -17,7 +17,38 @@ export default defineComponent({
         Menu
     },
     setup() {
-        return true
+      const menuItems = [
+        {
+          'label': 'Dashboard',
+          'icon': '123',
+          'link': '/dashboard',
+        },
+        {
+          'label': 'Homepage',
+          'icon': '345',
+          'link': '/homepage',
+        },
+        {
+          'label': 'Expansion',
+          'icon': '',
+          'link': '/expansion',
+          'items': [
+            {
+              'label': 'Dashboard',
+              'icon': '123',
+              'link': '/dashboard',
+            },
+            {
+              'label': 'Homepage',
+              'icon': '345',
+              'link': '/homepage',
+            },
+          ]
+        },
+      ]
+        return {
+          menuItems
+        }
     },
 })
 </script>

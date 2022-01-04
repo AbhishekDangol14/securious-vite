@@ -1,6 +1,6 @@
 <template>
     <div class="dashboard bg-blue-50" >
-        <sidebar /> 
+        <Sidebar />
         <h1>Dashboard</h1>
         {{ user }}
         <button @click="logout">Log Out</button>
