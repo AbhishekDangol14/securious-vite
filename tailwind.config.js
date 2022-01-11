@@ -5,7 +5,10 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        '30/2': '15%',
+        '30/2': '15%'
+      },
+      colors: {
+        'button': '#055CA8'
       }
     },
   },

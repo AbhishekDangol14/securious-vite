@@ -3,6 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import store from './store'
 import router from './router'
+import axios from 'axios'
 
 import './css/tailwind.css'
 
@@ -21,6 +22,10 @@ router.beforeEach((to, from, next) => {
       next()
     }
   });
+
+const token = localStorage.getItem('ID_TOKEN_KEY')
+if (token)
+  axios.defaults.headers.common['Authorization'] = "Bearer "+token
 
 createApp(App).use(store).use(router).mount('#app')
 

@@ -14,10 +14,10 @@ export const auth_module = {
     },
     actions: {
         [LOGIN] (context, credentials){
-            axios.post('http://127.0.0.1:8000/api/login', credentials.values).then((data) => {
-                context.commit(SET_AUTH, data)
-                router.push('/dashboard')
-            });
+            axios.post('http://127.0.0.1:8000/api/login', credentials.values).then((response) => {
+                context.commit(SET_AUTH, response)
+                router.push('/dashboard') 
+            })
         },
         [CHECK_AUTH] (){
             if(localStorage.getItem('ID_TOKEN_KEY'))
@@ -34,8 +34,8 @@ export const auth_module = {
     },
     mutations: {
         [SET_AUTH](state, user) {
-            state.user = user.data.data
-            localStorage.setItem('ID_TOKEN_KEY', user.data.data.token)
+            localStorage.setItem('USER', JSON.stringify(user.data.data.resource))
+            localStorage.setItem('ID_TOKEN_KEY', user.data.data.resource.token)
         }
     }
 }

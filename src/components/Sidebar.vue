@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar bg-white max-w-30/2 min-h-screen">
+    <div class="sidebar bg-white min-h-screen shadow-xl">
         <div class="logo p-3">
             <img src="../assets/views/securious-logo.svg">
         </div>
@@ -24,26 +24,9 @@ export default defineComponent({
           'link': '/dashboard',
         },
         {
-          'label': 'Homepage',
+          'label': 'Industries',
           'icon': '345',
-          'link': '/homepage',
-        },
-        {
-          'label': 'Expansion',
-          'icon': '',
-          'link': '/expansion',
-          'items': [
-            {
-              'label': 'Dashboard',
-              'icon': '123',
-              'link': '/dashboard',
-            },
-            {
-              'label': 'Homepage',
-              'icon': '345',
-              'link': '/homepage',
-            },
-          ]
+          'link': '/industries',
         },
       ]
         return {
@@ -52,3 +35,4 @@ export default defineComponent({
     },
 })
 </script>
+

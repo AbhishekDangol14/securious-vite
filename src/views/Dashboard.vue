@@ -1,15 +1,12 @@
 <template>
-    <div class="dashboard bg-blue-50" >
-        <Sidebar />
-        <h1>Dashboard</h1>
-        {{ user }}
-        <button @click="logout">Log Out</button>
+    <div class="dashboard bg-blue-50 grid grid-cols-6" >
+        <div class="col-span-1"><Sidebar /></div>
     </div>
-    
+    {{ user }}
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent,computed } from 'vue'
 import router from '../router'
 import Sidebar from '../components/Sidebar.vue'
 import { useStore } from 'vuex'
@@ -24,10 +21,9 @@ export default defineComponent({
             localStorage.removeItem('ID_TOKEN_KEY')
             router.push('/login')
         }
-        const user = store.state.a.state.user
         return {
             logout,
-            user
+            user: computed(() => store.state.auth.state.user)
         }
     }
 })
