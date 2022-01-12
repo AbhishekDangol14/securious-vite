@@ -5,7 +5,6 @@
                 <div class="text-sm font-semibold pt-3 ">Title</div>
                 <div class="input-field pt-2">
                     <input v-model="title" class="border rounded-md p-3 text-xs" type="text" placeholder="Please Enter Title">
-                    {{ title }}
                     <div class="relative inline-block w-8 ml-2 mr-2 align-middle select-none transition duration-200 ease-in">
                         <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-4 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
                         <label for="toggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>

@@ -2,6 +2,7 @@ import router from '../../router'
 import axios from 'axios'
 import {
     LOGIN,
+    LOGOUT,
     REGISTER,
     CHECK_AUTH,
   } from "./actions.type";
@@ -18,6 +19,9 @@ export const auth_module = {
                 context.commit(SET_AUTH, response)
                 router.push('/dashboard') 
             })
+        },
+        [LOGOUT](context) {
+            context.commit(PURGE_AUTH);
         },
         [CHECK_AUTH] (){
             if(localStorage.getItem('ID_TOKEN_KEY'))
@@ -36,6 +40,10 @@ export const auth_module = {
         [SET_AUTH](state, user) {
             localStorage.setItem('USER', JSON.stringify(user.data.data.resource))
             localStorage.setItem('ID_TOKEN_KEY', user.data.data.resource.token)
+        },
+        [PURGE_AUTH](state){
+            localStorage.removeItem('ID_TOKEN_KEY')
+            localStorage.removeItem('USER')
         }
     }
 }

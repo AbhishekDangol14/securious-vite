@@ -14,12 +14,15 @@ export const industry_module = {
             })
         },
         [STORE_INDUSTRY] (context, industry){
-            context.commit(SAVE_INDUSTRY, industry.data)
+            industry.data.id ? axios.put('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry.data) : axios.post('http://127.0.0.1:8000/api/admin/industries', industry.data)
         },
         [NEW_INDUSTRY] (context, industry){
             context.commit(ADD_INDUSTRIES, industry)
         },
         [DELETE_INDUSTRY] (context, {industry, index}){
+            if(industry.id)
+                axios.delete('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry)
+            
             context.commit(REMOVE_INDUSTRY, {industry, index})
         }
     },
@@ -31,23 +34,8 @@ export const industry_module = {
         [ADD_INDUSTRIES] (state, data){
             state.industries.push(data)
         },
-        [SAVE_INDUSTRY] (state, industry){
-            if(industry.id){
-                axios.put('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry)  
-            }
-            else
-                axios.post('http://127.0.0.1:8000/api/admin/industries', industry).then((response) => {
-                    console.log(response)
-                }) 
-        },
         [REMOVE_INDUSTRY] (state, {industry, index}){
-            if (industry.id){
-                axios.delete('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry).then((response) => {
-                    state.industries.splice(index,1)
-                }).catch()
-            }
-            else
-                state.industries.splice(index,1)
+            state.industries.splice(index,1)
         }
     }
 }
