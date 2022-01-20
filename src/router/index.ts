@@ -6,13 +6,10 @@ import Dashboard from '../views/Dashboard.vue'
 import test from '../views/test.vue'
 import Threats from '../views/Threats.vue'
 import Industries from '../views/Industries.vue'
+import SolutionPartners from '../views/SolutionPartners.vue'
+import CreateSolutionPartner from '../components/SolutionPartners/CreateSolutionPartner.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/login',
     name: 'Login',
@@ -42,6 +39,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/industries',
     name: 'industries',
     component: Industries
+  },
+  {
+    path: '/solutionPartners',
+    name: 'solutionPartners',
+    component: SolutionPartners
+  },
+  {
+    path: '/solutionPartners/edit',
+    name: 'editSolutionPartners',
+    component: CreateSolutionPartner
   }
 
 ]

@@ -1,7 +1,7 @@
 <template>
     <Layout Title="Industries">
         <div class="industry-content">
-            <AddButton>Add new industry</AddButton>
+            <AddButton path="industries">Add new industry</AddButton>
             <div class="grid grid-cols-4 ml-4">
                 <Industry v-for="(item,index) in industries" :item="item" :index="index" v-bind:key="item.details_level"/>
             </div>

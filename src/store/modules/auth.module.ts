@@ -44,6 +44,7 @@ export const auth_module = {
         [PURGE_AUTH](state){
             localStorage.removeItem('ID_TOKEN_KEY')
             localStorage.removeItem('USER')
+            router.push('/login')
         }
     }
 }

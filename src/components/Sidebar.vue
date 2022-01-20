@@ -28,6 +28,11 @@ export default defineComponent({
           'icon': '345',
           'link': '/industries',
         },
+        {
+          'label': 'Assets & Partners',
+          'icon': '346',
+          'link': '/solutionPartners' 
+        }
       ]
         return {
           menuItems

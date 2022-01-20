@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
+import { LOGOUT } from '@/store/modules/actions.type'
 import { defineComponent,computed } from 'vue'
 import { useStore } from 'vuex'
-import router from '../router'
 
 export default defineComponent({
   name: 'Menu',
@@ -33,9 +33,7 @@ export default defineComponent({
       const store = useStore()
       
       function logout() {
-          localStorage.removeItem('ID_TOKEN_KEY')
-          localStorage.removeItem('USER')
-          router.push('/login')
+          store.dispatch(LOGOUT)
       }
       return { 
         logout,
