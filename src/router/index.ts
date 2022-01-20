@@ -6,8 +6,7 @@ import Dashboard from '../views/Dashboard.vue'
 import test from '../views/test.vue'
 import Threats from '../views/Threats.vue'
 import Industries from '../views/Industries.vue'
-import SolutionPartners from '../views/SolutionPartners.vue'
-import CreateSolutionPartner from '../components/SolutionPartners/CreateSolutionPartner.vue'
+import News from '../views/News.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -41,14 +40,9 @@ const routes: Array<RouteRecordRaw> = [
     component: Industries
   },
   {
-    path: '/solutionPartners',
-    name: 'solutionPartners',
-    component: SolutionPartners
-  },
-  {
-    path: '/solutionPartners/edit',
-    name: 'editSolutionPartners',
-    component: CreateSolutionPartner
+    path: '/news',
+    name: 'news',
+    component: News
   }
 
 ]
