@@ -5,7 +5,7 @@ import store from './store'
 import router from './router'
 import axios from 'axios'
 
-import './css/tailwind.css'
+import './css/index.scss';
 
 router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/'];
