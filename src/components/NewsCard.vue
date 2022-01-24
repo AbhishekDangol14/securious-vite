@@ -1,27 +1,30 @@
 <template>
-  <div class="flex w-100 h-100 items-center justify-center">
+  <div class="flex items-center justify-center">
     <div
-      class="news-card flex flex-col p-4 justify-between shadow-primary rounded bg-white"
+      class="news-card flex h-full flex-col p-4 justify-between shadow-primary rounded bg-white"
     >
       <div class="flex">
-        <div class="border-2 border-dashed border-blue-100">
+        <div class="border-2 border-dashed rounded border-blue-100">
           <img
+          class="rounded"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg"
             alt="icon"
           />
         </div>
         <Switch />
       </div>
-      <div class="flex flex-col">
-        <span>News News</span>
-        <span>News News</span>
+      <div class="flex flex-col gap-2">
+        <span class="text-lg text-blue-blue font-semibold">News News</span>
+        <span class="text-md font-semibold text-grey-grey">News News</span>
       </div>
-      <div class="flex gap-2 justify-center items-center">
+      <div class="flex pt-4 gap-2 justify-center items-center">
         <Button
+          name="ternary-button"
           icon="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg"
           title="Save"
         />
         <Button
+          name="ternary-button"
           icon="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg"
           title="Save"
         />
@@ -49,6 +52,5 @@ export default defineComponent({
 <style scoped>
 .news-card {
   width: 530px;
-  height: 450px;
 }
 </style>
