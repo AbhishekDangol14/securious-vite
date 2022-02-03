@@ -1,0 +1,119 @@
+<template>
+  <Layout Title="CREATE NEWS">
+    <div>
+      <div class="flex justify-center pt-10">
+        <form class="news-create self-center align-middle">
+          <div class="news-create-nav pb-4">
+            <div class="flex justify-between">
+              <a class="text-blue-100 pl-8 self-center" href="#"
+                >Back to news library</a
+              >
+              <div class="flex gap-2">
+                <Button name="ternary-button" :icon="Img" title="Delete" />
+                <Button :icon="Img" title="Save" @my-event="save" />
+              </div>
+            </div>
+          </div>
+          <div class="news-body border-2 border-grey-100 shadow-primary">
+            <div class="flex">
+              <div class="w-2/3">
+                <Input id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations[selectedLanguage].title" />
+              </div>
+              <div
+                class="pl-8 flex gap-4 justify-center align-middle items-center"
+              >
+                <span>
+                  <FileUpload @my-file="uploadFile" />
+                </span>
+                <div class="gap-2 flex flex-col">
+                  <Button name="ternary-button" :icon="Img" title="Upload" />
+                  <Button name="ternary-button" :icon="Img" title="Select" />
+                </div>
+              </div>
+            </div>
+            <Input id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations[selectedLanguage].excerpt" />
+            <Input id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
+            <Switch name="Active" v-model="news.is_active" />
+            <CKEditor name="Description" v-model="news.friendlyTranslations[selectedLanguage].description" />
+          </div>
+          <div class="flex gap-2 pt-4 justify-end">
+            <Button name="ternary-button" :icon="Img" title="Delete" />
+            <Button :icon="Img" title="Save" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </Layout>
+</template>
+
+<script lang="ts">
+import { defineComponent, reactive,ref } from 'vue';
+import { useStore } from 'vuex';
+import Button from '@/components/Button.vue';
+import Input from '@/components/Input.vue';
+import Switch from '@/components/Switch.vue';
+import FileUpload from '@/components/FileUpload.vue';
+import CKEditor from '@/components/CKEditor.vue';
+import Layout from '@/components/Main.vue';
+import { STORE_NEWS } from '@/store/modules/actions.type';
+// import NewsCard from '../components/NewsCard.vue';
+
+export default defineComponent({
+  components: {
+    Button,
+    Input,
+    Switch,
+    FileUpload,
+    CKEditor,
+    Layout
+    // NewsCard,
+  },
+
+  setup() {
+    const news = reactive({
+      friendlyTranslations: {
+        EN: {
+          title: '',
+          excerpt: '',
+          description: '',
+        },
+        DE: {
+          title: '',
+          excerpt: '',
+          description: '',
+        },
+      },
+      news_category_id: '',
+      is_active: false,
+      image: ''
+    });
+
+    const user = localStorage.getItem('USER')
+    let selectedLanguage = ""
+    if (user)
+      selectedLanguage = JSON.parse(user).selected_language
+
+    const store = useStore();
+
+    function uploadFile(image){
+      news.image = image
+    }
+
+    function save() {
+      store.dispatch({
+        type: STORE_NEWS,
+        news
+      })
+    }
+
+    return {
+      Img: require('@/assets/icons/img.svg'),
+      news,
+      save,
+      selectedLanguage,
+      uploadFile
+    };
+  },
+});
+</script>
+
