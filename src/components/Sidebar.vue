@@ -1,0 +1,69 @@
+<template>
+    <div class="sidebar bg-white min-h-screen shadow-secondary">
+        <div class="logo p-3">
+            <img src="../assets/views/securious-logo.svg">
+        </div>
+        <div class="border-line pt-4"><hr></div>
+        <Menu v-for="item in menu.menus" :item="item" v-bind:key="item.label" />
+        <div v-if="menu.role[0].role == 'Admin'"> 
+            <hr>       
+            <div class="pt-4 pl-4 flex-cols space-y-4">
+                <div class="flex space-x-2 text-sm pb-3"><img src="../assets/components/user.svg"/><router-link :to="{ name: 'users' }">Users</router-link></div>
+                <div class="flex space-x-2 text-sm pb-3"><img src="../assets/components/setting.svg"/><router-link :to="{ name: 'settings' }">Setting</router-link></div>
+                <button class="flex space-x-2 text-sm pb-3" @click="logout"><img src="../assets/components/logout.svg"/><div>Logout</div></button>
+            </div>
+        </div>
+        <div v-show="token">
+            <hr>
+            <div class="cursor-pointer flex space-x-2 pt-4 pl-4" @click="stopImpersonating">
+                <i class="fa fa-stop-circle" aria-hidden="true"></i>
+                <div class="text-sm font-normal">Stop Impersonating</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
+import router from '@/router'
+import { LOGOUT } from '@/store/modules/actions.type'
+import { defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
+import Menu from '../components/Menu.vue'
+
+export default defineComponent({
+    components: {
+        Menu
+    },
+    setup() {
+        const store = useStore()
+        let user = localStorage.getItem("USER")
+        let menu = {}
+
+        const token = localStorage.getItem('IMPERSONATOR_TOKEN')
+
+        if (user)
+        menu = JSON.parse(user)
+
+        function logout() {
+          store.dispatch(LOGOUT)
+        }
+
+        function stopImpersonating() {
+            const user = localStorage.getItem('IMPERSONATOR_USER')
+            token ? localStorage.setItem('ID_TOKEN_KEY',token) : null
+            user ? localStorage.setItem('USER',user) : null
+            localStorage.removeItem('IMPERSONATOR_TOKEN')
+            localStorage.removeItem('IMPERSONATOR_USER')
+            router.push({ name: 'users' })
+        }
+        
+        return {
+            menu,
+            logout,
+            stopImpersonating,
+            token
+        }
+    }
+})
+</script>
+

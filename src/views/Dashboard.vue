@@ -1,16 +1,20 @@
 <template>
-    <h1>Dashboard</h1>
-    <button @click="logout">Log Out</button>
+    <Layout>
+        <div class="dashboard bg-secondary-blue grid grid-cols-6"></div> 
+    </Layout>
 </template>
 
 <script lang="ts">
-import router from '../router'
-export default {
-    methods: {
-        logout() {
-            localStorage.removeItem('ID_TOKEN_KEY')
-            router.push('/')
-        }
+import { defineComponent,computed } from 'vue'
+import Layout from '@/components/Main.vue'
+export default defineComponent({    
+    components: {
+        Layout
     },
-}
+    setup() {
+        return {
+
+        }
+    }
+})
 </script>
