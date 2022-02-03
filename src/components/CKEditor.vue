@@ -1,25 +1,35 @@
 <template>
   <div class="text-editor">
     <span class="text-md font-bold text-grey-grey">{{ name }}</span>
-    <ckeditor :editor="editor"> white </ckeditor>
+    <ckeditor :editor="editor" v-model="value"> white </ckeditor>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent,computed } from 'vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
 export default defineComponent({
   props: {
     name: String,
+    modelValue: String,
   },
   components: {
     ckeditor: CKEditor.component,
   },
-  data() {
+  emits: ['update:modelValue'],
+  setup(props,context) {
     return {
       editor: ClassicEditor,
+      value: computed({
+        get() {
+        return props.modelValue
+        },
+        set(value) {
+          context.emit('update:modelValue', value)
+        }
+      })
     };
   },
 });

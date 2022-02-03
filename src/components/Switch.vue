@@ -11,6 +11,8 @@
         name="toggle"
         id="toggle"
         class="toggle-checkbox absolute block w-5 h-5 mx-0.5 self-center rounded-md bg-white appearance-none cursor-pointer"
+        v-model="value"
+        @click="switchChange"
       />
       <label
         for="toggle"
@@ -21,13 +23,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent,computed } from 'vue';
 export default defineComponent({
   props: {
     name: String,
+    modelValue: Boolean,
   },
-  setup(props) {
-    return {};
+  emits: ['update:modelValue','btn-click'],
+  setup(props,{emit}) {
+    function switchChange() {
+      emit('btn-click')
+    }
+    return { 
+      switchChange,
+      value: computed({
+        get() {
+        return props.modelValue
+        },
+        set(value) {
+          emit('update:modelValue', value)
+        }
+      })
+     };
   },
 });
 </script>

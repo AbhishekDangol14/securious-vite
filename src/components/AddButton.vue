@@ -1,9 +1,9 @@
 <template>
     <div class="grid place-items-end pt-16 pr-8">
-        <button v-if="path === 'industries'" class="add-button w-2/12 p-3 bg-button rounded-full text-white text-center" @click="addIndustry">
+        <button v-if="path === 'industries'" class="add-button w-2/12 p-3 bg-primary rounded-lg text-white-white text-center" @click="addIndustry">
             <slot></slot>
         </button>
-        <router-link class="w-2/12 p-3 bg-button rounded-full text-white text-center" v-else :to="path_name"><slot></slot></router-link>
+        <router-link class="button-text w-2/12 p-3 bg-primary rounded-lg text-white-white text-center" v-else :to="path_name"><slot></slot></router-link>
     </div>
 </template>
 
@@ -21,26 +21,12 @@ export default defineComponent({
 
         let path_name = "/"+props.path
 
-        let industry = {
-            id: null,
-            details_level: null,
-            is_active: 0,
-            friendlyTranslations: {
-                EN: {
-                    name: ""
-                },
-                DE: {
-                    name: ""
-                }
-            }
-        }
-
         function addIndustry() {
             store.dispatch(
                 NEW_INDUSTRY,
                 {
                     id: null,
-                    details_level: null,
+                    details_level: 'low',
                     is_active: 0,
                     friendlyTranslations: {
                         EN: {
@@ -61,3 +47,4 @@ export default defineComponent({
     },
 })
 </script>
+

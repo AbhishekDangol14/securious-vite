@@ -6,7 +6,6 @@
       class="w-20 h-20 flex flex-col align-middle justify-center items-center bg-secondary rounded tracking-wide border-1 border-green-green border-dashed cursor-pointer hover:bg-secondary-blue"
     >
       <svg
-        v-if="!url"
         width="3rem"
         height="3rem"
         viewBox="0 0 50 45"
@@ -22,35 +21,24 @@
           fill="#707070"
         />
       </svg>
-      <input type="file" class="hidden" @change="onFileChange" />
-      <img class="w-20 h-20" v-if="url" :src="url" />
-      <span v-if="url" @click="removeFile" class="font-bold w-20 h-20 text-white-white text-sm absolute w-100 opacity-40 h-100 border-2 border-blue-100">REMOVE FILE</span>
+        <input type="file" class="hidden" @change="onChangeFile" />
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 export default defineComponent({
-  props: {},
-  setup(props) {
-    return {};
+  props: {
+
   },
-  data() {
-    return {
-      url: '',
-    };
-  },
-  methods: {
-    onFileChange(e) {
-      const file = e.target.files[0];
-      this.url = URL.createObjectURL(file);
-    },
-    removeFile() {
-      if (this.url.length > 1) {
-        return (this.url = '');
-      }
-    },
+  setup(props,context) {
+    function onChangeFile(event) {
+      context.emit('myFile', event.target.files[0])
+    }
+    return { 
+        onChangeFile
+     };
   },
 });
 </script>

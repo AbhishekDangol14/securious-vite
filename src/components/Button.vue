@@ -1,7 +1,7 @@
 <template>
-  <button :class="name ? `${name + ' button'}` : 'button primary-button'">
+  <button :class="name ? `${name + ' button'}` : 'button primary-button'" @click.prevent="save">
     <span class="self-center">{{ title }}</span>
-    <img class="w-5 h-5 self-center" :src="icon" alt="icon" />
+    <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
   </button>
 </template>
 
@@ -13,8 +13,13 @@ export default defineComponent({
     icon: String,
     title: String,
   },
-  setup(props) {
-    return {};
+  setup(props,context) {
+    function save() {
+        context.emit('myEvent');
+    }
+    return {
+      save
+    };
   },
 });
 </script>
@@ -67,5 +72,13 @@ svg {
   color: #707070;
   border: 1px solid #707070;
   background-color: white;
+}
+.tertiary-button {
+  color: #055ca8;
+  background-color: none;
+  background: transparent;
+  border: 1px solid #055ca8;
+  height: 30px;
+  line-height: 16px;
 }
 </style>

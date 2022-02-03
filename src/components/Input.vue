@@ -8,6 +8,7 @@
       :id="id"
       :type="type ? type : 'text'"
       :placeholder="placeholder"
+      v-model="value"
     />
     <p class="text-green-green text-base pl-1">{{ message }}</p>
     <p class="text-red-red text-base pl-1">{{ error }}</p>
@@ -15,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent, defineEmits } from 'vue';
 export default defineComponent({
   props: {
     id: String,
@@ -24,9 +25,20 @@ export default defineComponent({
     placeholder: String,
     message: String,
     error: String,
+    modelValue: String
   },
-  setup(props) {
-    return {};
+  emits: ['update:modelValue'],
+  setup(props, context) {
+    return { 
+      value: computed({
+        get() {
+        return props.modelValue
+        },
+        set(value) {
+          context.emit('update:modelValue', value)
+        }
+      })
+     };
   },
 });
 </script>

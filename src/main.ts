@@ -11,21 +11,21 @@ router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('ID_TOKEN_KEY');
+    
 
     if (authRequired && !loggedIn) {
       next('/login');
     } 
     else if(!authRequired && loggedIn) {
+      axios.defaults.headers.common['Authorization'] = "Bearer "+loggedIn
       next('/dashboard');
     }
     else {
+      axios.defaults.headers.common['Authorization'] = "Bearer "+loggedIn
       next()
     }
   });
 
-const token = localStorage.getItem('ID_TOKEN_KEY')
-if (token)
-  axios.defaults.headers.common['Authorization'] = "Bearer "+token
-
 createApp(App).use(store).use(router).mount('#app')
+
 

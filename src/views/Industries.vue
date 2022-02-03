@@ -27,11 +27,7 @@ export default defineComponent({
     setup() {
         const store = useStore();
 
-        onMounted(() => {
-            store.dispatch({
-                type: GET_INDUSTRIES
-            })
-        })
+        store.dispatch(GET_INDUSTRIES)
 
         return {    
             industries: computed(() => store.state.industry.state.industries) 

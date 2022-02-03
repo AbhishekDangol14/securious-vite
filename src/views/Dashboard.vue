@@ -1,29 +1,19 @@
 <template>
-    <div class="dashboard bg-blue-50 grid grid-cols-6" >
-        <div class="col-span-1"><Sidebar /></div>
-    </div>
-    {{ user }}
+    <Layout>
+        <div class="dashboard bg-secondary-blue grid grid-cols-6"></div> 
+    </Layout>
 </template>
 
 <script lang="ts">
 import { defineComponent,computed } from 'vue'
-import router from '../router'
-import Sidebar from '../components/Sidebar.vue'
-import { useStore } from 'vuex'
+import Layout from '@/components/Main.vue'
 export default defineComponent({    
     components: {
-        Sidebar
+        Layout
     },
     setup() {
-        const store = useStore()
-
-        function logout() {
-            localStorage.removeItem('ID_TOKEN_KEY')
-            router.push('/login')
-        }
         return {
-            logout,
-            user: computed(() => store.state.auth.state.user)
+
         }
     }
 })

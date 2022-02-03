@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { GET_INDUSTRIES, NEW_INDUSTRY, DELETE_INDUSTRY, STORE_INDUSTRY } from './actions.type'
 import { SET_INDUSTRIES,ADD_INDUSTRIES, REMOVE_INDUSTRY, SAVE_INDUSTRY } from './mutations.type'
-import { computed } from 'vue'
 
 export const industry_module = {
     state: {
@@ -14,16 +13,24 @@ export const industry_module = {
             })
         },
         [STORE_INDUSTRY] (context, industry){
-            industry.data.id ? axios.put('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry.data) : axios.post('http://127.0.0.1:8000/api/admin/industries', industry.data)
+            if(industry.id)  
+                axios.put('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry).then((response) => {
+                    console.log(response)
+                })
+            else    
+                axios.post('http://127.0.0.1:8000/api/admin/industries', industry).then((response) => {
+                    console.log(response)
+                })
         },
         [NEW_INDUSTRY] (context, industry){
             context.commit(ADD_INDUSTRIES, industry)
         },
         [DELETE_INDUSTRY] (context, {industry, index}){
             if(industry.id)
-                axios.delete('http://127.0.0.1:8000/api/admin/industries/'+industry.id, industry)
-            
-            context.commit(REMOVE_INDUSTRY, {industry, index})
+                axios.delete('http://127.0.0.1:8000/api/admin/industries/'+industry.id).then(() => {
+                    context.commit(REMOVE_INDUSTRY, index)
+                })
+            context.commit(REMOVE_INDUSTRY, index)   
         }
     },
     mutations: {
@@ -34,7 +41,7 @@ export const industry_module = {
         [ADD_INDUSTRIES] (state, data){
             state.industries.push(data)
         },
-        [REMOVE_INDUSTRY] (state, {industry, index}){
+        [REMOVE_INDUSTRY] (state, index:number){
             state.industries.splice(index,1)
         }
     }

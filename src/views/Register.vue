@@ -14,7 +14,7 @@
                     <span class="text-lg">{{ passwordError }}</span>
                     <div class="text-xs pt-5 pb-6">Mit der Anmeldung stimmen Sie den Datenschutzbestimmungen zu.</div>
                     <div class="flex justify-center">
-                        <button class="rounded-full text-white text-sm pl-10 pr-10 pt-2 pb-2">JETZT LOSLEGEN</button>
+                        <button class="rounded-full text-white-white text-sm pl-10 pr-10 pt-2 pb-2">JETZT LOSLEGEN</button>
                     </div>
                 </form>
                 <div class="form-footer flex justify-center p-3 space-x-4">
@@ -24,9 +24,9 @@
             </div>
         </div>
         <div class="right_content p-3">
-            <div class="text-white text-center text-2xl mt-16">Schützen Sie Ihr Unternehmen vor Cyber-Angriffen</div>
-            <p class="text-white text-center text-sm pt-4 pl-24 pr-24 pb-6">Mit securious können Sie in einfachen, kleinen Schritten Ihre IT-Sicherheit überprüfen und durch umsetzbare und konkrete Maßnahmen erhöhen. </p>
-            <ul class="text-white text-center text-xs space-y-1">
+            <div class="text-white-white text-center text-2xl mt-16">Schützen Sie Ihr Unternehmen vor Cyber-Angriffen</div>
+            <p class="text-white-white text-center text-sm pt-4 pl-24 pr-24 pb-6">Mit securious können Sie in einfachen, kleinen Schritten Ihre IT-Sicherheit überprüfen und durch umsetzbare und konkrete Maßnahmen erhöhen. </p>
+            <ul class="text-white-white text-center text-xs space-y-1">
                 <li><i class="fa fa-check"></i>Sie müssen kein IT-Sicherheits-Experte sein.</li>
                 <li><i class="fa fa-check"></i>Wie greifen nie auf Ihre interne Systeme zu.</li>
                 <li><i class="fa fa-check"></i>Die Analyse der IT-Sicherheit wird immer kostenlos sein.</li>

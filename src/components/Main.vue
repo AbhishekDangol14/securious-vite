@@ -1,5 +1,5 @@
 <template>
-    <div class="main bg-blue-50 grid grid-cols-6">
+    <div class="main bg-secondary-blue grid grid-cols-6">
         <div class="col-span-1"><Sidebar /></div>
         <div class="col-span-5 flex flex-col">
              <div class=""><Headerbar>{{ Title }}</Headerbar></div>

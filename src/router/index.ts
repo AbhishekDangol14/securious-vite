@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import Dashboard from '../views/Dashboard.vue'
 import test from '../views/test.vue'
-import Threats from '../views/Threats.vue'
-import Industries from '../views/Industries.vue'
-import News from '../views/News.vue'
 
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '',
+    name: 'Home',
+    component: () => import('@/views/Home.vue')
+  },
   {
     path: '/login',
     name: 'Login',
@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: () => import('@/views/Dashboard.vue')
   },
   {
     path: '/test',
@@ -32,19 +32,64 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/threats',
     name: 'threats',
-    component: Threats
+    component: () => import('@/views/Threats/Threats.vue')
+  },
+  {
+    path: '/threat/create',
+    name: 'createThreats',
+    component: () => import('@/views/Threats/ThreatsCreate.vue')
   },
   {
     path: '/industries',
     name: 'industries',
-    component: Industries
+    component: () => import('@/views/Industries.vue')
   },
   {
     path: '/news',
     name: 'news',
-    component: News
-  }
-
+    component: () => import('@/views/News/News.vue')
+  },
+  {
+    path: '/news/create',
+    name: 'newsCreate',
+    component: () => import('@/views/News/NewsCreate.vue')
+  },
+  {
+    path: '/news/update/:id',
+    name: 'newsUpdate',
+    component: () => import('@/views/News/NewsUpdate.vue'),
+    props: true
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('@/views/Settings.vue'),
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: () => import('@/views/UserList.vue'),
+  },
+  {
+    path: '/recommendations',
+    name: 'recommendations',
+    component: test
+  },
+  {
+    path: '/certificates',
+    name: 'certificates',
+    component: test
+  },
+  {
+    path: '/data-leak',
+    name: 'data-leak',
+    component: test
+  },
+  {
+    path: '/company-assets',
+    name: 'company-assets',
+    component: test
+  },
 ]
 
 const router = createRouter({

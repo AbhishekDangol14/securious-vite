@@ -11,7 +11,6 @@ import { SET_AUTH, PURGE_AUTH } from "./mutations.type";
 export const auth_module = {
     state: {
         user: {},
-        menu: {}
     },
     actions: {
         [LOGIN] (context, credentials){

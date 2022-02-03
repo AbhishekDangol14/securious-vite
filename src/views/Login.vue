@@ -11,7 +11,7 @@
                     <input class="inp rounded-none p-2 text-xs" name="password" v-model="password" :error="passwordError" type="password" placeholder="Passwort" />
                     <div class="link-text text-right text-sm">Passwort vergessen?</div>
                     <div class="grid grid-cols-3">
-                        <button class="col-start-2 col-end-2 rounded-full text-white p-2">LOGIN</button>
+                        <button class="col-start-2 col-end-2 rounded-lg text-white-white p-2">LOGIN</button>
                     </div>
                 </form>
                 <div class="register flex justify-center space-x-4 pt-4">

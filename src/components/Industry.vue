@@ -3,12 +3,9 @@
         <div class="form pl-6">
             <div class="input-title">
                 <div class="text-sm font-semibold pt-3 ">Title</div>
-                <div class="input-field pt-2">
-                    <input v-model="title" class="border rounded-md p-3 text-xs" type="text" placeholder="Please Enter Title">
-                    <div class="relative inline-block w-8 ml-2 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-4 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                        <label for="toggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
-                    </div>
+                <div class="input-field pt-2 flex">
+                    <input v-model="title" />
+                    <Switch v-model="is_active" />
                 </div>
             </div>
             <div class="input-details">
@@ -21,18 +18,22 @@
             </div>
             <div class="buttons grid space-y-2 pt-4 pb-4 justify-items-center">
                 <button @click="deleteIndustry(item,index)" class="border rounded-full p-2 w-1/2">Delete</button>
-                <button @click="saveIndustry(passValue)" class="text-white border rounded-full bg-button p-2 w-1/2">Save</button>
+                <button @click="saveIndustry()" class="text-white border rounded-full bg-button p-2 w-1/2">Save</button>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent,mergeProps,onMounted,toRef,reactive,ref } from 'vue'
+import { defineComponent,toRef,reactive,ref } from 'vue'
 import { useStore } from 'vuex'
 import { STORE_INDUSTRY,NEW_INDUSTRY,DELETE_INDUSTRY } from '@/store/modules/actions.type'
+import Switch from '@/components/Switch.vue'
 
 export default defineComponent({
+    components:{
+        Switch
+    },
     props: {
         item: Object,
         index: Number
@@ -42,38 +43,29 @@ export default defineComponent({
 
         const store = useStore()
 
-        const prop_item = toRef(props, 'item') 
+        const data = toRef(props, 'item') 
 
         const user = localStorage.getItem('USER')
 
-        let selectedLanguage = ""
+        let selectedLanguage = user ? JSON.parse(user).selected_language : 'EN'
 
-        let passValue = prop_item.value
-
-
-        let details = ref('')
+        let title = ref('')
+        if (data.value)
+        {
+            title.value = data.value.id ? data.value.friendlyTranslations[selectedLanguage+'.name'].value : ''
+        }
         
-        if (user)
-            selectedLanguage = JSON.parse(user).selected_language
+        const is_active = ref(data.value ? (data.value.is_active ? true : false) : false)
+        
+        const details = ref(data.value ? data.value.details_level : '')
 
-        let title = ref()
-
-            if (prop_item.value)
-            {
-                if (prop_item.value.id){
-                    title.value = prop_item.value.friendlyTranslations[selectedLanguage+'.name'].value
-                }
+        function saveIndustry(){
+            if (data.value) {
+                data.value.id ? data.value.friendlyTranslations[selectedLanguage+'.name'].value = title.value : data.value.friendlyTranslations[selectedLanguage].name = title.value
+                data.value.details_level = details
+                data.value.is_active = is_active.value
             }
-        
-
-        function saveIndustry(data){
-            data.id ? data.friendlyTranslations[selectedLanguage+'.name'].value = title.value : data.friendlyTranslations[selectedLanguage].name = title.value
-            data.details_level = details.value
-
-            store.dispatch({ 
-                type: STORE_INDUSTRY,
-                data
-            })
+            store.dispatch(STORE_INDUSTRY, data.value)
         }
 
         function deleteIndustry(industry, index){
@@ -81,7 +73,6 @@ export default defineComponent({
                 type: DELETE_INDUSTRY,
                 industry,
                 index
-                
             })
         }
 
@@ -89,22 +80,12 @@ export default defineComponent({
             saveIndustry,
             deleteIndustry,
             title,
-            passValue,
-            details
+            data,
+            details,
+            is_active,
+            selectedLanguage
         }
     },
 })
 </script>
 
-
-<style scoped>
-.toggle-checkbox:checked {
-  @apply: right-0 border-green-400;
-  right: 0;
-  border-color: #68D391;
-}
-.toggle-checkbox:checked + .toggle-label {
-  @apply: bg-green-400;
-  background-color: #68D391;
-}
-</style>
