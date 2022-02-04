@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <h class="text-lg font-semibold mx-5">Display Options</h>
+  </div>
   <div class="grid grid-cols-2 mx-5 space-x-8 p-5">
     <div>
       <Switch name="Active" />

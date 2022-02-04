@@ -36,9 +36,6 @@
         name="Video Link (Optional)"
         placeholder="Please put here video link"
       />
-      <Switch name="Active" />
-      <Switch name="Show if industry is:" />
-      <Input placeholder="Multi select" />
     </div>
     <div class="basis-1/2 grow">
       <div>
