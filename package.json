@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-build-classic": "^31.1.0",
     "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@tailwindcss/postcss7-compat": "^2.2.17",
+    "@vueform/slider": "^2.0.8",
     "autoprefixer": "^9.8.8",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
@@ -23,9 +24,12 @@
     "vue": "^3.0.0",
     "vue-axios": "^3.4.0",
     "vue-class-component": "^8.0.0-0",
+    "vue-draggable-next": "^2.1.1",
     "vue-password-strength-meter": "^1.7.2",
     "vue-router": "^4.0.0-0",
+    "vue3-draggable": "^2.0.9",
     "vue3-dropzone": "^0.0.7",
+    "vuedraggable": "^4.1.0",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
