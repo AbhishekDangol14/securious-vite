@@ -9,10 +9,35 @@
         </a>
       </div>
       <div class="ml-5">
-        <h class="text-lg font-semibold">Can be edited directly {{ title }}</h>
+        <input
+          class="editable-labels"
+          ref="edit_question_label"
+          type="text"
+          v-if="questionActive"
+          v-model="questionTitle"
+          v-on:keyup.enter="toggleActiveQuestionTitle"
+        />
+
+        <h class="text-lg font-semibold" v-if="questionActive === false">
+          {{ questionTitle }}
+        </h>
+        <a
+          v-if="!questionActive"
+          @click="toggleActiveQuestionTitle"
+          class="edit-question-title"
+          role="button"
+          >Edit
+        </a>
+        <a
+          v-if="questionActive"
+          @click="setTitle"
+          class="edit-question-title"
+          role="button"
+          >Save
+        </a>
       </div>
       <div class="ml-auto">
-        <Button name="Edit" />
+        <Button name="secondary-button" title="Edit" />
       </div>
     </div>
     <div class="flex">
@@ -34,6 +59,12 @@ import Button from "@/components/Button.vue";
 import Switch from "@/components/Switch.vue";
 
 export default {
+  data() {
+    return {
+      questionActive: false,
+      questionTitle: this.title,
+    };
+  },
   components: {
     Button,
     Switch,
@@ -42,6 +73,15 @@ export default {
     title: {
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    toggleActiveQuestionTitle() {
+      this.questionActive = true;
+    },
+    setTitle() {
+      this.questionActive = false;
+      this.questionTitle = "Lalalal";
     },
   },
 };

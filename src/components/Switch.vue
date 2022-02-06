@@ -4,7 +4,7 @@
       name
     }}</label>
     <div
-      class="relative grid w-10 h-6 rounded-md bg-ternary select-none transition duration-200 ease-in"
+      class="relative grid w-10 h-6 rounded-md bg-ternary select-none transition duration-2006 ease-in"
     >
       <input
         type="checkbox"
@@ -23,28 +23,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,computed } from 'vue';
+import { defineComponent, computed } from "vue";
 export default defineComponent({
   props: {
     name: String,
     modelValue: Boolean,
   },
-  emits: ['update:modelValue','btn-click'],
-  setup(props,{emit}) {
+  emits: ["update:modelValue", "btn-click"],
+  setup(props, { emit }) {
     function switchChange() {
-      emit('btn-click')
+      emit("btn-click");
     }
-    return { 
+    return {
       switchChange,
       value: computed({
         get() {
-        return props.modelValue
+          return props.modelValue;
         },
         set(value) {
-          emit('update:modelValue', value)
-        }
-      })
-     };
+          emit("update:modelValue", value);
+        },
+      }),
+    };
   },
 });
 </script>

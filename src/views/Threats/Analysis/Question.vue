@@ -8,11 +8,37 @@
           <img src="@/assets/icons/drag-handler.svg" alt="" />
         </a>
       </div>
-      <div class="ml-5">
-        <h class="text-lg font-semibold">Can be edited directly {{ title }}</h>
+      <div class="ml-5 flex items-stretch">
+        <div class="w-full">
+          <input
+            class="editable-labels text-lg font-semibold outline-none w-full"
+            ref="edit_question_label"
+            type="text"
+            v-if="questionActive"
+            v-model="questionTitle"
+            v-on:keyup.enter="toggleActiveQuestionTitle"
+          />
+
+          <h class="text-lg font-semibold" v-if="questionActive === false">
+            {{ questionTitle }}
+          </h>
+        </div>
+
+        <img
+          v-if="!questionActive"
+          @click="toggleActiveQuestionTitle"
+          class="edit-question-title w-5 ml-2"
+          src="@/assets/icons/edit-icon.svg"
+        />
+        <img
+          v-if="questionActive"
+          @click="setTitle"
+          class="save-question-title w-5 ml-2"
+          src="@/assets/icons/save-icon.svg"
+        />
       </div>
       <div class="ml-auto">
-        <Button name="Edit" />
+        <Button title="Edit" class="bg-color-200" />
       </div>
     </div>
     <div class="flex">
@@ -34,6 +60,12 @@ import Button from "@/components/Button.vue";
 import Switch from "@/components/Switch.vue";
 
 export default {
+  data() {
+    return {
+      questionActive: false,
+      questionTitle: this.title,
+    };
+  },
   components: {
     Button,
     Switch,
@@ -42,6 +74,14 @@ export default {
     title: {
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    toggleActiveQuestionTitle() {
+      this.questionActive = true;
+    },
+    setTitle() {
+      this.questionActive = false;
     },
   },
 };
