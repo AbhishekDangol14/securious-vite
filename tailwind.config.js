@@ -89,6 +89,7 @@ module.exports = {
       'secondary-blue': '#055ca80d',
       ternary: '#7070701a',
       white: '#ffffff',
+      'ternary-blue': '#E6EFF7'
     }),
   },
   variants: {

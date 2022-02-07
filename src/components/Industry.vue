@@ -4,7 +4,7 @@
             <div class="input-title">
                 <div class="text-sm font-semibold pt-3 ">Title</div>
                 <div class="input-field pt-2 flex">
-                    <input v-model="title" />
+                    <Input type="text" placeholder="Enter Industry" id="industry" v-model="title" />
                     <Switch v-model="is_active" />
                 </div>
             </div>
@@ -17,8 +17,8 @@
                 </select>
             </div>
             <div class="buttons grid space-y-2 pt-4 pb-4 justify-items-center">
-                <button @click="deleteIndustry(item,index)" class="border rounded-full p-2 w-1/2">Delete</button>
-                <button @click="saveIndustry()" class="text-white border rounded-full bg-button p-2 w-1/2">Save</button>
+                <button @click="deleteIndustry(item,index)" class="border rounded-lg p-2 w-1/2">Delete</button>
+                <button @click="saveIndustry()" class="text-white-white border rounded-lg bg-primary p-2 w-1/2">Save</button>
             </div>
         </div>
     </div>
@@ -29,10 +29,12 @@ import { defineComponent,toRef,reactive,ref } from 'vue'
 import { useStore } from 'vuex'
 import { STORE_INDUSTRY,NEW_INDUSTRY,DELETE_INDUSTRY } from '@/store/modules/actions.type'
 import Switch from '@/components/Switch.vue'
+import Input from '@/components/Input.vue'
 
 export default defineComponent({
     components:{
-        Switch
+        Switch,
+        Input
     },
     props: {
         item: Object,

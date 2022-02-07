@@ -115,6 +115,7 @@ export default defineComponent({
 
         async function sendCode() {
             await store.dispatch(VERIFY_GOOGLE_CODE, googleVerificationCode)
+            sendModal.value = false
         }
 
         async function googleAuth(event){
@@ -129,6 +130,7 @@ export default defineComponent({
         
         async function sendEmailCode() {
             await store.dispatch(VERIFY_EMAIL_CODE, emailCode)
+            emailModal.value = false
         }
 
         return {

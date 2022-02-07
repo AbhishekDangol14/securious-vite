@@ -1,8 +1,8 @@
 <template>
     <Layout Title="User View">
         <div class="user-list shadow-primary m-4">
-            <table class="table-auto w-full">
-                <thead class="bg-ternary">
+            <table class="table data-table">
+                <thead>
                     <tr class="text-base font-semibold text-blue-blue">
                     <th class="p-4">Name</th>
                     <th>Company Name</th>

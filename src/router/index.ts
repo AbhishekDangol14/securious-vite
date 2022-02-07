@@ -90,6 +90,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'company-assets',
     component: test
   },
+  {
+    path: '/kunden',
+    name: 'kunden',
+    component: () => import('@/views/Consultant/Kunden.vue')
+  },
 ]
 
 const router = createRouter({

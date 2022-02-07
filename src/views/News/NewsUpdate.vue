@@ -18,7 +18,7 @@
           <div class="news-body border-2 border-grey-100 shadow-primary">
             <div class="flex">
               <div class="w-2/3">
-                <Input id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations.EN_title.value" />
+                <Input type="text" id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations.EN_title.value" />
               </div>
               <div
                 class="pl-8 flex gap-4 justify-center align-middle items-center"
@@ -32,8 +32,8 @@
                 </div>
               </div>
             </div>
-            <Input id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations.EN_excerpt.value" />
-            <Input id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
+            <Input type="text" id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations.EN_excerpt.value" />
+            <Input type="text" id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
             <Switch name="Active" v-model="news.is_active" />
             <CKEditor name="Description" v-model="news.friendlyTranslations.EN_description.value" />
           </div>
@@ -41,7 +41,7 @@
 
           <div class="flex gap-2 pt-4 justify-end">
             <Button name="ternary-button" :icon="Img" title="Delete" />
-            <Button :icon="Img" title="Save" />
+            <Button :icon="Img" title="Save" @my-event="update" />
           </div>
         </form>
       </div>
@@ -60,6 +60,7 @@ import Switch from '@/components/Switch.vue';
 import FileUpload from '@/components/FileUpload.vue';
 import CKEditor from '@/components/CKEditor.vue';
 import Layout from '@/components/Main.vue';
+import router from '@/router';
 
 export default defineComponent({
   components: {
@@ -87,6 +88,7 @@ export default defineComponent({
 
     function update(){
       store.dispatch(UPDATE_NEWS, news.value)
+      router.push({ name:'news' })
     }
 
     function uploadFile(image){

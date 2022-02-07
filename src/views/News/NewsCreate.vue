@@ -17,7 +17,7 @@
           <div class="news-body border-2 border-grey-100 shadow-primary">
             <div class="flex">
               <div class="w-2/3">
-                <Input id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations[selectedLanguage].title" />
+                <Input type="text" id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations[selectedLanguage].title" />
               </div>
               <div
                 class="pl-8 flex gap-4 justify-center align-middle items-center"
@@ -31,14 +31,14 @@
                 </div>
               </div>
             </div>
-            <Input id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations[selectedLanguage].excerpt" />
-            <Input id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
+            <Input type="text" id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations[selectedLanguage].excerpt" />
+            <Input type="text" id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
             <Switch name="Active" v-model="news.is_active" />
             <CKEditor name="Description" v-model="news.friendlyTranslations[selectedLanguage].description" />
           </div>
           <div class="flex gap-2 pt-4 justify-end">
             <Button name="ternary-button" :icon="Img" title="Delete" />
-            <Button :icon="Img" title="Save" />
+            <Button :icon="Img" title="Save" @my-event="save"/>
           </div>
         </form>
       </div>
@@ -56,6 +56,7 @@ import FileUpload from '@/components/FileUpload.vue';
 import CKEditor from '@/components/CKEditor.vue';
 import Layout from '@/components/Main.vue';
 import { STORE_NEWS } from '@/store/modules/actions.type';
+import router from '@/router';
 // import NewsCard from '../components/NewsCard.vue';
 
 export default defineComponent({

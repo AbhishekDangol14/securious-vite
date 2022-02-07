@@ -7,7 +7,7 @@
         <div class="border-2 border-dashed rounded border-blue-100">
           <img
           class="rounded"
-            :src="item.image"
+            src="@/assets/img-10.jpg"
             alt="icon"
           />
         </div>
