@@ -91,16 +91,11 @@ const routes: Array<RouteRecordRaw> = [
     component: test,
   },
   {
-    path: "/data-leak",
-    name: "data-leak",
-    component: test,
+    path: '/kunden',
+    name: 'kunden',
+    component: () => import('@/views/Consultant/Kunden.vue')
   },
-  {
-    path: "/company-assets",
-    name: "company-assets",
-    component: test,
-  },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
