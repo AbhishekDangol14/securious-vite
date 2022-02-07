@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="created-analysis-component mx-0 p-5">
-      <draggable class="dragArea list-group w-full" :list="list">
+      <draggable
+        class="dragArea list-group w-full"
+        handle=".handle"
+        :list="list"
+      >
         <transition-group>
           <div
             class="list-group-item border border-grey-grey m-1 p-3 text-center"

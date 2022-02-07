@@ -8,36 +8,37 @@
           <img src="@/assets/icons/drag-handler.svg" alt="" />
         </a>
       </div>
-      <div class="ml-5">
-        <input
-          class="editable-labels"
-          ref="edit_question_label"
-          type="text"
-          v-if="questionActive"
-          v-model="questionTitle"
-          v-on:keyup.enter="toggleActiveQuestionTitle"
-        />
+      <div class="ml-5 flex items-stretch">
+        <div class="w-full">
+          <input
+            class="editable-labels text-lg font-semibold outline-none w-full"
+            ref="edit_question_label"
+            type="text"
+            v-if="questionActive"
+            v-model="questionTitle"
+            v-on:keyup.enter="toggleActiveQuestionTitle"
+          />
 
-        <h class="text-lg font-semibold" v-if="questionActive === false">
-          {{ questionTitle }}
-        </h>
-        <a
+          <h class="text-lg font-semibold" v-if="questionActive === false">
+            {{ questionTitle }}
+          </h>
+        </div>
+
+        <img
           v-if="!questionActive"
           @click="toggleActiveQuestionTitle"
-          class="edit-question-title"
-          role="button"
-          >Edit
-        </a>
-        <a
+          class="edit-question-title w-5 ml-2"
+          src="@/assets/icons/edit-icon.svg"
+        />
+        <img
           v-if="questionActive"
           @click="setTitle"
-          class="edit-question-title"
-          role="button"
-          >Save
-        </a>
+          class="save-question-title w-5 ml-2"
+          src="@/assets/icons/save-icon.svg"
+        />
       </div>
       <div class="ml-auto">
-        <Button name="secondary-button" title="Edit" />
+        <Button title="Edit" class="bg-color-200" />
       </div>
     </div>
     <div class="flex">
@@ -81,7 +82,6 @@ export default {
     },
     setTitle() {
       this.questionActive = false;
-      this.questionTitle = "Lalalal";
     },
   },
 };
