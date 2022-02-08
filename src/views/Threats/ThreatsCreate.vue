@@ -1,6 +1,17 @@
 <template>
   <Layout Title="Create Threats">
-    <div class="m-4">
+    <div class="m-12">
+      <div class="grid grid-cols-2">
+        <div class="">
+          <a href="#" class="text-blue-blue"
+            ><i class="fa fa-angle-left"></i> Back to threat library</a
+          >
+        </div>
+        <DeleteEditSave />
+        <div class="col-end-9 text-grey-grey ml-1">
+          <!-- language dropdown -->
+        </div>
+      </div>
       <ul
         class="nav nav-tabs flex flex-wrap list-none border-b-0 pl-0 mb-4"
         id="tabs-tab"
@@ -9,7 +20,7 @@
         <li class="nav-item" role="presentation">
           <a
             href="#tabs-home"
-            class="nav-link block font-medium text-lg font-semibold leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent active"
+            class="nav-link block font-medium text-xl leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent active"
             id="tabs-home-tab"
             data-bs-toggle="pill"
             data-bs-target="#tabs-home"
@@ -22,7 +33,7 @@
         <li class="nav-item" role="presentation">
           <a
             href="#tabs-profile"
-            class="nav-link block font-medium text-lg font-semibold leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+            class="nav-link block font-medium text-xl leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent text-blue-blue"
             id="tabs-profile-tab"
             data-bs-toggle="pill"
             data-bs-target="#tabs-profile"
@@ -35,7 +46,7 @@
         <li class="nav-item" role="presentation">
           <a
             href="#tabs-messages"
-            class="nav-link block font-medium text-lg font-semibold leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+            class="nav-link block font-medium text-xl leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
             id="tabs-messages-tab"
             data-bs-toggle="pill"
             data-bs-target="#tabs-messages"
@@ -72,6 +83,9 @@
           <Recommendation />
         </div>
       </div>
+      <div class="mt-8 mb-8">
+        <DeleteEditSave />
+      </div>
     </div>
   </Layout>
 </template>
@@ -82,6 +96,7 @@ import Layout from "@/components/Main.vue";
 import ThreatDetailCreate from "@/views/Threats/ThreatDetailCreate.vue";
 import Analysis from "@/views/Threats/Analysis/Analysis.vue";
 import Recommendation from "@/views/Threats/Recommendation/Index.vue";
+import DeleteEditSave from "@/views/Threats/DeleteEditSave.vue";
 
 export default defineComponent({
   components: {
@@ -89,9 +104,16 @@ export default defineComponent({
     ThreatDetailCreate,
     Analysis,
     Recommendation,
+    DeleteEditSave,
   },
   setup() {
     return {};
   },
 });
 </script>
+<style scoped>
+.nav-link.active {
+  color: #055ca8;
+  font-weight: bold;
+}
+</style>

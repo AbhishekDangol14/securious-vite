@@ -1,8 +1,11 @@
 <template>
-  <div class="flex gap-4 pb-3 align-middle">
-    <label for="toggle" class="text-md font-bold text-grey-grey w-fit">{{
-      name
-    }}</label>
+  <div class="flex gap-1 pb-1 align-middle">
+    <label
+      v-if="!alternate"
+      for="toggle"
+      class="text-base font-bold text-grey-grey w-fit"
+      >{{ name }}</label
+    >
     <div
       class="relative grid w-10 h-6 rounded-md bg-ternary select-none transition duration-2006 ease-in"
     >
@@ -19,6 +22,12 @@
         class="toggle-label block overflow-hidden h-6 p-1 rounded-md bg-grey-100 cursor-pointer"
       ></label>
     </div>
+    <label
+      v-if="alternate"
+      for="toggle"
+      class="text-base font-bold text-grey-grey w-fit"
+      >{{ name }}</label
+    >
   </div>
 </template>
 
@@ -28,6 +37,7 @@ export default defineComponent({
   props: {
     name: String,
     modelValue: Boolean,
+    alternate: Boolean,
   },
   emits: ["update:modelValue", "btn-click"],
   setup(props, { emit }) {

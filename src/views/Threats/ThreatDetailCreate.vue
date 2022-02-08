@@ -2,7 +2,7 @@
   <div class="grid grid-cols-2 mx-5 space-x-8 p-5">
     <div class="basis-1/2">
       <div class="flex">
-        <div class="w-2/3">
+        <div class="w-2/5">
           <Input
             id="title"
             name="Title"
@@ -14,39 +14,64 @@
             <FileUpload @my-file="uploadFile" />
           </span>
           <div class="gap-2 flex flex-col">
-            <Button name="ternary-button" :icon="Img" title="Upload" />
-            <Button name="ternary-button" :icon="Img" title="Select" />
+            <Button
+              name="ternary-button"
+              :faIcon="'fa fa-file-upload'"
+              title="Upload"
+            />
+            <Button
+              name="ternary-button"
+              :faIcon="'fa fa-hand-pointer'"
+              title="Select"
+            />
           </div>
         </div>
       </div>
-      <div>
-        <b class="text-grey-grey">Max Points:</b>
+      <div class="mt-10">
+        <b class="text-grey-grey font-bold text-base">Max Points:</b>
       </div>
-      <Input id="category" name="Category" placeholder="Category" />
+      <Input
+        class="mt-3"
+        id="category"
+        name="Category"
+        placeholder="Category"
+      />
       <Input
         name="Estimated time (in minutes)"
         placeholder="Please put estimated time in minutes here."
       />
-      <div>
-        <b class="text-grey-grey">Time to analysis by Users (In minutes): </b>
+      <div class="mb-5">
+        <b class="text-grey-grey text-base"
+          >Time to analysis by Users (In minutes):
+        </b>
       </div>
       <CKEditor name="Description" />
       <Input
+        class="mt-3"
         id="video_link"
         name="Video Link (Optional)"
         placeholder="Please put here video link"
       />
     </div>
-    <div class="basis-1/2 grow">
+    <div class="basis-1/2">
       <div>
-        <h class="text-lg font-semibold -ml-2">Define Importance</h>
+        <h class="text-medium font-semibold -ml-2 text-blue-blue"
+          >Define Importance</h
+        >
       </div>
-      <Switch name="Mark always as important" />
-      <Switch name="Mark as important if industry is:" />
+      <Switch class="mt-2" name="Mark always as important" />
+      <Switch :alternate="true" name="Mark as important if industry is:" />
       <Input placeholder="Multi select" />
-      <Switch name="Mark as if company size is:" class="my-4" />
+      <Switch
+        :alternate="true"
+        name="Mark as if company size is:"
+        class="my-4"
+      />
       <Slider v-model="valueOfSlider" :max="500" :min="0" :step="1" />
     </div>
+  </div>
+  <div class="px-2 mb-2">
+    <hr class="opacity-10" />
   </div>
   <DisplayOption />
 </template>
@@ -74,8 +99,8 @@ export default {
     CKEditor,
     Slider,
     DisplayOption,
+    VOtpInput,
   },
 };
 </script>
-
 <style src="@vueform/slider/themes/default.css"></style>

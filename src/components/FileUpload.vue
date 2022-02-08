@@ -21,24 +21,22 @@
           fill="#707070"
         />
       </svg>
-        <input type="file" class="hidden" @change="onChangeFile" />
+      <input type="file" class="hidden" @change="onChangeFile" />
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed } from "vue";
 export default defineComponent({
-  props: {
-
-  },
-  setup(props,context) {
+  props: {},
+  setup(props, context) {
     function onChangeFile(event) {
-      context.emit('myFile', event.target.files[0])
+      context.emit("myFile", event.target.files[0]);
     }
-    return { 
-        onChangeFile
-     };
+    return {
+      onChangeFile,
+    };
   },
 });
 </script>

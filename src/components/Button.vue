@@ -1,24 +1,29 @@
 <template>
-  <button :class="name ? `${name + ' button'}` : 'button primary-button'" @click.prevent="save">
+  <button
+    :class="name ? `${name + ' button'}` : 'button primary-button'"
+    @click.prevent="save"
+  >
     <span class="self-center">{{ title }}</span>
+    <i v-if="faIcon" :class="faIcon"></i>
     <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     name: String,
     icon: String,
     title: String,
+    faIcon: String,
   },
-  setup(props,context) {
+  setup(props, context) {
     function save() {
-        context.emit('myEvent');
+      context.emit("myEvent");
     }
     return {
-      save
+      save,
     };
   },
 });
@@ -32,7 +37,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   font-weight: 400;
   border-radius: 25px;
   padding: 11px 20px;
@@ -80,5 +85,17 @@ svg {
   border: 1px solid #055ca8;
   height: 30px;
   line-height: 16px;
+}
+
+.deletion-button {
+  color: #707070;
+  background-color: none;
+  background: transparent;
+  border: 1px solid #707070;
+}
+.deletion-button:hover {
+  color: #055ca8;
+  border: 1px solid #055ca8;
+  background-color: white;
 }
 </style>

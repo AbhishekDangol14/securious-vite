@@ -1,6 +1,6 @@
 <template>
-  <div class="mb-5 w-auto">
-    <label class="block text-grey-grey pl-1 text-md font-bold" :for="id">
+  <div class="mb-3 w-auto">
+    <label class="block text-grey-grey text-md font-normal" :for="id">
       {{ name }}
     </label>
     <input
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineEmits } from 'vue';
+import { computed, defineComponent, defineEmits } from "vue";
 export default defineComponent({
   props: {
     id: String,
@@ -25,20 +25,20 @@ export default defineComponent({
     placeholder: String,
     message: String,
     error: String,
-    modelValue: String
+    modelValue: String,
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
   setup(props, context) {
-    return { 
+    return {
       value: computed({
         get() {
-        return props.modelValue
+          return props.modelValue;
         },
         set(value) {
-          context.emit('update:modelValue', value)
-        }
-      })
-     };
+          context.emit("update:modelValue", value);
+        },
+      }),
+    };
   },
 });
 </script>

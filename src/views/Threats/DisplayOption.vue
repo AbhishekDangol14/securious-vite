@@ -1,21 +1,32 @@
 <template>
   <div>
-    <h class="text-lg font-semibold mx-5">Display Options</h>
+    <h class="text-medium font-semibold text-blue-blue mx-5">Display Options</h>
   </div>
   <div class="grid grid-cols-2 mx-5 space-x-8 p-5">
     <div>
-      <Switch name="Active" />
-      <Switch name="Show if industry is:" />
-      <Input placeholder="Multi select" />
+      <div>
+        <Switch name="Active" />
+      </div>
+      <div class="mt-2">
+        <Switch :alternate="true" name="Show if industry is:" />
+      </div>
+      <div class="mt-3">
+        <Input placeholder="Multi select" />
+      </div>
     </div>
     <div>
       <div>
-        <Switch name="Show if company size is:" />
-        <div class="my-3">
+        <Switch :alternate="true" name="Show if company size is:" />
+        <div class="my-10">
           <Slider v-model="valueOfOptions" :max="500" :min="0" :step="1" />
         </div>
-        <Switch name="Show if using the following asset(s):" />
-        <Input placeholder="Multi select" />
+        <Switch
+          :alternate="true"
+          name="Show if using the following asset(s):"
+        />
+        <div class="mt-3">
+          <Input placeholder="Multi select" />
+        </div>
       </div>
     </div>
   </div>
