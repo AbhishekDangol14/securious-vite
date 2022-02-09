@@ -1,7 +1,7 @@
 <template>
   <div class="border border-grey-grey border-opacity-20 relative shadow-sm">
     <a
-      @click="removeQuestion(item.id)"
+      @click="removeQuestion(item)"
       class="absolute -top-3 -right-2 cursor-pointer"
     >
       <img src="@/assets/icons/close-box.svg" alt="" />
@@ -16,7 +16,9 @@
       </div>
       <div class="grow">
         <div class="grid grid-cols-5 p-2">
-          <div class="col-start-1 col-end-5 my-4">
+          <div
+            class="col-start-1 col-end-5 my-4 border-l border-blue-blue border-opacity-20 pl-2"
+          >
             <div class="flex justify-start my-4">
               <div class="box-border block min-w-min m-0 p-1">
                 <input

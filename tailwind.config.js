@@ -62,6 +62,7 @@ module.exports = {
       lg: "26px",
       xl: "28px",
       xxl: "30px",
+      xxxl: "35px",
     },
     borderRadius: {
       none: "0",
@@ -73,6 +74,7 @@ module.exports = {
     },
     opacity: {
       0: "0",
+      10: "0.1",
       20: "0.2",
       40: "0.4",
       60: "0.6",
