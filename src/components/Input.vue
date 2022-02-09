@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3 w-auto">
-    <label class="block text-grey-grey text-md font-normal" :for="id">
+    <label class="block text-grey-grey text-md font-normal text-left" :for="id">
       {{ name }}
     </label>
     <input

@@ -42,7 +42,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/threat/question/edit",
     name: "editThreatQuestion",
-    component: () => import("@/views/Threats/Analysis/QuestionEdit/index.vue"),
+    component: () => import("@/views/Threats/Analysis/QuestionEdit/Index.vue"),
+  },
+  {
+    path: "/threat/possible-recommendation/edit",
+    name: "editThreatPossibleRecommendation",
+    component: () => import("@/views/Threats/Recommendation/Edit.vue"),
   },
   {
     path: "/industries",

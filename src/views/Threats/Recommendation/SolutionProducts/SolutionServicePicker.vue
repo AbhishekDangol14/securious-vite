@@ -1,9 +1,9 @@
 <template>
-  <div>Possible Answers</div>
+  <div>Modal to select products</div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style scoped></style>
+<style></style>
