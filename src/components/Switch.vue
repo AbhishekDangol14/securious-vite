@@ -65,6 +65,6 @@ export default defineComponent({
   border-color: #68d391;
 }
 .toggle-checkbox:checked + .toggle-label {
-  background-color: #68d391;
+  background-color: #61b756;
 }
 </style>

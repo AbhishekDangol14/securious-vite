@@ -99,7 +99,6 @@ export default {
     CKEditor,
     Slider,
     DisplayOption,
-    VOtpInput,
   },
 };
 </script>

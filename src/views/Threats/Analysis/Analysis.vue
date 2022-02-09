@@ -8,35 +8,35 @@
       >
         <transition-group>
           <div
-            class="list-group-item border border-grey-grey m-1 p-3 text-center"
+            class="list-group-item p-3 text-center"
             v-for="element in list"
             :key="element.name"
           >
             <component
               v-bind:is="'ThreatAnalysisQuestion'"
-              :title="element.name"
+              :removeQuestion="removeItem"
+              :item="element"
             />
           </div>
         </transition-group>
       </draggable>
     </div>
 
-    <div></div>
-    <div class="text-right mt-10">
-      <form>
-        <button
-          class="btn btn-rounded btn-outline-primary theme-border theme-color"
-          id="add-new-question"
-          type="submit"
-        >
-          Add new question&nbsp;<i class="fa fa-plus"></i>
-        </button>
-      </form>
+    <div class="flex flex-row-reverse m-4 pb-8">
+      <div class="text-right">
+        <Button
+          class="ternary-button"
+          :faIcon="'fa fa-plus'"
+          title="Add new questions"
+          @click="addItem"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
 import { defineComponent } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import ThreatAnalysisQuestion from "@/views/Threats/Analysis/Question.vue";
@@ -45,21 +45,38 @@ export default defineComponent({
   components: {
     draggable: VueDraggableNext,
     ThreatAnalysisQuestion,
+    Button,
   },
   data() {
     return {
       enabled: true,
       list: [
-        { name: "John", id: 1 },
+        { name: "John" },
         {
           name: "Jany",
-          id: 2,
         },
       ],
       dragging: false,
     };
   },
-  methods: {},
+  methods: {
+    addItem() {
+      this.list.push({
+        name: "New Question",
+      });
+    },
+    removeItem(element) {
+      // get index of object with id:37
+      var removeIndex = this.list
+        .map(function (item) {
+          return item.name;
+        })
+        .indexOf(element.name);
+
+      // remove object
+      this.list.splice(removeIndex, 1);
+    },
+  },
 });
 </script>
 

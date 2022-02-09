@@ -13,14 +13,14 @@
         </div>
       </div>
       <ul
-        class="nav nav-tabs flex flex-wrap list-none border-b-0 pl-0 mb-4"
+        class="nav nav-tabs flex flex-wrap list-none pl-0 -mb-1"
         id="tabs-tab"
         role="tablist"
       >
         <li class="nav-item" role="presentation">
           <a
             href="#tabs-home"
-            class="nav-link block font-medium text-xl leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent active"
+            class="nav-link block font-medium text-xxl leading-tight border-x-0 border-t-0 border-b-0 border-transparent px-6 py-4 hover:border-transparent hover:bg-gray-100 focus:border-transparent active"
             id="tabs-home-tab"
             data-bs-toggle="pill"
             data-bs-target="#tabs-home"
@@ -33,7 +33,7 @@
         <li class="nav-item" role="presentation">
           <a
             href="#tabs-profile"
-            class="nav-link block font-medium text-xl leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent text-blue-blue"
+            class="nav-link block font-medium text-xxl leading-tight border-x-0 border-t-0 border-b-0 border-transparent px-6 py-4 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
             id="tabs-profile-tab"
             data-bs-toggle="pill"
             data-bs-target="#tabs-profile"
@@ -46,7 +46,7 @@
         <li class="nav-item" role="presentation">
           <a
             href="#tabs-messages"
-            class="nav-link block font-medium text-xl leading-tight border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+            class="nav-link block font-medium text-xxl leading-tight border-x-0 border-t-0 border-b-0 border-transparent px-6 py-4 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
             id="tabs-messages-tab"
             data-bs-toggle="pill"
             data-bs-target="#tabs-messages"
@@ -115,5 +115,8 @@ export default defineComponent({
 .nav-link.active {
   color: #055ca8;
   font-weight: bold;
+  border: 0;
+  border-top: #055ca8 solid 3px;
+  background-color: #fff;
 }
 </style>
