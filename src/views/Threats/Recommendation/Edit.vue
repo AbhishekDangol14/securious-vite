@@ -65,6 +65,9 @@
               <Slider v-model="valueOfSlider" :max="500" :min="0" :step="1" />
             </div>
           </div>
+          <div>
+            <SolutionProducts />
+          </div>
         </div>
       </div>
       <div class="mt-8 mb-8">
@@ -82,6 +85,7 @@ import Switch from "@/components/Switch.vue";
 import CKEditor from "@/components/CKEditor.vue";
 import Slider from "@vueform/slider";
 import DeleteEditSave from "@/views/Threats/DeleteEditSave.vue";
+import SolutionProducts from "@/views/Threats/Recommendation/SolutionProducts/Index.vue";
 
 export default defineComponent({
   data() {
@@ -96,6 +100,7 @@ export default defineComponent({
     Slider,
     Layout,
     DeleteEditSave,
+    SolutionProducts,
   },
   setup() {
     return {};
