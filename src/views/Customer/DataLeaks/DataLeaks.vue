@@ -30,6 +30,13 @@
                     <div class="source-link text-sm text-grey-grey mt-3">
                         Quelle der Informationen: <a href="https://haveibeenpwned.com/" class="text-blue-blue" target="_blank">haveibeenpwned.com</a>
                     </div>
+                    <hr class="mt-6 mb-4 border-grey-300">
+                    <div class="websites grid grid-cols-4 mt-12 mb-6 space-x-4 place-items-end">
+                        <img src="@/assets/views/no-data-leak-detected.svg" class="col-start-2">
+                        <div class="text-sm font-medium text-grey-grey cols-start-3 text-justify mb-16">
+                            Wir haben noch kein Datenleck für Ihre E-Mail gefunden. Sobald wir ein Leck entdecken, informieren wir Sie. Gerne können Sie noch weitere E-Mails zur Analyse hinzufügen.
+                        </div>
+                    </div>
                 </template>
             </Card>
         </div>
