@@ -34,22 +34,104 @@
             <div
               class="basis-1/2 border-r-2 border-blue-blue border-opacity-20 pr-4"
             >
-              <span class="text-base font-bold text-grey-grey">Title</span>
-              <Input id="title" placeholder="New Title" />
+              <span class="text-base font-semibold text-grey-grey">Title</span>
+              <Input id="title" placeholder="Possible Recommendation" />
               <Switch :alternate="true" class="mt-2" name="Is Automated" />
-              <span class="text-base font-bold text-grey-grey">Title</span>
-              <Input id="category" placeholder="Category" />
-              <Input placeholder="Please put estimated time in minutes here." />
-              <div class="mb-5">
-                <b class="text-grey-grey text-base"
-                  >Time to analysis by Users (In minutes):
-                </b>
+              <div class="flex gap-8 relative">
+                <div class="w-2/4">
+                  <span class="text-base font-semibold text-grey-grey"
+                    >For Question</span
+                  >
+                  <VSelect
+                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                    placeholder="Please Select the question"
+                    :options="questions"
+                    :reduce="(question) => question.id"
+                    label="question"
+                  />
+                </div>
+
+                <div class="w-1/4">
+                  <span class="text-base font-semibold text-grey-grey"
+                    >For Answer</span
+                  >
+                  <VSelect
+                    multiple
+                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                    placeholder="Please Select the answer"
+                    :options="answers"
+                    :reduce="(answer) => answer.id"
+                    label="answer"
+                  />
+                </div>
+                <div class="w-1/4 align-middle">
+                  <a class="absolute top-6 cursor-pointer">
+                    <img src="@/assets/icons/close-box.svg" alt="" />
+                  </a>
+                </div>
               </div>
-              <Input
-                class="mt-3"
-                id="video_link"
-                name="Video Link (Optional)"
-                placeholder="Please put here video link"
+              <div class="text-left mt-3">
+                <a class="text-blue-blue text-base cursor-pointer">+Add</a>
+              </div>
+              <div class="flex gap-8">
+                <div class="w-2/4">
+                  <span class="text-base font-semibold text-grey-grey"
+                    >Once sentence recommendation</span
+                  >
+                  <Input id="category" placeholder="Short Description" />
+                </div>
+
+                <div class="w-2/4">
+                  <span class="text-base font-semibold text-grey-grey"
+                    >Points</span
+                  >
+                  <VSelect
+                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                    placeholder="Points"
+                    :options="points"
+                  />
+                </div>
+              </div>
+              <Switch
+                :alternate="true"
+                class="mt-2"
+                name="Show only if industry is"
+              />
+              <VSelect
+                multiple
+                class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                placeholder="Please select industry"
+                :options="industries"
+                :reduce="(industry) => industry.id"
+                label="name"
+              />
+              <Switch
+                :alternate="true"
+                name="
+Show only for company size:"
+                class="my-4"
+              />
+              <Slider v-model="valueOfSlider" :max="500" :min="0" :step="1" />
+
+              <Switch
+                :alternate="true"
+                name="
+Show if using following asset(s) :"
+                class="mt-4"
+              />
+              <VSelect
+                multiple
+                class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                placeholder="Please select the company asset"
+                :options="industries"
+                :reduce="(industry) => industry.id"
+                label="name"
+              />
+              <Switch
+                :alternate="true"
+                name="
+Display if these conditions are met:"
+                class="mt-4"
               />
             </div>
             <div class="basis-1/2">
@@ -57,12 +139,38 @@
                 >Description</span
               >
               <CKEditor />
-              <Switch
-                :alternate="true"
-                name="Mark as if company size is:"
-                class="my-4"
-              />
-              <Slider v-model="valueOfSlider" :max="500" :min="0" :step="1" />
+              <div class="flex gap-8 relative mt-3">
+                <div class="w-3/5">
+                  <span class="text-base font-semibold text-grey-grey"
+                    >Description for</span
+                  >
+                  <CKEditor />
+                </div>
+
+                <div class="w-2/5">
+                  <span class="text-base font-semibold text-grey-grey"
+                    >Company Assets</span
+                  >
+                  <VSelect
+                    multiple
+                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                    placeholder="Please Select the answer"
+                    :options="answers"
+                    :reduce="(answer) => answer.id"
+                    label="answer"
+                  />
+                </div>
+                <div class="w-1/5 align-middle">
+                  <a class="absolute top-6 cursor-pointer">
+                    <img src="@/assets/icons/close-box.svg" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div class="text-left mt-3">
+                <a class="text-blue-blue text-base cursor-pointer"
+                  >+Add Description</a
+                >
+              </div>
             </div>
           </div>
           <div>
@@ -86,11 +194,27 @@ import CKEditor from "@/components/CKEditor.vue";
 import Slider from "@vueform/slider";
 import DeleteEditSave from "@/views/Threats/DeleteEditSave.vue";
 import SolutionProducts from "@/views/Threats/Recommendation/SolutionProducts/Index.vue";
+import VSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 export default defineComponent({
   data() {
     return {
+      questions: [
+        { id: 1, question: "Wahat is Anti virus?" },
+        { id: 2, question: "What do you mean by that ?" },
+      ],
+      answers: [
+        { id: 1, answer: "A software protect from virus" },
+        { id: 2, answer: " I don't know" },
+      ],
       valueOfSlider: [0, 500],
+      points: [0, 10, 20, 30],
+
+      industries: [
+        { id: 1, name: "Industry 1" },
+        { id: 2, name: "Industry 2" },
+      ],
     };
   },
   components: {
@@ -101,20 +225,21 @@ export default defineComponent({
     Layout,
     DeleteEditSave,
     SolutionProducts,
+    VSelect,
   },
+  methods: {},
+
   setup() {
     return {};
   },
 });
 </script>
+
 <style src="@vueform/slider/themes/default.css"></style>
 
-<style scoped>
-.nav-link.active {
-  color: #055ca8;
-  font-weight: bold;
-  border: 0;
-  border-bottom: #055ca8 solid 2px;
-  background-color: #fff;
+<style>
+.style-chooser .vs__dropdown-toggle {
+  height: auto;
+  min-height: 45px;
 }
 </style>

@@ -11,7 +11,13 @@
         <Switch :alternate="true" name="Show if industry is:" />
       </div>
       <div class="mt-3">
-        <Input placeholder="Multi select" />
+        <VSelect
+          class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+          multiple
+          :options="industries"
+          :reduce="(industry) => industry.id"
+          label="name"
+        />
       </div>
     </div>
     <div>
@@ -25,7 +31,13 @@
           name="Show if using the following asset(s):"
         />
         <div class="mt-3">
-          <Input placeholder="Multi select" />
+          <VSelect
+            class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+            multiple
+            :options="assets"
+            :reduce="(asset) => asset.id"
+            label="name"
+          />
         </div>
       </div>
     </div>
@@ -33,21 +45,38 @@
 </template>
 
 <script>
-import Input from "@/components/Input.vue";
+// import Input from "@/components/Input.vue";
 import Switch from "@/components/Switch.vue";
 import Slider from "@vueform/slider";
+import VSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+
 export default {
   data() {
     return {
       valueOfOptions: [20, 40],
+      industries: [
+        { id: 1, name: "Industry 1" },
+        { id: 2, name: "Industry 2" },
+      ],
+      assets: [
+        { id: 1, name: "Asset 1" },
+        { id: 2, name: "Asset 2" },
+      ],
     };
   },
   components: {
-    Input,
+    // Input,
     Switch,
     Slider,
+    VSelect,
   },
 };
 </script>
 
-<style></style>
+<style>
+.style-chooser .vs__dropdown-toggle {
+  height: auto;
+  min-height: 45px;
+}
+</style>

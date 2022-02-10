@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,computed } from 'vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import CKEditor from '@ckeditor/ckeditor5-vue';
+import { defineComponent, computed } from "vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import CKEditor from "@ckeditor/ckeditor5-vue";
 
 export default defineComponent({
   props: {
@@ -18,18 +18,18 @@ export default defineComponent({
   components: {
     ckeditor: CKEditor.component,
   },
-  emits: ['update:modelValue'],
-  setup(props,context) {
+  emits: ["update:modelValue"],
+  setup(props, context) {
     return {
       editor: ClassicEditor,
       value: computed({
         get() {
-        return props.modelValue
+          return props.modelValue;
         },
         set(value) {
-          context.emit('update:modelValue', value)
-        }
-      })
+          context.emit("update:modelValue", value);
+        },
+      }),
     };
   },
 });
@@ -39,5 +39,8 @@ export default defineComponent({
 .ck-editor__editable {
   min-height: 12rem;
   background-color: red;
+}
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  background-color: #055ca80d;
 }
 </style>

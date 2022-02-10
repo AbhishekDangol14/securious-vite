@@ -8,12 +8,8 @@
     <div
       class="justify-center pb-3 border-b border-blue-blue border-opacity-30"
     >
-      <a class="btn-block-option draggable-handler sortable-answer-handle">
-        <img
-          src="@/assets/icons/drag-handler-2.svg"
-          class="mx-auto my-autos"
-          alt=""
-        />
+      <a class="draggable-handler sortable-handle handle cursor-move">
+        <img src="@/assets/icons/drag-handler-2.svg" class="mx-auto my-auto" />
       </a>
     </div>
     <div class="flex pt-2">
@@ -29,7 +25,7 @@
       </div>
       <div class="flex-fill">
         <div class="text-md text-blue-blue font-bold mb-5">
-          Antivirus- Bitdefender
+          {{ item.name }}
         </div>
         <div class="text-sm">
           <span class="text-grey-grey font-bold">Company: </span>
@@ -47,7 +43,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style></style>
