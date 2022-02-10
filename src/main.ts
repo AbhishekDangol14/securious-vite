@@ -11,14 +11,22 @@ router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('ID_TOKEN_KEY');
-    
+    const email = localStorage.getItem('EMAIL_VERIFIED_AT');
 
+    if (to.path == '/verify' || !authRequired){ 
+      next()
+    }
     if (authRequired && !loggedIn) {
       next('/login');
     } 
     else if(!authRequired && loggedIn) {
       axios.defaults.headers.common['Authorization'] = "Bearer "+loggedIn
       next('/dashboard');
+    }
+    else if(!email && loggedIn) {
+      if (!authRequired)
+        next()
+      next('/verify')
     }
     else {
       axios.defaults.headers.common['Authorization'] = "Bearer "+loggedIn

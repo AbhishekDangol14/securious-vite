@@ -65,7 +65,7 @@ module.exports = {
     },
     borderRadius: {
       none: '0',
-      sm: '0.5px',
+      sm: '15px',
       DEFAULT: '5px',
       md: '22px',
       lg: '50px',
@@ -89,7 +89,7 @@ module.exports = {
       'secondary-blue': '#055ca80d',
       ternary: '#7070701a',
       white: '#ffffff',
-      'ternary-blue': '#E6EFF7'
+      'ternary-blue': '#055CA80D'
     }),
   },
   variants: {

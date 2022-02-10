@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar bg-white min-h-screen shadow-secondary">
+    <div class="sidebar bg-white shadow-secondary h-screen">
         <div class="logo p-3">
             <img src="../assets/views/securious-logo.svg">
         </div>
