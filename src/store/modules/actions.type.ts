@@ -1,4 +1,5 @@
 export const LOGIN = "login";
+export const VERIFY = "verify";
 export const LOGOUT = "logout";
 export const REGISTER = "register";
 export const CHECK_AUTH = "checkAuth";
