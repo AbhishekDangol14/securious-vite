@@ -113,7 +113,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/data-leak',
     name: 'data-leak',
-    component: () => import('@/views/Customer/DataLeaks.vue')
+    component: () => import('@/views/Customer/DataLeaks/DataLeaks.vue')
+  },
+  {
+    path: '/introduction',
+    name: 'introduction',
+    component: () => import('@/views/Intro.vue')
   },
 ]
 
