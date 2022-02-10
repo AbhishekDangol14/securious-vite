@@ -21,12 +21,17 @@
         </div>
       </draggable>
     </transition-group>
+
     <div class="text-blue-blue mr-0 flex justify-end">
       <Button
+        @click="toggleModal()"
         name="ternary-button"
         title="Select existing service"
         :faIcon="'fa fa-check'"
       />
+    </div>
+    <div>
+      <SolutionServicePicker v-if="showModal" />
     </div>
   </div>
 </template>
@@ -35,9 +40,12 @@
 import Button from "@/components/Button.vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import SolutionProduct from "@/views/Threats/Recommendation/SolutionProducts/SolutionProduct.vue";
+import SolutionServicePicker from "@/views/Threats/Recommendation/SolutionProducts/SolutionServicePicker.vue";
+
 export default {
   data() {
     return {
+      showModal: false,
       list: [
         {
           id: 1,
@@ -54,6 +62,12 @@ export default {
     Button,
     SolutionProduct,
     draggable: VueDraggableNext,
+    SolutionServicePicker,
+  },
+  methods: {
+    toggleModal: function () {
+      this.showModal = !this.showModal;
+    },
   },
 };
 </script>
