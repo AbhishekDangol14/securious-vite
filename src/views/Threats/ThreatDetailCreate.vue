@@ -33,12 +33,11 @@
         </b>
       </div>
       <div class="mt-4">
-        <span class="text-base font-semibold text-grey-grey">Category</span>
-        <VSelect
-          class="mb-3 style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-          multiple
+        <VueSelect
+          name="Category"
+          :multiple="true"
+          placeholder="Please select the company asset"
           :options="categories"
-          :reduce="(category) => category.id"
           label="category"
         />
       </div>
@@ -69,13 +68,9 @@
       </div>
       <Switch class="mt-2" name="Mark always as important" />
       <Switch :alternate="true" name="Mark as important if industry is:" />
-      <VSelect
-        class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-        multiple
-        :options="industries"
-        :reduce="(industry) => industry.id"
-        label="name"
-      />
+
+      <VueSelect :multiple="true" :options="industries" label="name" />
+
       <Switch
         :alternate="true"
         name="Mark as if company size is:"
@@ -98,8 +93,8 @@ import FileUpload from "@/components/FileUpload.vue";
 import CKEditor from "@/components/CKEditor.vue";
 import Slider from "@vueform/slider";
 import DisplayOption from "@/views/Threats/DisplayOption.vue";
-import VSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
+import VueSelect from "@/components/Select.vue";
+
 export default {
   data() {
     return {
@@ -126,14 +121,8 @@ export default {
     CKEditor,
     Slider,
     DisplayOption,
-    VSelect,
+    VueSelect,
   },
 };
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
-<style>
-.style-chooser .vs__dropdown-toggle {
-  height: auto;
-  min-height: 45px;
-}
-</style>

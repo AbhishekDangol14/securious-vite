@@ -1,5 +1,15 @@
 <template>
+  <router-link
+    v-if="path_name"
+    :class="name ? `${name + ' button'}` : 'button primary-button'"
+    :to="{ name: path_name }"
+  >
+    <span class="self-center">{{ title }}</span>
+    <i v-if="faIcon" :class="faIcon"></i>
+    <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
+  </router-link>
   <button
+    v-else
     :class="name ? `${name + ' button'}` : 'button primary-button'"
     @click.prevent="save"
   >
@@ -17,6 +27,7 @@ export default defineComponent({
     icon: String,
     title: String,
     faIcon: String,
+    path_name: String,
   },
   setup(props, context) {
     function save() {

@@ -3,8 +3,11 @@
     <div class="m-12">
       <div class="grid grid-cols-2">
         <div class="">
-          <a href="#" class="text-blue-blue"
-            ><i class="fa fa-angle-left"></i> Back to analysis</a
+          <router-link
+            :to="{ name: 'createThreats' }"
+            href="#"
+            class="text-blue-blue"
+            ><i class="fa fa-angle-left"></i> Back to Analysis</router-link
           >
         </div>
         <DeleteEditSave />
@@ -39,28 +42,20 @@
               <Switch :alternate="true" class="mt-2" name="Is Automated" />
               <div class="flex gap-8 relative">
                 <div class="w-2/4">
-                  <span class="text-base font-semibold text-grey-grey"
-                    >For Question</span
-                  >
-                  <VSelect
-                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                  <VueSelect
+                    name="For Question"
                     placeholder="Please Select the question"
                     :options="questions"
-                    :reduce="(question) => question.id"
                     label="question"
                   />
                 </div>
 
                 <div class="w-1/4">
-                  <span class="text-base font-semibold text-grey-grey"
-                    >For Answer</span
-                  >
-                  <VSelect
-                    multiple
-                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                  <VueSelect
+                    :multiple="true"
+                    name="For Answer"
                     placeholder="Please Select the answer"
                     :options="answers"
-                    :reduce="(answer) => answer.id"
                     label="answer"
                   />
                 </div>
@@ -82,13 +77,11 @@
                 </div>
 
                 <div class="w-2/4">
-                  <span class="text-base font-semibold text-grey-grey"
-                    >Points</span
-                  >
-                  <VSelect
-                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+                  <VueSelect
+                    name="For Answer"
                     placeholder="Points"
                     :options="points"
+                    label="Points"
                   />
                 </div>
               </div>
@@ -97,14 +90,14 @@
                 class="mt-2"
                 name="Show only if industry is"
               />
-              <VSelect
-                multiple
-                class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+
+              <VueSelect
+                :multiple="true"
                 placeholder="Please select industry"
                 :options="industries"
-                :reduce="(industry) => industry.id"
                 label="name"
               />
+
               <Switch
                 :alternate="true"
                 name="
@@ -119,14 +112,14 @@ Show only for company size:"
 Show if using following asset(s) :"
                 class="mt-4"
               />
-              <VSelect
-                multiple
-                class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+
+              <VueSelect
+                :multiple="true"
                 placeholder="Please select the company asset"
                 :options="industries"
-                :reduce="(industry) => industry.id"
                 label="name"
               />
+
               <Switch
                 :alternate="true"
                 name="
@@ -148,16 +141,12 @@ Display if these conditions are met:"
                 </div>
 
                 <div class="w-2/5">
-                  <span class="text-base font-semibold text-grey-grey"
-                    >Company Assets</span
-                  >
-                  <VSelect
-                    multiple
-                    class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-                    placeholder="Please Select the answer"
-                    :options="answers"
-                    :reduce="(answer) => answer.id"
-                    label="answer"
+                  <VueSelect
+                    name="Company Assets"
+                    :multiple="true"
+                    placeholder="Please select the answer"
+                    :options="assets"
+                    label="name"
                   />
                 </div>
                 <div class="w-1/5 align-middle">
@@ -194,8 +183,7 @@ import CKEditor from "@/components/CKEditor.vue";
 import Slider from "@vueform/slider";
 import DeleteEditSave from "@/views/Threats/DeleteEditSave.vue";
 import SolutionProducts from "@/views/Threats/Recommendation/SolutionProducts/Index.vue";
-import VSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
+import VueSelect from "@/components/Select.vue";
 
 export default defineComponent({
   data() {
@@ -211,6 +199,10 @@ export default defineComponent({
       valueOfSlider: [0, 500],
       points: [0, 10, 20, 30],
 
+      assets: [
+        { id: 1, name: "Asset 1" },
+        { id: 2, name: "Asset 2" },
+      ],
       industries: [
         { id: 1, name: "Industry 1" },
         { id: 2, name: "Industry 2" },
@@ -225,7 +217,7 @@ export default defineComponent({
     Layout,
     DeleteEditSave,
     SolutionProducts,
-    VSelect,
+    VueSelect,
   },
   methods: {},
 

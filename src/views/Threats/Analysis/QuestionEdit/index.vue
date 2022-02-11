@@ -3,8 +3,11 @@
     <div class="m-12">
       <div class="grid grid-cols-2">
         <div class="">
-          <a href="#" class="text-blue-blue"
-            ><i class="fa fa-angle-left"></i> Back to Threat Edit</a
+          <router-link
+            :to="{ name: 'createThreats' }"
+            href="#"
+            class="text-blue-blue"
+            ><i class="fa fa-angle-left"></i> Back to Threat Edit</router-link
           >
         </div>
         <DeleteEditSave />

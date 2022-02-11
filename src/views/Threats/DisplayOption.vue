@@ -11,13 +11,7 @@
         <Switch :alternate="true" name="Show if industry is:" />
       </div>
       <div class="mt-3">
-        <VSelect
-          class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-          multiple
-          :options="industries"
-          :reduce="(industry) => industry.id"
-          label="name"
-        />
+        <VueSelect :multiple="true" :options="industries" label="name" />
       </div>
     </div>
     <div>
@@ -31,11 +25,10 @@
           name="Show if using the following asset(s):"
         />
         <div class="mt-3">
-          <VSelect
-            class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-            multiple
+          <VueSelect
+            name="Category"
+            :multiple="true"
             :options="assets"
-            :reduce="(asset) => asset.id"
             label="name"
           />
         </div>
@@ -48,8 +41,7 @@
 // import Input from "@/components/Input.vue";
 import Switch from "@/components/Switch.vue";
 import Slider from "@vueform/slider";
-import VSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
+import VueSelect from "@/components/Select.vue";
 
 export default {
   data() {
@@ -69,14 +61,7 @@ export default {
     // Input,
     Switch,
     Slider,
-    VSelect,
+    VueSelect,
   },
 };
 </script>
-
-<style>
-.style-chooser .vs__dropdown-toggle {
-  height: auto;
-  min-height: 45px;
-}
-</style>

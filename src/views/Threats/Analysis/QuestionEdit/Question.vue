@@ -4,25 +4,19 @@
       <Input id="title" name="Question Title" placeholder="New Question" />
       <div class="flex gap-8 relative">
         <div class="w-2/4">
-          <span class="text-base font-semibold text-grey-grey"
-            >Question Type</span
-          >
-          <VSelect
-            class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+          <VueSelect
+            name="Question Type"
+            placeholder="Please select the company asset"
             :options="types"
-            :reduce="(type) => type.id"
             label="name"
           />
         </div>
 
         <div class="w-2/4">
-          <span class="text-base font-semibold text-grey-grey"
-            >Detail level</span
-          >
-          <VSelect
-            class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
+          <VueSelect
+            name="Detail level"
+            :multiple="true"
             :options="levels"
-            :reduce="(level) => level.id"
             label="name"
           />
         </div>
@@ -46,13 +40,8 @@
       <div>
         <Switch :alternate="true" class="mt-2" name="Show if industry is" />
       </div>
-      <VSelect
-        multiple
-        class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-        :options="industries"
-        :reduce="(industry) => industry.id"
-        label="name"
-      />
+      <VueSelect :multiple="true" :options="industries" label="name" />
+
       <Switch
         :alternate="true"
         class="mt-2"
@@ -65,13 +54,9 @@
       <div class="my-2">
         <Switch :alternate="true" name="Show if using the following assets" />
       </div>
-      <VSelect
-        multiple
-        class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-        :options="assets"
-        :reduce="(asset) => asset.id"
-        label="name"
-      />
+
+      <VueSelect :multiple="true" :options="assets" label="name" />
+
       <Switch
         :alternate="true"
         name="Display if these conditions are met"
@@ -92,8 +77,7 @@ import Input from "@/components/Input.vue";
 import Switch from "@/components/Switch.vue";
 import CKEditor from "@/components/CKEditor.vue";
 import Slider from "@vueform/slider";
-import VSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
+import VueSelect from "@/components/Select.vue";
 
 export default {
   data() {
@@ -124,15 +108,8 @@ export default {
     Switch,
     CKEditor,
     Slider,
-    VSelect,
+    VueSelect,
   },
 };
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
-
-<style>
-.style-chooser .vs__dropdown-toggle {
-  height: auto;
-  min-height: 45px;
-}
-</style>

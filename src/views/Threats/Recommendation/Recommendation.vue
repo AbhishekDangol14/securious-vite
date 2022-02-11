@@ -70,7 +70,11 @@
                 |
                 <b class="text-blue-blue">EN</b>
               </div>
-              <Button title="Edit" :faIcon="'fa fa-pencil'" />
+              <Button
+                path_name="editThreatPossibleRecommendation"
+                title="Edit"
+                :faIcon="'fa fa-pencil'"
+              />
             </div>
           </div>
         </div>
