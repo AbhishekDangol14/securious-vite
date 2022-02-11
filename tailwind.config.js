@@ -85,6 +85,7 @@ module.exports = {
     boxShadow: {
       primary: "0px 3px 6px rgba(5, 92, 168, 0.102)",
       secondary: "0px 10px 40px rgba(5, 92, 168, 0.1)",
+      ternary: "0 2px 6px rgb(21 92 168 / 25%)",
     },
     backgroundColor: () => ({
       primary: "#055ca8",
@@ -92,9 +93,12 @@ module.exports = {
       "secondary-blue": "#055ca80d",
       ternary: "#7070701a",
       white: "#ffffff",
+      modal: "#F2F7FB",
     }),
   },
   variants: {
-    extend: {},
+    extend: {
+      borderColor: ["responsive", "hover", "focus", "active", "group-hover"],
+    },
   },
 };

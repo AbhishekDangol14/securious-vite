@@ -2,7 +2,10 @@
   <div
     class="border border-grey-grey border-opacity-20 rounded p-5 font-weight-bold h-full flex flex-col relative"
   >
-    <a class="absolute -top-3 -right-2 cursor-pointer">
+    <a
+      @click="removeThisProduct(item)"
+      class="absolute -top-3 -right-2 cursor-pointer"
+    >
       <img src="@/assets/icons/close-box.svg" alt="" />
     </a>
     <div
@@ -49,6 +52,7 @@ export default {
       type: Object,
       required: true,
     },
+    removeThisProduct: Function,
   },
 };
 </script>
