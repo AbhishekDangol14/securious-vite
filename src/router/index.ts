@@ -25,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Verify.vue')
   },
   {
+    path: '/verify',
+    name: 'verify',
+    component: () => import('@/views/Verify.vue')
+  },
+  {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/Dashboard.vue')
@@ -94,6 +99,31 @@ const routes: Array<RouteRecordRaw> = [
     path: "/certificates",
     name: "certificates",
     component: test,
+  },
+  {
+    path: '/kunden',
+    name: 'kunden',
+    component: () => import('@/views/Consultant/Kunden.vue')
+  },
+  {
+    path: '/email2fa',
+    name: 'email2fa',
+    component: () => import('@/views/2FA/Email2FA.vue')
+  },
+  {
+    path: '/google2fa',
+    name: 'google2fa',
+    component: () => import('@/views/2FA/Google2FA.vue')
+  },
+  {
+    path: '/data-leak',
+    name: 'data-leak',
+    component: () => import('@/views/Customer/DataLeaks/DataLeaks.vue')
+  },
+  {
+    path: '/introduction',
+    name: 'introduction',
+    component: () => import('@/views/Intro.vue')
   },
   {
     path: '/kunden',
