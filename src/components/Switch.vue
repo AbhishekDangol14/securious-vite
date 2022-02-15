@@ -1,10 +1,13 @@
 <template>
-  <div class="flex gap-4 pb-3 align-middle">
-    <label for="toggle" class="text-md font-bold text-grey-grey w-fit">{{
-      name
-    }}</label>
+  <div class="flex gap-1 pb-1 align-middle">
+    <label
+      v-if="!alternate"
+      for="toggle"
+      class="text-base font-bold text-grey-grey w-fit"
+      >{{ name }}</label
+    >
     <div
-      class="relative grid w-10 h-6 rounded-md bg-ternary select-none transition duration-200 ease-in"
+      class="relative grid w-10 h-6 rounded-md bg-ternary select-none transition duration-2006 ease-in"
     >
       <input
         type="checkbox"
@@ -19,32 +22,39 @@
         class="toggle-label block overflow-hidden h-6 p-1 rounded-md bg-grey-100 cursor-pointer"
       ></label>
     </div>
+    <label
+      v-if="alternate"
+      for="toggle"
+      class="text-base font-bold text-grey-grey w-fit"
+      >{{ name }}</label
+    >
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent,computed } from 'vue';
+import { defineComponent, computed } from "vue";
 export default defineComponent({
   props: {
     name: String,
     modelValue: Boolean,
+    alternate: Boolean,
   },
-  emits: ['update:modelValue','btn-click'],
-  setup(props,{emit}) {
+  emits: ["update:modelValue", "btn-click"],
+  setup(props, { emit }) {
     function switchChange() {
-      emit('btn-click')
+      emit("btn-click");
     }
-    return { 
+    return {
       switchChange,
       value: computed({
         get() {
-        return props.modelValue
+          return props.modelValue;
         },
         set(value) {
-          emit('update:modelValue', value)
-        }
-      })
-     };
+          emit("update:modelValue", value);
+        },
+      }),
+    };
   },
 });
 </script>
@@ -55,6 +65,6 @@ export default defineComponent({
   border-color: #68d391;
 }
 .toggle-checkbox:checked + .toggle-label {
-  background-color: #68d391;
+  background-color: #61b756;
 }
 </style>

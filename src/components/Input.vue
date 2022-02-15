@@ -1,10 +1,10 @@
 <template>
-  <div class="mb-5 w-auto">
-    <label class="block text-grey-grey pl-1 text-md font-bold" :for="id">
+  <div class="mb-3 w-auto">
+    <label class="block text-grey-grey text-md font-normal text-left" :for="id">
       {{ name }}
     </label>
     <input
-      class="appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline"
+      class="appearance-none border h-11 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline"
       :id="id"
       :type="type ? type : 'text'"
       :placeholder="placeholder"
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineEmits } from 'vue';
+import { computed, defineComponent, defineEmits } from "vue";
 export default defineComponent({
   props: {
     id: String,
@@ -25,20 +25,20 @@ export default defineComponent({
     placeholder: String,
     message: String,
     error: String,
-    modelValue: String
+    modelValue: String,
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
   setup(props, context) {
-    return { 
+    return {
       value: computed({
         get() {
-        return props.modelValue
+          return props.modelValue;
         },
         set(value) {
-          context.emit('update:modelValue', value)
-        }
-      })
-     };
+          context.emit("update:modelValue", value);
+        },
+      }),
+    };
   },
 });
 </script>
