@@ -165,7 +165,12 @@ const routes: Array<RouteRecordRaw> = [
     name: "introduction",
     component: () => import("@/views/Intro.vue"),
   },
-];
+  {
+    path: '/company-assets',
+    name: 'company-assets',
+    component: () => import('@/views/test.vue')
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
