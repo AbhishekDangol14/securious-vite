@@ -12,3 +12,6 @@ export const EDIT_NEWS = "editNews";
 export const UPDATE_NEWS = "updateNews"
 export const DELETE_NEWS = "deleteNews"
 export const SET_CODE = "setCode"
+export const SET_THREATS = "setThreats"
+export const SET_EDIT_THREAT = "setEditThreat"
+export const ADD_ANSWER = "addAnswer"

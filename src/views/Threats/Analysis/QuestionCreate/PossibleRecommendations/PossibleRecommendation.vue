@@ -1,7 +1,7 @@
 <template>
-  <div v-if="questionTitle[index].friendlyTranslations" class="border border-grey-grey border-opacity-20 relative shadow-sm">
+  <div class="border border-grey-grey border-opacity-20 relative shadow-sm">
     <a
-      @click="removeQuestion(item)"
+      @click="removePossibleRecommendation(item)"
       class="absolute -top-3 -right-2 cursor-pointer"
     >
       <img src="@/assets/icons/close-box.svg" alt="" />
@@ -26,8 +26,8 @@
                   ref="edit_question_label"
                   type="text"
                   v-if="questionActive"
+                  v-model="questionTitle"
                   v-on:keyup.enter="toggleActiveQuestionTitle"
-                  v-model="questionTitle[index].friendlyTranslations['EN.title'].value"
                 />
               </div>
 
@@ -35,7 +35,7 @@
                 class="box-content text-medium font-semibold text-blue-blue min-w-min"
                 v-if="questionActive === false"
               >
-                {{ questionTitle[index].friendlyTranslations["EN.title"].value }}
+                {{ questionTitle }}
               </h>
               <a
                 v-if="!questionActive"
@@ -72,11 +72,7 @@
                 |
                 <b class="text-blue-blue">EN</b>
               </div>
-              <Button
-                path_name="editThreatQuestion"
-                title="Edit"
-                :faIcon="'fa fa-pencil'"
-              />
+              <Button title="Edit" :faIcon="'fa fa-pencil'" />
             </div>
           </div>
         </div>
@@ -85,14 +81,17 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Button from "@/components/Button.vue";
 import Switch from "@/components/Switch.vue";
-import { computed, defineComponent, toRef } from "@vue/runtime-core";
-import { ref } from "vue";
-import { useStore } from "vuex";
 
-export default defineComponent({
+export default {
+  data() {
+    return {
+      questionActive: false,
+      questionTitle: this.item.name,
+    };
+  },
   components: {
     Button,
     Switch,
@@ -102,46 +101,17 @@ export default defineComponent({
       type: Object,
       required: true,
     },
-    index: {
-      type: Number,
-      required: true
-    },
-    removeQuestion: Function,
+    removePossibleRecommendation: Function,
   },
-  setup(props) {
-    const store = useStore()
-    const questionActive = ref(false)
-
-    function toggleActiveQuestionTitle() {
-      questionActive.value = true
-    }
-
-    function setTitle() {
-      questionActive.value = false
-    }
-    return {
-      questionActive,
-      questionTitle: computed(() => store.state.threat.state.editThreat.analysisQuestion),
-      toggleActiveQuestionTitle,
-      setTitle
-    }
-  }
-});
+  methods: {
+    toggleActiveQuestionTitle() {
+      this.questionActive = true;
+    },
+    setTitle() {
+      this.questionActive = false;
+    },
+  },
+};
 </script>
 
 <style></style>
-
-  // data() {
-  //   return {
-  //     questionActive: false,
-  //     questionTitle: this.item.name,
-  //   };
-  // },
-  //   methods: {
-  //   toggleActiveQuestionTitle() {
-  //     this.questionActive = true;
-  //   },
-  //   setTitle() {
-  //     this.questionActive = false;
-  //   },
-  // },

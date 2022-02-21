@@ -15,9 +15,10 @@ const routes: Array<RouteRecordRaw> = [
     component: Login,
   },
   {
-    path: "/register",
+    path: "/register/:slug?",
     name: "Register",
     component: Register,
+    props: true
   },
   {
     path: '/verify',
@@ -25,9 +26,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Verify.vue')
   },
   {
-    path: '/verify',
-    name: 'verify',
-    component: () => import('@/views/Verify.vue')
+    path: '/email2fa',
+    name: 'email2fa',
+    component: () => import('@/views/2FA/Email2FA.vue')
   },
   {
     path: '/dashboard',
@@ -42,12 +43,18 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/threats",
     name: "threats",
-    component: () => import("@/views/Threats/Threats.vue"),
+    component: () => import("@/views/Threats/Threat/Threats.vue"),
   },
   {
     path: "/threat/create",
     name: "createThreats",
-    component: () => import("@/views/Threats/ThreatsCreate.vue"),
+    component: () => import("@/views/Threats/Threat/ThreatCreate/ThreatsCreate.vue"),
+  },
+  {
+    path: "/threat/update/:id",
+    name: "threatUpdate",
+    component: () => import("@/views/Threats/Threat/ThreatUpdate/ThreatUpdate.vue"),
+    props: true,
   },
   {
     path: "/threat/question/edit",
@@ -55,9 +62,19 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Threats/Analysis/QuestionEdit/Index.vue"),
   },
   {
-    path: "/threat/possible-recommendation/edit",
-    name: "editThreatPossibleRecommendation",
-    component: () => import("@/views/Threats/Recommendation/Edit.vue"),
+    path: "/threat/question/create/:id",
+    name: "createThreatQuestion",
+    component: () => import("@/views/Threats/Analysis/QuestionCreate/QuestionCreate.vue"),
+  },
+  {
+    path: "/threat/recommendation/edit/:id",
+    name: "editThreatRecommendation",
+    component: () => import("@/views/Threats/Recommendation/RecommendationUpdate/Edit.vue"),
+  },
+  {
+    path: "/threat/recommendation/create/:id",
+    name: "createThreatRecommendation",
+    component: () => import("@/views/Threats/Recommendation/RecommendationCreate/Create.vue"),
   },
   {
     path: "/industries",

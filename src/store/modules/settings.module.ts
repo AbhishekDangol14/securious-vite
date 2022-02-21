@@ -1,3 +1,4 @@
+import router from '@/router'
 import axios from 'axios'
 import { ENABLE_EMAIL_2FA, GET_GOOGLE_CODE, VERIFY_EMAIL_CODE, VERIFY_GOOGLE_CODE } from './actions.type'
 import { SET_CODE } from './mutations.type'
@@ -23,8 +24,9 @@ export const settings_module = {
             }) 
         },
         [VERIFY_EMAIL_CODE] (context, emailVerification_code) {
-            axios.post('http://127.0.0.1:8000/api/admin/validate_email_secret',emailVerification_code).then((response) => {
-                console.log(response)
+            axios.post('http://127.0.0.1:8000/api/admin/validate_email_secret',{emailVerification_code: emailVerification_code}).then((response) => {
+                localStorage.setItem('EMAIL2FA','0')
+                router.push('/dashboard')
             })
         }
     },

@@ -5,7 +5,12 @@
     <label
       class="w-20 h-20 flex flex-col align-middle justify-center items-center bg-secondary rounded tracking-wide border-1 border-green-green border-dashed cursor-pointer hover:bg-secondary-blue"
     >
+      <div v-if="url" class="relative overflow-hidden"> 
+        <img class="w-20 h-20" :src="url" />
+        <span @click="removeFile" class="absolute w-full py-2.5 bottom-0 inset-x-0 bg-blue-100 text-black text-xs text-center leading-4">REMOVE</span>
+      </div>
       <svg
+        v-else
         width="3rem"
         height="3rem"
         viewBox="0 0 50 45"
@@ -27,15 +32,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, ref, toRef } from "vue";
 export default defineComponent({
-  props: {},
+  props: {
+    image: String
+  },
   setup(props, context) {
+    let url = ref('')
+
     function onChangeFile(event) {
+      const file = event.target.files[0];
+      url.value = URL.createObjectURL(file);
       context.emit("myFile", event.target.files[0]);
     }
+
+    function removeFile() {
+      if (url.value.length > 1) {
+        return (url.value = '');
+      }
+    }
+
     return {
       onChangeFile,
+      removeFile,
+      url
     };
   },
 });

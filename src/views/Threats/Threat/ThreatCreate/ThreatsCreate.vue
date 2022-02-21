@@ -8,7 +8,7 @@
             Library</router-link
           >
         </div>
-        <DeleteEditSave />
+        <DeleteEditSave name="store_threat" />
         <div class="col-end-9 text-grey-grey ml-1">
           <!-- language dropdown -->
         </div>
@@ -31,32 +31,6 @@
             >Threat</a
           >
         </li>
-        <li class="nav-item" role="presentation">
-          <a
-            href="#tabs-profile"
-            class="nav-link block font-medium text-xxl leading-tight border-x-0 border-t-0 border-b-0 border-transparent px-6 py-4 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
-            id="tabs-profile-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#tabs-profile"
-            role="tab"
-            aria-controls="tabs-profile"
-            aria-selected="false"
-            >Analysis</a
-          >
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            href="#tabs-messages"
-            class="nav-link block font-medium text-xxl leading-tight border-x-0 border-t-0 border-b-0 border-transparent px-6 py-4 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
-            id="tabs-messages-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#tabs-messages"
-            role="tab"
-            aria-controls="tabs-messages"
-            aria-selected="false"
-            >Recommendations</a
-          >
-        </li>
       </ul>
       <div class="tab-content bg-white shadow-primary" id="tabs-tabContent">
         <div
@@ -67,25 +41,9 @@
         >
           <ThreatDetailCreate />
         </div>
-        <div
-          class="tab-pane fade"
-          id="tabs-profile"
-          role="tabpanel"
-          aria-labelledby="tabs-profile-tab"
-        >
-          <Analysis />
-        </div>
-        <div
-          class="tab-pane fade"
-          id="tabs-messages"
-          role="tabpanel"
-          aria-labelledby="tabs-profile-tab"
-        >
-          <Recommendation />
-        </div>
       </div>
       <div class="mt-8 mb-8">
-        <DeleteEditSave />
+        <DeleteEditSave name="store_threat" />
       </div>
     </div>
   </Layout>
@@ -94,21 +52,18 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Layout from "@/components/Main.vue";
-import ThreatDetailCreate from "@/views/Threats/ThreatDetailCreate.vue";
-import Analysis from "@/views/Threats/Analysis/Analysis.vue";
-import Recommendation from "@/views/Threats/Recommendation/Index.vue";
-import DeleteEditSave from "@/views/Threats/DeleteEditSave.vue";
+import ThreatDetailCreate from "@/views/Threats/Threat/ThreatCreate/ThreatDetailCreate.vue";
+import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
 
 export default defineComponent({
   components: {
     Layout,
     ThreatDetailCreate,
-    Analysis,
-    Recommendation,
     DeleteEditSave,
   },
   setup() {
-    return {};
+    return {
+    };
   },
 });
 </script>

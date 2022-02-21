@@ -35,6 +35,8 @@
 import { defineComponent } from 'vue'
 import TwoFactor from '@/components/TwoFactor.vue'
 import Code from 'vue3-otp-input/src/vue3-otp-input.vue'
+import { useStore } from 'vuex'
+import { VERIFY_EMAIL_CODE } from '@/store/modules/actions.type'
 
 export default defineComponent({
     components: {
@@ -42,8 +44,10 @@ export default defineComponent({
         Code
     },
     setup() {
-        function handleOnComplete(value) {
-            alert(value)
+        const store = useStore()
+        
+        async function handleOnComplete(code) {
+            await store.dispatch(VERIFY_EMAIL_CODE,code)
         }
         return {
             handleOnComplete
