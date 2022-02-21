@@ -10,7 +10,7 @@
             ><i class="fa fa-angle-left"></i> Back to Threat Edit</router-link
           >
         </div>
-        <DeleteEditSave />
+        <DeleteEditSave name="store_question" />
         <div class="col-end-9 text-grey-grey ml-1">
           <!-- language dropdown -->
         </div>
@@ -105,18 +105,18 @@
         </div>
       </div>
       <div class="mt-8 mb-8">
-        <DeleteEditSave />
+        <DeleteEditSave name="store_question" />
       </div>
     </div>
   </Layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import Layout from "@/components/Main.vue";
-import Question from "@/views/Threats/Analysis/QuestionEdit/Question.vue";
-import PossibleAnswers from "@/views/Threats/Analysis/QuestionEdit/PossibleAnswers/Index.vue";
-import PossibleRecommendations from "@/views/Threats/Analysis/QuestionEdit/PossibleRecommendations/Index.vue";
+import Question from "@/views/Threats/Analysis/QuestionCreate/Question.vue";
+import PossibleAnswers from "@/views/Threats/Analysis/QuestionCreate/PossibleAnswers/Index.vue";
+import PossibleRecommendations from "@/views/Threats/Analysis/QuestionCreate/PossibleRecommendations/Index.vue";
 import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
 
 export default defineComponent({
@@ -128,7 +128,8 @@ export default defineComponent({
     DeleteEditSave,
   },
   setup() {
-    return {};
+    return {
+    };
   },
 });
 </script>

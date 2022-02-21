@@ -1,11 +1,11 @@
 <template>
-    <div class="sidebar bg-white shadow-secondary h-screen">
+    <div class="sidebar bg-white shadow-secondary h-screen" v-if="menu">
         <div class="logo p-3">
             <img src="../assets/views/securious-logo.svg">
         </div>
         <div class="border-line pt-4"><hr></div>
-        <Menu v-for="item in menu.menus" :item="item" v-bind:key="item.label" />
-        <div v-if="menu.role[0].role == 'Admin'"> 
+        <Menu v-for="item in menu" :item="item" v-bind:key="item" />
+        <div v-if="role == 'Admin'"> 
             <hr>       
             <div class="pt-4 pl-4 flex-cols space-y-4">
                 <div class="flex space-x-2 text-sm pb-3"><img src="../assets/components/user.svg"/><router-link :to="{ name: 'users' }">Users</router-link></div>
@@ -37,12 +37,15 @@ export default defineComponent({
     setup() {
         const store = useStore()
         let user = localStorage.getItem("USER")
-        let menu = {}
+        let menu = ref([])
+        let role = ref()
 
         const token = localStorage.getItem('IMPERSONATOR_TOKEN')
 
-        if (user)
-        menu = JSON.parse(user)
+        if (user){
+        menu.value = JSON.parse(user).menus
+        role.value = JSON.parse(user).role[0].role
+        }
 
         function logout() {
           store.dispatch(LOGOUT)
@@ -59,6 +62,7 @@ export default defineComponent({
         
         return {
             menu,
+            role,
             logout,
             stopImpersonating,
             token

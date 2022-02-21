@@ -42,6 +42,7 @@ export default defineComponent({
     options: String,
     name: String,
     label: String,
+    data: String
   },
 });
 </script>

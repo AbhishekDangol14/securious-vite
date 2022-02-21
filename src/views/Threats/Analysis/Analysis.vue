@@ -4,18 +4,19 @@
       <draggable
         class="dragArea list-group w-full"
         handle=".handle"
-        :list="list"
+        v-model="question"
       >
         <transition-group>
           <div
             class="list-group-item p-3 text-center"
-            v-for="element in list"
+            v-for="(element,index) in question"
             :key="element.name"
           >
             <component
               v-bind:is="'ThreatAnalysisQuestion'"
               :removeQuestion="removeItem"
               :item="element"
+              :index="index"
             />
           </div>
         </transition-group>
@@ -25,21 +26,22 @@
     <div class="flex flex-row-reverse m-4 pb-8">
       <div class="text-right">
         <Button
-          class="ternary-button"
+          path_name="createThreatQuestion"
           :faIcon="'fa fa-plus'"
           title="Add new questions"
-          @click="addItem"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Button from "@/components/Button.vue";
-import { defineComponent } from "vue";
+import { computed, defineComponent,ref } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import ThreatAnalysisQuestion from "@/views/Threats/Analysis/Question.vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 export default defineComponent({
   components: {
@@ -47,37 +49,51 @@ export default defineComponent({
     ThreatAnalysisQuestion,
     Button,
   },
-  data() {
-    return {
-      enabled: true,
-      list: [
-        { name: "John" },
-        {
-          name: "Jany",
-        },
-      ],
-      dragging: false,
-    };
-  },
-  methods: {
-    addItem() {
-      this.list.push({
-        name: "New Question",
-      });
-    },
-    removeItem(element) {
-      // get index of object with id:37
-      var removeIndex = this.list
-        .map(function (item) {
-          return item.name;
-        })
-        .indexOf(element.name);
+  setup(){
+    const store = useStore()
 
-      // remove object
-      this.list.splice(removeIndex, 1);
-    },
-  },
+    function addItem() {
+        alert('hello')
+    }
+    function removeItem(element){
+      console.log(element)
+    }
+
+    return {
+      question: computed(() => store.state.threat.state.editThreat.analysisQuestion),
+      addItem,
+      removeItem
+    }
+  }
 });
 </script>
 
 <style></style>
+
+  // setup() {
+  //   const router = useRouter()
+  //   let list = ref([
+  //       { name: "John" },
+  //       { name: "Jany" },
+  //       { name: "Hello" }
+  //     ])
+    
+
+  //   function removeItem(element) {
+  //     // get index of object with id:37
+  //     var removeIndex = list.value
+  //       .map(function (item) {
+  //         return item.name;
+  //       })
+  //       .indexOf(element.name);
+
+  //     // remove object
+  //     list.value.splice(removeIndex, 1);
+  //   }
+
+  //   return {
+  //     list,
+  //     removeItem,
+  //     addItem,
+  //   };
+  // },

@@ -3,19 +3,20 @@
     <div class="created-analysis-component mx-0 p-5">
       <draggable
         class="dragArea list-group w-full"
-        :list="list"
         handle=".handle"
+        v-model="recommendation"
       >
         <transition-group>
           <div
-            class="list-group-item m-1 p-3 text-center"
-            v-for="element in list"
+            class="list-group-item p-3 text-center"
+            v-for="(element,index) in recommendation"
             :key="element.name"
           >
             <component
-              v-bind:is="'PosssibleRecommendation'"
-              :removeRecommendation="removeItem"
+              v-bind:is="'Recommendation'"
+              :removeQuestion="removeItem"
               :item="element"
+              :index="index"
             />
           </div>
         </transition-group>
@@ -25,57 +26,69 @@
     <div class="flex flex-row-reverse m-4 pb-8">
       <div class="text-right">
         <Button
-          class="ternary-button"
+          path_name="createThreatRecommendation"
           :faIcon="'fa fa-plus'"
-          title="Add new questions"
-          @click="addItem"
+          title="Add new recommendation"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Button from "@/components/Button.vue";
-import { defineComponent } from "vue";
+import { computed, defineComponent,ref } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
-import PosssibleRecommendation from "@/views/Threats/Recommendation/Recommendation.vue";
+import Recommendation from "@/views/Threats/Recommendation/Recommendation.vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   components: {
     draggable: VueDraggableNext,
-    PosssibleRecommendation,
+    Recommendation,
     Button,
   },
-  data() {
-    return {
-      list: [
-        { name: "Recommendation1" },
-        {
-          name: "Recommendation2",
-        },
-      ],
-      dragging: false,
-    };
-  },
-  methods: {
-    addItem() {
-      this.list.push({
-        name: "New Recommendation",
-      });
-    },
-    removeItem(element) {
-      var removeIndex = this.list
-        .map(function (item) {
-          return item.name;
-        })
-        .indexOf(element.name);
+  setup(){
+    const store = useStore()
 
-      // remove object
-      this.list.splice(removeIndex, 1);
-    },
-  },
+    function removeItem(element){
+      console.log(element)
+    }
+
+    return {
+      recommendation: computed(() => store.state.threat.state.editThreat.recommendation),
+      removeItem
+    }
+  }
 });
 </script>
 
 <style></style>
+
+  // setup() {
+  //   const router = useRouter()
+  //   let list = ref([
+  //       { name: "John" },
+  //       { name: "Jany" },
+  //       { name: "Hello" }
+  //     ])
+    
+
+  //   function removeItem(element) {
+  //     // get index of object with id:37
+  //     var removeIndex = list.value
+  //       .map(function (item) {
+  //         return item.name;
+  //       })
+  //       .indexOf(element.name);
+
+  //     // remove object
+  //     list.value.splice(removeIndex, 1);
+  //   }
+
+  //   return {
+  //     list,
+  //     removeItem,
+  //     addItem,
+  //   };
+  // },

@@ -14,7 +14,7 @@
                     <span class="text-lg">{{ passwordError }}</span>
                     <div class="text-xs pt-5 pb-6">Mit der Anmeldung stimmen Sie den Datenschutzbestimmungen zu.</div>
                     <div class="flex justify-center">
-                        <button class="rounded-full text-white-white text-sm pl-10 pr-10 pt-2 pb-2">JETZT LOSLEGEN</button>
+                        <button class="rounded-md text-white-white text-sm pl-10 pr-10 pt-2 pb-2">JETZT LOSLEGEN</button>
                     </div>
                 </form>
                 <div class="form-footer flex justify-center p-3 space-x-4">
@@ -39,35 +39,46 @@
 </template>
 
 <script lang="ts">
-    import { useForm,useField } from 'vee-validate'
-    import { REGISTER } from '../store/modules/actions.type'
-    import { defineComponent } from 'vue'
-    import store from '@/store'
+import { useForm,useField } from 'vee-validate'
+import { REGISTER } from '@/store/modules/actions.type'
+import { defineComponent, onBeforeMount } from 'vue'
+import store from '@/store'
+import { propsToAttrMap } from '@vue/shared';
+import registerService from '@/service/register.service'
 
-    export default defineComponent ({
-        setup() {
-            const { handleSubmit } = useForm();
-            
-            const register = handleSubmit((values, {resetForm}): void =>  {
-                store.dispatch({
-                    type: REGISTER,
-                    values
-                })
+export default defineComponent ({
+    props: {
+        slug: null
+    },
+    setup(props) {
+        const { handleSubmit } = useForm();
+        const { role,getRole } = registerService();
+        
+        const register = handleSubmit((credentials): void =>  {
+            store.dispatch({
+                type: REGISTER,
+                credentials,
+                role
             })
+        })
 
-            const email = useField('email')
+        const email = useField('email')
 
-            const password = useField('password')
+        const password = useField('password')
 
-            return {
-                register,
-                email: email.value,
-                password: password.value,
-                emailError: email.errorMessage,
-                passwordError: password.errorMessage,
-            }
+        onBeforeMount(() => {
+            props.slug ? getRole(props.slug) : getRole()
+        })
+
+        return {
+            register,
+            email: email.value,
+            password: password.value,
+            emailError: email.errorMessage,
+            passwordError: password.errorMessage,
         }
-    });
+    }
+});
 </script>
 
 <style scoped>
