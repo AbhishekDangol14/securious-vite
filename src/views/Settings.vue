@@ -19,7 +19,7 @@
                                     Google Authenticator (empfohlen)
                                 </div>
                                 <div class="toggle-google">
-                                    <Switch @btn-click="googleAuth"/>
+                                    <Switch @btn-click="googleAuth" />
                                 </div>
                             </div>
                             <div class="auth-description text-base text-grey-grey font-medium w-1/2">
@@ -32,7 +32,7 @@
                                     E-Mail
                                 </div>
                                 <div class="toggle-email">
-                                    <Switch @btn-click="emailAuth"/>
+                                   <Switch @btn-click="emailAuth" v-model="email2faSwitch" />
                                 </div>
                             </div>
                             <div class="auth-description text-base text-grey-grey font-medium w-1/2">
@@ -98,6 +98,12 @@ export default defineComponent({
 
         let emailModal = ref(false)
 
+        const user = localStorage.getItem('USER')
+
+        const email2faSwitch = user ? (JSON.parse(user).email_2fa_enabled ? true : false) : false
+
+        const google2faSwitch = user ? (JSON.parse(user).google_2fa_enabled ? true : false) : false
+
         const store = useStore()
 
         const googleVerificationCode = reactive({
@@ -144,7 +150,8 @@ export default defineComponent({
             sendModal,
             emailModal,
             emailCode,
-            googleVerificationCode
+            googleVerificationCode,
+            email2faSwitch
 
         }
     },

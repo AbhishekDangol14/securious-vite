@@ -50,12 +50,9 @@
           >
             <div class="mx-6 font-bold text-medium text-left">
               <span class="text-base font-bold text-grey-grey">Answer</span>
-              <Input id="title" placeholder="Please Write the Answer" />
-              <span class="text-base font-bold text-grey-grey"
-                >Associate answer with a company asset</span
-              >
-
-              <Input id="category" placeholder="Select" />
+              <Input id="title" placeholder="Please Write the Answer" v-model="question[index].friendlyTranslations[language+'.title'].value" type="text" />
+              <span class="text-base font-bold text-grey-grey">Associate answer with a company asset</span>
+              <Input id="category" placeholder="Select" type="text" />
             </div>
           </div>
           <div class="w-20 mx-auto my-auto">
@@ -73,16 +70,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Button from "@/components/Button.vue";
 import FileUpload from "@/components/FileUpload.vue";
 import Input from "@/components/Input.vue";
+import { defineComponent } from "@vue/runtime-core";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 // import Switch from "@/components/Switch.vue";
 
-export default {
-  data() {
-    return {};
-  },
+export default defineComponent({
   components: {
     Button,
     FileUpload,
@@ -93,9 +91,29 @@ export default {
       type: Object,
       required: true,
     },
-    removePossibleAnswer: Function,
+    index: {
+      type: Number
+    },
+    removePossibleAnswer: Function
   },
-};
+  setup(props){
+    const store = useStore()
+    const route = useRoute()
+
+    const language = localStorage.getItem('LANGUAGE')
+
+    const question = route.params.id ? computed(() => store.state.question.state.editQuestion.answers) : computed(() => store.state.question.state.question.answers) 
+
+    function uploadFile(image) {
+      console.log(image)
+    }
+    return {
+      uploadFile,
+      question,
+      language
+    }
+  }
+});
 </script>
 
 <style></style>

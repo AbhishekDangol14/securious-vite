@@ -121,7 +121,7 @@
             <div>
             <Switch :alternate="true" name="Show if company size is:" v-model="threatDetail.show_if_company_size" />
             <div class="my-10">
-            <Slider v-model="threatDetail.important_company_size" :max="500" :min="0" :step="1" />
+            <Slider v-model="threatDetail.company_size" :max="500" :min="0" :step="1" />
             </div>
             <Switch :alternate="true" name="Show if using the following asset(s):" />
             <div class="mt-3">

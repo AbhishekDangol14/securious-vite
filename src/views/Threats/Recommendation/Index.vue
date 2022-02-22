@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="recommendation">
     <div class="created-analysis-component mx-0 p-5">
       <draggable
         class="dragArea list-group w-full"
@@ -10,7 +10,7 @@
           <div
             class="list-group-item p-3 text-center"
             v-for="(element,index) in recommendation"
-            :key="element.name"
+            :key="element"
           >
             <component
               v-bind:is="'Recommendation'"
@@ -37,10 +37,11 @@
 
 <script lang="ts">
 import Button from "@/components/Button.vue";
-import { computed, defineComponent,ref } from "vue";
+import { computed, defineComponent,ref, WritableComputedRef } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import Recommendation from "@/views/Threats/Recommendation/Recommendation.vue";
 import { useStore } from "vuex";
+import { SET_RECOMMENDATION_LIST } from "@/store/modules/mutations.type";
 
 export default defineComponent({
   components: {
@@ -51,12 +52,21 @@ export default defineComponent({
   setup(){
     const store = useStore()
 
+    const recommendation: WritableComputedRef<string> = computed({
+      get() {
+        return store.state.threat.state.editThreat.recommendation
+      },
+      set(value) {
+        store.commit(SET_RECOMMENDATION_LIST,value)
+      },
+    });
+
     function removeItem(element){
       console.log(element)
     }
 
     return {
-      recommendation: computed(() => store.state.threat.state.editThreat.recommendation),
+      recommendation,
       removeItem
     }
   }

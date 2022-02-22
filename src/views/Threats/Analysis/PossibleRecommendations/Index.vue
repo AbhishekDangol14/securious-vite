@@ -4,18 +4,19 @@
       <draggable
         class="dragArea list-group w-full"
         handle=".handle"
-        :list="list"
+        :list="recommendation"
       >
         <transition-group>
           <div
             class="list-group-item p-3 text-center"
-            v-for="element in list"
-            :key="element.name"
+            v-for="(element,index) in recommendation"
+            :key="element"
           >
             <component
               v-bind:is="'PossibleRecommendation'"
               :removePossibleRecommendation="removeItem"
               :item="element"
+              :index="index"
             />
           </div>
         </transition-group>
@@ -25,21 +26,23 @@
     <div class="flex flex-row-reverse m-4 pb-8">
       <div class="text-right">
         <Button
-          class="ternary-button"
+          path_name="createThreatRecommendation"
           :faIcon="'fa fa-plus'"
           title="Add new questions"
-          @click="addItem"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Button from "@/components/Button.vue";
-import { defineComponent } from "vue";
+import { defineComponent,WritableComputedRef,computed } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
-import PossibleRecommendation from "@/views/Threats/Analysis/QuestionEdit/PossibleRecommendations/PossibleRecommendation.vue";
+import PossibleRecommendation from "@/views/Threats/Analysis/PossibleRecommendations/PossibleRecommendation.vue";
+import { SET_RECOMMENDATION_LIST } from "@/store/modules/mutations.type";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   components: {
@@ -47,36 +50,23 @@ export default defineComponent({
     PossibleRecommendation,
     Button,
   },
-  data() {
+  setup(){
+    const store = useStore()
+    const route = useRoute()
+    const recommendation = computed({
+      get() {
+        if (route.params.id)
+          return store.state.question.state.editQuestion.recommendation
+        return store.state.question.state.question.recommendation
+      },
+      set(value) {
+        store.commit(SET_RECOMMENDATION_LIST,value)
+      },
+    });
     return {
-      enabled: true,
-      list: [
-        { name: "Possible Recommendation 1" },
-        {
-          name: "Possible Recommendation 2",
-        },
-      ],
-      dragging: false,
-    };
-  },
-  methods: {
-    addItem() {
-      this.list.push({
-        name: "New Question",
-      });
-    },
-    removeItem(element) {
-      // get index of object with id:37
-      var removeIndex = this.list
-        .map(function (item) {
-          return item.name;
-        })
-        .indexOf(element.name);
-
-      // remove object
-      this.list.splice(removeIndex, 1);
-    },
-  },
+      recommendation
+    }
+  }
 });
 </script>
 

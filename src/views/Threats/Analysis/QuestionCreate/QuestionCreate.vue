@@ -115,8 +115,8 @@
 import { defineComponent, reactive } from "vue";
 import Layout from "@/components/Main.vue";
 import Question from "@/views/Threats/Analysis/QuestionCreate/Question.vue";
-import PossibleAnswers from "@/views/Threats/Analysis/QuestionCreate/PossibleAnswers/Index.vue";
-import PossibleRecommendations from "@/views/Threats/Analysis/QuestionCreate/PossibleRecommendations/Index.vue";
+import PossibleAnswers from "@/views/Threats/Analysis/PossibleAnswers/Index.vue";
+import PossibleRecommendations from "@/views/Threats/Analysis/PossibleRecommendations/Index.vue";
 import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
 
 export default defineComponent({

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="question">
     <div class="created-analysis-component mx-0 p-5">
       <draggable
         class="dragArea list-group w-full"
@@ -10,7 +10,7 @@
           <div
             class="list-group-item p-3 text-center"
             v-for="(element,index) in question"
-            :key="element.name"
+            :key="element"
           >
             <component
               v-bind:is="'ThreatAnalysisQuestion'"
@@ -37,11 +37,12 @@
 
 <script lang="ts">
 import Button from "@/components/Button.vue";
-import { computed, defineComponent,ref } from "vue";
+import { computed, defineComponent,ref, WritableComputedRef } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import ThreatAnalysisQuestion from "@/views/Threats/Analysis/Question.vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { SET_QUESTION_LIST } from "@/store/modules/mutations.type";
 
 export default defineComponent({
   components: {
@@ -52,6 +53,16 @@ export default defineComponent({
   setup(){
     const store = useStore()
 
+    const question: WritableComputedRef<string> = computed({
+      get() {
+        return store.state.threat.state.editThreat.analysisQuestion
+      },
+      set(value) {
+        store.commit(SET_QUESTION_LIST,value)
+      },
+    });
+
+
     function addItem() {
         alert('hello')
     }
@@ -60,7 +71,7 @@ export default defineComponent({
     }
 
     return {
-      question: computed(() => store.state.threat.state.editThreat.analysisQuestion),
+      question,
       addItem,
       removeItem
     }

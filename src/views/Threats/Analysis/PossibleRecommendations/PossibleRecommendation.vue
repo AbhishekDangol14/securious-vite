@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-grey-grey border-opacity-20 relative shadow-sm">
+  <div v-if="recommendation" class="border border-grey-grey border-opacity-20 relative shadow-sm">
     <a
       @click="removePossibleRecommendation(item)"
       class="absolute -top-3 -right-2 cursor-pointer"
@@ -25,28 +25,28 @@
                   class="text-medium font-semibold outline-none"
                   ref="edit_question_label"
                   type="text"
-                  v-if="questionActive"
-                  v-model="questionTitle"
-                  v-on:keyup.enter="toggleActiveQuestionTitle"
+                  v-if="recommendationActive"
+                  v-model="recommendation[index].friendlyTranslations['EN.title'].value"
+                  v-on:keyup.enter="toggleActiveRecommendationTitle"
                 />
               </div>
 
               <h
                 class="box-content text-medium font-semibold text-blue-blue min-w-min"
-                v-if="questionActive === false"
+                v-if="recommendationActive === false"
               >
-                {{ questionTitle }}
+                {{ recommendation[index].friendlyTranslations['EN.title'].value }}
               </h>
               <a
-                v-if="!questionActive"
-                @click="toggleActiveQuestionTitle"
+                v-if="!recommendationActive"
+                @click="toggleActiveRecommendationTitle"
                 class="edit-question-title w-5 ml-2"
               >
                 <i class="cursor-pointer fa fa-pencil"></i>
               </a>
 
               <a
-                v-if="questionActive"
+                v-if="recommendationActive"
                 @click="setTitle"
                 class="save-question-title w-5 ml-2"
               >
@@ -81,17 +81,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Button from "@/components/Button.vue";
 import Switch from "@/components/Switch.vue";
+import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
+import { defineComponent,ref } from "@vue/runtime-core";
+import { computed } from "vue";
 
-export default {
-  data() {
-    return {
-      questionActive: false,
-      questionTitle: this.item.name,
-    };
-  },
+export default defineComponent ({
   components: {
     Button,
     Switch,
@@ -101,17 +99,36 @@ export default {
       type: Object,
       required: true,
     },
+    index: {
+      type: Number,
+      required: true
+    },
     removePossibleRecommendation: Function,
   },
-  methods: {
-    toggleActiveQuestionTitle() {
-      this.questionActive = true;
-    },
-    setTitle() {
-      this.questionActive = false;
-    },
-  },
-};
+  setup(){
+    const store = useStore()
+    const route = useRoute()
+
+    const recommendationActive = ref(false)
+    const language = localStorage.getItem('LANGUAGE')
+
+    const recommendation = route.params.id ? computed(() => store.state.question.state.editQuestion.recommendation) : computed(() => store.state.question.state.question.recommendation) 
+
+    function toggleActiveRecommendationTitle() {
+      recommendationActive.value = true
+    }
+    function setTitle() {
+      recommendationActive.value = false
+    }
+    return {
+      recommendation,
+      language,
+      recommendationActive,
+      toggleActiveRecommendationTitle,
+      setTitle
+    }
+  }
+});
 </script>
 
 <style></style>
