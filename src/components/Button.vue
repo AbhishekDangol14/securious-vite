@@ -1,6 +1,16 @@
 <template>
   <router-link
-    v-if="path_name"
+    v-if="route_id"
+    :class="name ? `${name + ' button'}` : 'button primary-button'"
+    :to="{ name: path_name, params: { id: route_id } }"
+  >
+  <span class="self-center">{{ title }}</span>
+    <i v-if="faIcon" :class="faIcon"></i>
+    <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
+  </router-link>
+ 
+  <router-link
+    v-else-if="path_name"
     :class="name ? `${name + ' button'}` : 'button primary-button'"
     :to="{ name: path_name }"
   >
@@ -8,6 +18,7 @@
     <i v-if="faIcon" :class="faIcon"></i>
     <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
   </router-link>
+  
   <button
     v-else
     :class="name ? `${name + ' button'}` : 'button primary-button'"
@@ -28,6 +39,7 @@ export default defineComponent({
     title: String,
     faIcon: String,
     path_name: String,
+    route_id: Number,
   },
   setup(props, context) {
     function save() {

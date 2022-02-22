@@ -13,7 +13,7 @@ export const recommendation_module = {
             show_if_company_size: false,
             display_if_conditions: false,
             threat_id: '',
-            recommendation_order: '0',
+            order: '0',
             status: '',
             friendlyTranslations: {
                 EN: {

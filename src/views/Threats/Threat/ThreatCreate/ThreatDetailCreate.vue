@@ -136,7 +136,15 @@ export default defineComponent({
     ])
 
     function uploadFile(image) {
-      store.state.threat.state.threat.image = image
+      const reader = new FileReader();
+      let rawImg;
+      reader.readAsDataURL(image);
+      reader.onloadend = () => {
+        rawImg = reader.result;
+        store.state.threat.state.threat.image = rawImg
+        console.log(rawImg)
+      };
+        
     }
 
     return {

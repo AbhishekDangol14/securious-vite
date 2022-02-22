@@ -74,6 +74,7 @@
               </div>
               <Button
                 path_name="editThreatQuestion"
+                :route_id="questionTitle[index].id"
                 title="Edit"
                 :faIcon="'fa fa-pencil'"
               />
@@ -90,6 +91,7 @@ import Button from "@/components/Button.vue";
 import Switch from "@/components/Switch.vue";
 import { computed, defineComponent, toRef } from "@vue/runtime-core";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default defineComponent({
@@ -110,6 +112,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
+    const router = useRouter()
     const questionActive = ref(false)
 
     function toggleActiveQuestionTitle() {
@@ -123,7 +126,7 @@ export default defineComponent({
       questionActive,
       questionTitle: computed(() => store.state.threat.state.editThreat.analysisQuestion),
       toggleActiveQuestionTitle,
-      setTitle
+      setTitle,
     }
   }
 });

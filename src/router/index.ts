@@ -57,22 +57,23 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
   },
   {
-    path: "/threat/question/edit",
+    path: "/threat/question/edit/:id",
     name: "editThreatQuestion",
     component: () => import("@/views/Threats/Analysis/QuestionEdit/Index.vue"),
   },
   {
-    path: "/threat/question/create/:id",
+    path: "/threat/question/create",
     name: "createThreatQuestion",
     component: () => import("@/views/Threats/Analysis/QuestionCreate/QuestionCreate.vue"),
   },
   {
     path: "/threat/recommendation/edit/:id",
     name: "editThreatRecommendation",
+    props: true,
     component: () => import("@/views/Threats/Recommendation/RecommendationUpdate/Edit.vue"),
   },
   {
-    path: "/threat/recommendation/create/:id",
+    path: "/threat/recommendation/create",
     name: "createThreatRecommendation",
     component: () => import("@/views/Threats/Recommendation/RecommendationCreate/Create.vue"),
   },

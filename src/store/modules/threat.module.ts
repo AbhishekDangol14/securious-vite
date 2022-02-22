@@ -1,6 +1,6 @@
 import { DELETE_THREAT, EDIT_THREAT, GET_THREATS, STORE_THREAT } from "./actions.type";
 import axios from 'axios'
-import { SET_EDIT_THREAT, SET_THREATS } from "./mutations.type";
+import { SET_EDIT_THREAT, SET_QUESTION_LIST, SET_RECOMMENDATION_LIST, SET_THREATS } from "./mutations.type";
 
 export const threat_module = {
   state: {
@@ -43,6 +43,11 @@ export const threat_module = {
         console.log(response.data)
       })
     },
+    update_threat ({state}) {
+      axios.put('http://127.0.0.1:8000/api/admin/threat/'+state.editThreat.id,state.editThreat).then((response) => {
+        console.log(response.data)
+      })
+    },
     [GET_THREATS] (context) {
       axios.get('http://127.0.0.1:8000/api/admin/threat').then((response) => {
         console.log(response)
@@ -64,6 +69,12 @@ export const threat_module = {
     },
     [SET_EDIT_THREAT] (state,data) {
       state.editThreat = data
+    },
+    [SET_QUESTION_LIST] (state,data) {
+      state.editThreat.analysisQuestion = data
+    },
+    [SET_RECOMMENDATION_LIST] (state,data) {
+      state.editThreat.recommendation = data
     }
   }
 }
