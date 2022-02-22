@@ -41,12 +41,12 @@ export default defineComponent({
   },
 
   setup() {
-    let products = reactive([{ id: null, name: "First", asset_alert: [{}] }]);
+    let products = reactive([{ id: null, name: "First", asset_alert: [] }]);
     function addProducts() {
       products.push({
         id: null,
         name: "",
-        asset_alert: [{}],
+        asset_alert: [],
       });
     }
     function removeProduct(ind) {
