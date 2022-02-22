@@ -7,11 +7,18 @@
     </div>
     <div class="px-8 bg-white pt-4">
       <div class="my-5">
-        <Product :products="products" />
+        <div v-for="(product, index) in products" :key="'produc_' + index">
+          <Product
+            :product="product"
+            :index="index"
+            :removeItem="removeProduct"
+          />
+        </div>
       </div>
       <div class="flex flex-row-reverse m-4 pb-8">
         <div class="text-right">
           <Button
+            @click="addProducts()"
             class="primary-button"
             :faIcon="'fa fa-plus'"
             title="Add another product"
@@ -23,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import Button from "@/components/Button.vue";
 import Product from "@/views/SolutionPartners/Products/product.vue";
 
@@ -32,10 +39,23 @@ export default defineComponent({
     Button,
     Product,
   },
+
   setup() {
-    var products = [{ id: 1, name: "Product 1" }];
+    let products = reactive([{ id: null, name: "First", asset_alert: [{}] }]);
+    function addProducts() {
+      products.push({
+        id: null,
+        name: "",
+        asset_alert: [{}],
+      });
+    }
+    function removeProduct(ind) {
+      products.splice(ind, 1);
+    }
     return {
       products,
+      addProducts,
+      removeProduct,
     };
   },
 });

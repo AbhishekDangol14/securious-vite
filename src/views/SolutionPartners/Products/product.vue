@@ -1,10 +1,11 @@
 <template>
   <div
-    v-for="(item, index) in products"
-    :key="'product' + index"
     class="border relative border-grey-grey border-opacity-20 py-4 px-4 mb-2 rounded-sm my-5"
   >
-    <a class="absolute -top-3 -right-2 cursor-pointer">
+    <a
+      @click="removeItem(index)"
+      class="absolute -top-3 -right-2 cursor-pointer"
+    >
       <img src="@/assets/icons/close-box.svg" alt="" />
     </a>
     <div class="flex">
@@ -15,16 +16,16 @@
             ref="edit_question_label"
             type="text"
             v-if="productActive"
-            v-model="productTitle"
+            v-model="item.name"
             v-on:keyup.enter="toggleActiveProductTitle"
           />
         </div>
 
         <h
-          class="box-content text-medium font-semibold text-blue-blue min-w-min"
+          class="box-content text-medium font-semibold min-w-min"
           v-if="productActive === false"
         >
-          {{ productTitle }}
+          {{ item.name }}
         </h>
         <a
           v-if="!productActive"
@@ -55,7 +56,7 @@
       </div>
     </div>
     <div v-if="showDetail">
-      <div class="grid grid-cols-3 mx-2 space-x-8 p-5">
+      <div class="grid grid-cols-3 mx-2 space-x-8 p-5 pb-10">
         <div>
           <div class="flex">
             <div
@@ -141,29 +142,48 @@
           </div>
         </div>
       </div>
-      <div class="pt-8">
-        <div class="relative m-0 p-1 px-4">
-          <a class="absolute -top-3 -right-2 cursor-pointer">
+      <div>
+        <div
+          class="relative m-0 p-1 px-4"
+          v-for="(asset, index) in item.asset_alert"
+          :key="'row_' + index"
+        >
+          <a
+            @click="deleteAssetAlert(index)"
+            class="absolute -top-3 -right-2 cursor-pointer"
+          >
             <img src="@/assets/icons/close-box.svg" alt="" />
           </a>
           <div class="flex gap-6">
             <div class="flex-auto">
               <span class="text-base font-semibold">Risk Level</span>
-              <Input type="text" placeholder="Please write the risk level" />
+              <Input
+                v-model="asset.risk_level"
+                type="text"
+                placeholder="Please write the risk level"
+              />
             </div>
             <div class="flex-auto">
               <span class="text-base font-semibold">Date</span>
-              <Datepicker />
+              <Datepicker v-model="asset.date" />
             </div>
             <div class="flex-auto">
               <span class="text-base font-semibold">Link</span>
-              <Input type="text" placeholder="Please write the asset link" />
+              <Input
+                v-model="asset.link"
+                type="text"
+                placeholder="Please write the asset link"
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="mt-4">
-        <a id="add-asset-alert" class="text-blue-blue text-base cursor-pointer">
+        <a
+          @click="addAssetAlert()"
+          id="add-asset-alert"
+          class="text-blue-blue text-base cursor-pointer"
+        >
           Add Asset Alert&nbsp;+
         </a>
       </div>
@@ -183,18 +203,21 @@ import "vue-select/dist/vue-select.css";
 import Datepicker from "@/components/Datepicker.vue";
 export default {
   props: {
-    products: Object,
+    product: Object,
+    index: Number,
+    removeItem: Function,
   },
   data() {
     return {
       productActive: false,
-      productTitle: "hello",
       showDetail: false,
       options: [
         { id: 1, name: "Asset 1" },
         { id: 2, name: "Asset2" },
       ],
       valueOfSlider: [20, 500],
+      item: this.product,
+      asset_alert: [],
     };
   },
   components: {
@@ -217,6 +240,17 @@ export default {
     },
     toggleThisDetail() {
       this.showDetail = !this.showDetail;
+    },
+    addAssetAlert() {
+      this.item.asset_alert.push({
+        risk_level: "",
+        date: "",
+        link: "",
+        id: null,
+      });
+    },
+    deleteAssetAlert(index) {
+      this.item.asset_alert.splice(index, 1);
     },
   },
 };
