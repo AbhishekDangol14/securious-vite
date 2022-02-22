@@ -20,19 +20,19 @@ const routes: Array<RouteRecordRaw> = [
     component: Register,
   },
   {
-    path: '/verify',
-    name: 'verify',
-    component: () => import('@/views/Verify.vue')
+    path: "/verify",
+    name: "verify",
+    component: () => import("@/views/Verify.vue"),
   },
   {
-    path: '/verify',
-    name: 'verify',
-    component: () => import('@/views/Verify.vue')
+    path: "/verify",
+    name: "verify",
+    component: () => import("@/views/Verify.vue"),
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('@/views/Dashboard.vue')
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/views/Dashboard.vue"),
   },
   {
     path: "/test",
@@ -63,6 +63,16 @@ const routes: Array<RouteRecordRaw> = [
     path: "/industries",
     name: "industries",
     component: () => import("@/views/Industries.vue"),
+  },
+  {
+    path: "/solution-partners",
+    name: "solutionpartners",
+    component: () => import("@/views/SolutionPartners/Index.vue"),
+  },
+  {
+    path: "/solution-partners/create",
+    name: "createSolutionpartners",
+    component: () => import("@/views/SolutionPartners/Create.vue"),
   },
   {
     path: "/news",
@@ -101,56 +111,56 @@ const routes: Array<RouteRecordRaw> = [
     component: test,
   },
   {
-    path: '/kunden',
-    name: 'kunden',
-    component: () => import('@/views/Consultant/Kunden.vue')
+    path: "/kunden",
+    name: "kunden",
+    component: () => import("@/views/Consultant/Kunden.vue"),
   },
   {
-    path: '/email2fa',
-    name: 'email2fa',
-    component: () => import('@/views/2FA/Email2FA.vue')
+    path: "/email2fa",
+    name: "email2fa",
+    component: () => import("@/views/2FA/Email2FA.vue"),
   },
   {
-    path: '/google2fa',
-    name: 'google2fa',
-    component: () => import('@/views/2FA/Google2FA.vue')
+    path: "/google2fa",
+    name: "google2fa",
+    component: () => import("@/views/2FA/Google2FA.vue"),
   },
   {
-    path: '/data-leak',
-    name: 'data-leak',
-    component: () => import('@/views/Customer/DataLeaks/DataLeaks.vue')
+    path: "/data-leak",
+    name: "data-leak",
+    component: () => import("@/views/Customer/DataLeaks/DataLeaks.vue"),
   },
   {
-    path: '/introduction',
-    name: 'introduction',
-    component: () => import('@/views/Intro.vue')
+    path: "/introduction",
+    name: "introduction",
+    component: () => import("@/views/Intro.vue"),
   },
   {
-    path: '/kunden',
-    name: 'kunden',
-    component: () => import('@/views/Consultant/Kunden.vue')
+    path: "/kunden",
+    name: "kunden",
+    component: () => import("@/views/Consultant/Kunden.vue"),
   },
   {
-    path: '/email2fa',
-    name: 'email2fa',
-    component: () => import('@/views/2FA/Email2FA.vue')
+    path: "/email2fa",
+    name: "email2fa",
+    component: () => import("@/views/2FA/Email2FA.vue"),
   },
   {
-    path: '/google2fa',
-    name: 'google2fa',
-    component: () => import('@/views/2FA/Google2FA.vue')
+    path: "/google2fa",
+    name: "google2fa",
+    component: () => import("@/views/2FA/Google2FA.vue"),
   },
   {
-    path: '/data-leak',
-    name: 'data-leak',
-    component: () => import('@/views/Customer/DataLeaks/DataLeaks.vue')
+    path: "/data-leak",
+    name: "data-leak",
+    component: () => import("@/views/Customer/DataLeaks/DataLeaks.vue"),
   },
   {
-    path: '/introduction',
-    name: 'introduction',
-    component: () => import('@/views/Intro.vue')
+    path: "/introduction",
+    name: "introduction",
+    component: () => import("@/views/Intro.vue"),
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
