@@ -60,13 +60,59 @@
       <Switch
         :alternate="true"
         name="Display if these conditions are met"
-        class="my-4"
+        class="mt-2"
       />
-
+      <div class="flex items-center flex-row gap-2 mt-2">
+        <div class="flex-fill grow">
+          <div class="flex flex-row gap-2">
+            <div class="w-6/12">
+              <VueSelect :options="questions" label="name" />
+            </div>
+            <div class="w-2/12">
+              <VueSelect :options="relations" label="name" />
+            </div>
+            <div class="w-6/12">
+              <VueSelect :options="answers" label="name" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <a class="cursor-pointer">
+            <img src="@/assets/icons/close-box.svg" alt="" />
+          </a>
+        </div>
+      </div>
+      <div class="flex items-center flex-row gap-2">
+        <div class="flex-fill grow">
+          <div class="flex flex-row gap-2 justify-center">
+            <div class="w-6/12"></div>
+            <div class="w-20 my-2">
+              <VueSelect :options="logics" label="name" />
+            </div>
+            <div class="w-6/12"></div>
+          </div>
+          <div class="flex flex-row gap-2">
+            <div class="w-6/12">
+              <VueSelect :options="questions" label="name" />
+            </div>
+            <div class="w-2/12">
+              <VueSelect :options="relations" label="name" />
+            </div>
+            <div class="w-6/12">
+              <VueSelect :options="answers" label="name" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <a class="cursor-pointer">
+            <img src="@/assets/icons/close-box.svg" alt="" />
+          </a>
+        </div>
+      </div>
       <div class="text-left mt-3">
         <a class="text-blue-blue text-base cursor-pointer">+Add</a>
       </div>
-      <Switch :alternate="true" name="Automation conditions:" class="my-4" />
+      <Switch :alternate="true" name="Automation conditions:" class="mt-2" />
     </div>
   </div>
 </template>
@@ -83,6 +129,7 @@ export default {
   data() {
     return {
       valueOfSlider: [0, 500],
+
       industries: [
         { id: 1, name: "Insutry 1" },
         { id: 2, name: "Industry 2" },
@@ -100,6 +147,18 @@ export default {
         { id: 2, name: "Medium" },
         { id: 3, name: "High" },
       ],
+      questions: [
+        { id: 1, name: "What is New Question " },
+        { id: 2, name: "How this happened " },
+        { id: 3, name: "Why is it so " },
+      ],
+      answers: [
+        { id: 1, name: "Answer 1 " },
+        { id: 2, name: "Answer 2 " },
+        { id: 3, name: "Answer 3 " },
+      ],
+      relations: [{ name: "is" }, { name: "is not " }],
+      logics: [{ name: "AND" }, { name: "OR " }],
     };
   },
   components: {
