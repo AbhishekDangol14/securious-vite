@@ -5,11 +5,10 @@
         Products {{ msg }}</span
       >
     </div>
-    <div class="px-8 bg-white pt-4">
+    <div class="px-8 bg-white pt-4" v-if="products">
       <div class="my-5">
-        <div v-for="(product, index) in products" :key="'produc_' + index">
+        <div v-for="(product, index) in products" v-bind:key="product">
           <Product
-            :product="product"
             :index="index"
             :removeItem="removeProduct"
           />
@@ -30,9 +29,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { computed, defineComponent, onBeforeMount, reactive } from "vue";
 import Button from "@/components/Button.vue";
-import Product from "@/views/SolutionPartners/Products/product.vue";
+import Product from "@/views/SolutionPartners/Products/SolutionProduct.vue";
+import { useStore } from "vuex";
+import { ADD_PRODUCT_LIST, DELETE_PRODUCT_LIST } from "@/store/modules/mutations.type";
 
 export default defineComponent({
   components: {
@@ -41,19 +42,44 @@ export default defineComponent({
   },
 
   setup() {
-    let products = reactive([{ id: null, name: "Product", asset_alert: [] }]);
+    // let products = reactive([{ id: null, name: "First", asset_alert: [] }]);
+    const store = useStore()
+    
     function addProducts() {
-      products.push({
-        id: null,
-        name: "Product",
+      store.commit(ADD_PRODUCT_LIST,{
+        id: '',
+        is_solution_partner: true,
+        is_company_asset: true,
+        product_link:"",
+        asset:"",
+        show_if_industry: true,
+        show_if_company_size: true,
+        is_active: true,
+        company_size: [0,0],
+        industries: [],
         asset_alert: [],
-      });
+        friendlyTranslations: {
+          EN : {
+            title: 'Solution Products 147: please provide your product title here...',
+            description: ''
+          },
+          DE : {
+            title: 'Solution Products 147: please provide your product title here...',
+            description: ''
+          }
+        }
+      })
     }
-    function removeProduct(ind) {
-      products.splice(ind, 1);
+    function removeProduct(index) {
+      store.commit(DELETE_PRODUCT_LIST,index)
     }
+
+    onBeforeMount(() => {
+      addProducts()
+    })
+    
     return {
-      products,
+      products: computed(() => store.state.solutionPartner.state.solutionPartner.solution_partner_products),
       addProducts,
       removeProduct,
     };

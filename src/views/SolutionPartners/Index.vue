@@ -49,64 +49,8 @@
           >
         </div>
       </div>
-      <div>
-        <div class="flex flex-row gap-4 flex-wrap">
-          <div class="shadow-secondary rounded bg-white basis-1/3">
-            <div class="flex pt-2 mt-8 mx-8">
-              <div class="mr-10 bg-contain w-32 grow">
-                <img
-                  class="align-middle"
-                  src="https://dev.securious.de/media/uploads/solutions_partners_products/HGdQnbAxGnGcRvJim8j1TTgUu5DmXHrc8tj63K3S.png"
-                  alt=""
-                />
-              </div>
-              <div class="text-base text-blue-blue font-bold mb-5">
-                <div class="mb-1">
-                  <b class="text-blue-blue font-semibold cursor-pointer">
-                    EN
-                  </b>
-                  |
-                  <b class="text-blue-blue font-semibold cursor-pointer">DE</b>
-                </div>
-                <div>
-                  <Switch :alternate="true" class="my-2" />
-                </div>
-              </div>
-            </div>
-            <div class="mx-8 mb-10">
-              <div class="flex-fill">
-                <div class="text-medium text-blue-blue font-semibold mt-4">
-                  Bitdefender
-                </div>
-                <div class="text-base mt-2">
-                  <span class="text-grey-grey font-bold">Products: </span>
-                </div>
-                <div class="text-sm text-blue-blue">
-                  <a><b>Antivirus - G DATA</b></a
-                  ><span>,</span>
-                </div>
-              </div>
-              <div class="flex mt-2 gap-4">
-                <div class="flex flex-col relative">
-                  <i class="fa fa-tag fa-rotate-90 absolute -top-3 left-1"></i>
-                  <Tag name="tag-button" title="Solution Partner" />
-                </div>
-                <div class="flex flex-col relative">
-                  <i class="fa fa-tag fa-rotate-90 absolute -top-3 left-1"></i>
-                  <Tag name="tag-button" title="Solution Partner" />
-                </div>
-              </div>
-              <div class="my-4">
-                <Button
-                  :faIcon="'fa fa-pencil'"
-                  class="primary-button px-6"
-                  title="Edit"
-                  name="edit-button"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="flex flex-row gap-8 flex-wrap">
+        <SolutionPartner v-for="(item) in products" :item="item" v-bind:key="item" />
       </div>
       <div class="grid place-items-center my-10">
         <Button
@@ -120,31 +64,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, onBeforeMount } from "vue";
 import Layout from "@/components/Main.vue";
 import Button from "@/components/Button.vue";
-import Switch from "@/components/Switch.vue";
-import Tag from "@/components/Tag.vue";
+// import Switch from "@/components/Switch.vue";
 import Search from "@/components/Search.vue";
 import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import { useStore } from "vuex";
+import { GET_SOLUTION_PARTNER } from "@/store/modules/actions.type";
+import SolutionPartner from "@/components/SolutionPartners/SolutionPartnerCard.vue"
 
 export default defineComponent({
   components: {
     Layout,
     Button,
     VSelect,
-    Switch,
-    Tag,
+    // Switch,
     Search,
+    SolutionPartner
   },
   setup() {
+    const store = useStore()
     var options = [
       { id: 1, name: "Example 1" },
       { id: 2, name: "Example 2" },
-    ];
-    return {
-      options,
+    ]
+    onBeforeMount(() => {
+      store.dispatch(GET_SOLUTION_PARTNER)
+    })
+    return { 
+      products: computed(() => store.state.solutionPartner.state.solutionPartners),
+      options
     };
   },
 });

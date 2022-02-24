@@ -11,18 +11,35 @@
       />
     </div>
     <div class="col-end-8 text-grey-grey ml-1">
-      <Button name="primary-button" title="Save" :faIcon="'fa fa-save'" />
+      <Button name="primary-button" title="Save" :faIcon="'fa fa-save'"  @my-event="save" />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Button from "@/components/Button.vue";
-export default {
+import { defineComponent } from "@vue/runtime-core";
+import { useStore } from "vuex";
+export default defineComponent({
   components: {
     Button,
   },
-};
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
+  setup(props){
+    const store = useStore()
+    function save(){
+      store.dispatch(props.name)
+    }
+    return {
+      save
+    }
+  }
+});
 </script>
 
 <style></style>
