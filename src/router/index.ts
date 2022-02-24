@@ -188,6 +188,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'company-assets',
     component: () => import('@/views/test.vue')
   },
+  {
+    path: '/company-assets',
+    name: 'company-assets',
+    component: () => import('@/views/test.vue')
+  },
 ]
 
 const router = createRouter({
