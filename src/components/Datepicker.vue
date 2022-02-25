@@ -3,15 +3,9 @@
     <label class="block text-grey-grey text-md font-normal text-left" :for="id">
       {{ name }}
     </label>
-    <input
-      :class="
-        type == 'text'
-          ? 'appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'
-          : ''
-      "
-      :id="id"
-      :type="type ? type : 'text'"
-      :placeholder="placeholder"
+
+    <datepicker
+      :class="'appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'"
       v-model="value"
     />
     <p class="text-green-green text-base pl-1">{{ message }}</p>
@@ -20,12 +14,17 @@
 </template>
 
 <script lang="ts">
+import Datepicker from "vue3-datepicker";
 import { computed, defineComponent, defineEmits } from "vue";
+import { ref } from "vue";
+
 export default defineComponent({
+  components: {
+    Datepicker,
+  },
   props: {
     id: String,
     name: String,
-    type: String,
     placeholder: String,
     message: String,
     error: String,
@@ -34,14 +33,7 @@ export default defineComponent({
   emits: ["update:modelValue"],
   setup(props, context) {
     return {
-      value: computed({
-        get() {
-          return props.modelValue;
-        },
-        set(value) {
-          context.emit("update:modelValue", value);
-        },
-      }),
+      value: ref(new Date()),
     };
   },
 });

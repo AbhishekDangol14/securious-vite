@@ -54,6 +54,19 @@ export default defineComponent({
   padding: 11px 20px;
   transition: 0.15s ease-in-out;
 }
+.edit-button {
+  border: 1px solid;
+  height: 45px;
+  min-width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: 400;
+  border-radius: 25px;
+  padding: 11px 35px;
+  transition: 0.15s ease-in-out;
+}
 .primary-button {
   color: white;
   background-color: #055ca8;

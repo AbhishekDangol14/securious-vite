@@ -51,8 +51,7 @@ export const news_module = {
     },
     mutations: {
         [SET_NEWS] (state, response) {
-            state.news = response.data.data.items
-            
+            state.news = response.data.data.items 
         },
         [EDIT_NEWS] (state, response) {
             state.item = response.data

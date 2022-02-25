@@ -1,46 +1,95 @@
 <template>
-    <div class="input-box bg-white h-fit ml-8 shadow-xl rounded">
-        <div class="padding p-8">
-            <div class="grid grid-cols-2 justify-items-end">
-                <div>
-                    <img src="../../assets/components/gdata.png">
-                </div>
-                <div class="flex flex-col space-y-2">
-                    <div class="translate">
-                        EN | DE
-                    </div>
-                    <div class="relative inline-block w-8 ml-2 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-4 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                        <label for="toggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
-                    </div>
-                </div>  
+    <div class="shadow-secondary rounded bg-white basis-1/3" v-if="partner">
+        <div class="flex pt-2 mt-8 mx-8">
+            <div class="mr-10 bg-contain w-32 grow">
+            <img
+                class="align-middle"
+                src="https://dev.securious.de/media/uploads/solutions_partners_products/HGdQnbAxGnGcRvJim8j1TTgUu5DmXHrc8tj63K3S.png"
+                alt=""
+            />
             </div>
-            <div class="title text-lg font-semibold">
-                G DATA
+            <div class="text-base text-blue-blue font-bold mb-5">
+            <div class="mb-1">
+                <b class="text-blue-blue font-semibold cursor-pointer">
+                EN
+                </b>
+                |
+                <b class="text-blue-blue font-semibold cursor-pointer">DE</b>
             </div>
-            <div class="products">
-                Products: 
+            <div>
+                <Switch :alternate="true" class="my-2" v-model="partner.is_active" />
             </div>
-            <div class="tags-container flex">
-                <div class="tags-label text-xs text-white bg-button p-1 rounded">Solution Partner</div>
             </div>
-            <div class="grid grid-cols-2 pt-2">
-                <div class="edit-button text-base text-white bg-button p-2 mr-6 rounded-full">
-                    Edit
-                </div>
+        </div>
+        <div class="mx-8 mb-10">
+            <div class="flex-fill">
+            <div class="text-medium text-blue-blue font-semibold mt-4">
+                {{ partner.friendlyTranslations[language+'.title'].value }}
+            </div>
+            <div class="text-base mt-2">
+                <span class="text-grey-grey font-bold">Products: </span>
+            </div>
+            <div class="text-sm text-blue-blue">
+                <a><b v-for="item in partner.solutionPartnersProducts" v-bind:key="item">
+                    {{ item.friendlyTranslations[language+'.title'].value }}
+                </b></a
+                ><span>,</span>
+            </div>
+            </div>
+            <div class="flex mt-2 gap-4">
+            <div class="flex flex-col relative">
+                <i class="fa fa-tag fa-rotate-90 absolute -top-3 left-1"></i>
+                <Tag name="tag-button" title="Solution Partner" />
+            </div>
+            <div class="flex flex-col relative">
+                <i class="fa fa-tag fa-rotate-90 absolute -top-3 left-1"></i>
+                <Tag name="tag-button" title="Solution Partner" />
+            </div>
+            </div>
+            <div class="my-4">
+            <Button
+                :faIcon="'fa fa-pencil'"
+                class="primary-button px-6"
+                title="Edit"
+                name="edit-button"
+            />
             </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-    .toggle-checkbox:checked {
-    @apply: right-0 border-green-400;
-    right: 0;
-    border-color: #68D391;
+<script lang="ts">
+import { defineComponent, toRef } from 'vue'
+import Tag from "@/components/Tag.vue";
+import Button from '@/components/Button.vue';
+
+export default defineComponent({
+    components: {
+        Tag,
+        Button
+    },
+    props: {
+        item: {
+            type: Object,
+            required: true
+        }
+    },
+    setup(props){
+        const partner = toRef(props,'item')
+        const language = localStorage.getItem('LANGUAGE')
+        return {
+            partner,
+            language
+        }
     }
-    .toggle-checkbox:checked + .toggle-label {
-    @apply: bg-green-400;
-    background-color: #68D391;
-    }
+})
+</script>
+
+
+<style>
+.style-chooser .vs__dropdown-toggle {
+  height: auto;
+  min-height: 45px;
+}
 </style>
+<style src="@vueform/slider/themes/default.css"></style>

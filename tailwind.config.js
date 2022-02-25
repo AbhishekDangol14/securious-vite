@@ -88,12 +88,12 @@ module.exports = {
       ternary: "0 2px 6px rgb(21 92 168 / 25%)",
     },
     backgroundColor: () => ({
-      primary: '#055ca8',
-      secondary: '#e5eef6',
-      'secondary-blue': '#055ca80d',
-      ternary: '#7070701a',
-      white: '#ffffff',
-      'ternary-blue': '#055CA80D'
+      primary: "#055ca8",
+      secondary: "#e5eef6",
+      "secondary-blue": "#055ca80d",
+      ternary: "#7070701a",
+      white: "#ffffff",
+      "ternary-blue": "#055CA80D",
     }),
   },
   variants: {

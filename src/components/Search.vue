@@ -1,21 +1,15 @@
 <template>
-  <div class="mb-3 w-auto">
+  <div class="mb-3 w-auto search-box">
     <label class="block text-grey-grey text-md font-normal text-left" :for="id">
       {{ name }}
     </label>
     <input
-      :class="
-        type == 'text'
-          ? 'appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'
-          : ''
-      "
+      :class="'search-field appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'"
       :id="id"
-      :type="type ? type : 'text'"
       :placeholder="placeholder"
       v-model="value"
     />
-    <p class="text-green-green text-base pl-1">{{ message }}</p>
-    <p class="text-red-red text-base pl-1">{{ error }}</p>
+    <i class="fa fa-search"></i>
   </div>
 </template>
 
@@ -25,10 +19,7 @@ export default defineComponent({
   props: {
     id: String,
     name: String,
-    type: String,
     placeholder: String,
-    message: String,
-    error: String,
     modelValue: String,
   },
   emits: ["update:modelValue"],
@@ -47,4 +38,20 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.search-field {
+  height: auto;
+  min-height: 45px;
+  padding-left: 30px;
+}
+.search-box {
+  position: relative;
+}
+
+.search-box i {
+  position: absolute;
+  left: 10px;
+  top: 38px;
+  color: gray;
+}
+</style>
