@@ -1,23 +1,37 @@
 <template>
   <Layout Title="CREATE NEWS">
-    <div>
-      <div class="flex justify-center pt-10">
-        <form class="news-create self-center align-middle">
-          <div class="news-create-nav pb-4">
-            <div class="flex justify-between">
-              <a class="text-blue-100 pl-8 self-center" href="#"
-                >Back to news library</a
-              >
-              <div class="flex gap-2">
-                <Button name="ternary-button" :icon="Img" title="Delete" />
-                <Button :icon="Img" title="Save" @my-event="save" />
-              </div>
-            </div>
+    <div class="mt-12">
+      <div class="grid grid-cols-2 mx-12">
+        <div class="text-base my-auto">
+          <router-link :to="{ name: 'news' }" href="#" class="text-blue-blue"
+            ><i class="fa fa-angle-left"></i> Back to News Library</router-link
+          >
+        </div>
+        <div class="flex justify-end mb-4">
+          <div class="flex gap-2">
+            <Button
+              name="ternary-button"
+              title="Delete"
+              :faIcon="'fa fa-close'"
+            />
+            <Button :faIcon="'fa fa-save'" title="Save" @my-event="save" />
           </div>
-          <div class="news-body border-2 border-grey-100 shadow-primary">
+        </div>
+      </div>
+      <div class="mx-6">
+        <form class="news-create self-center align-middle">
+          <div
+            class="news-body border-2 border-grey-100 shadow-primary py-4 px-8 bg-white"
+          >
             <div class="flex">
               <div class="w-2/3">
-                <Input type="text" id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations[selectedLanguage].title" />
+                <Input
+                  type="text"
+                  id="title"
+                  name="Title"
+                  placeholder="News Title"
+                  v-model="news.friendlyTranslations[selectedLanguage].title"
+                />
               </div>
               <div
                 class="pl-8 flex gap-4 justify-center align-middle items-center"
@@ -31,14 +45,29 @@
                 </div>
               </div>
             </div>
-            <Input type="text" id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations[selectedLanguage].excerpt" />
-            <Input type="text" id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
+            <Input
+              type="text"
+              id="excerpt"
+              name="Excerpt"
+              placeholder="Excerpt"
+              v-model="news.friendlyTranslations[selectedLanguage].excerpt"
+            />
+            <Input
+              type="text"
+              id="category"
+              name="Category"
+              placeholder="Category"
+              v-model="news.news_category_id"
+            />
             <Switch name="Active" v-model="news.is_active" />
-            <CKEditor name="Description" v-model="news.friendlyTranslations[selectedLanguage].description" />
+            <CKEditor
+              name="Description"
+              v-model="news.friendlyTranslations[selectedLanguage].description"
+            />
           </div>
           <div class="flex gap-2 pt-4 justify-end">
             <Button name="ternary-button" :icon="Img" title="Delete" />
-            <Button :icon="Img" title="Save" @my-event="save"/>
+            <Button :icon="Img" title="Save" @my-event="save" />
           </div>
         </form>
       </div>
@@ -67,7 +96,7 @@ export default defineComponent({
     Switch,
     FileUpload,
     CKEditor,
-    Layout
+    Layout,
     // NewsCard,
   },
 
@@ -75,25 +104,24 @@ export default defineComponent({
     const news = ref({
       friendlyTranslations: {
         EN: {
-          title: '',
-          excerpt: '',
-          description: '',
+          title: "",
+          excerpt: "",
+          description: "",
         },
         DE: {
-          title: '',
-          excerpt: '',
-          description: '',
+          title: "",
+          excerpt: "",
+          description: "",
         },
       },
-      news_category_id: '',
+      news_category_id: "",
       is_active: false,
-      image: ''
+      image: "",
     });
 
-    const user = localStorage.getItem('USER')
-    let selectedLanguage = ""
-    if (user)
-      selectedLanguage = JSON.parse(user).selected_language
+    const user = localStorage.getItem("USER");
+    let selectedLanguage = "";
+    if (user) selectedLanguage = JSON.parse(user).selected_language;
 
     const store = useStore();
 
@@ -112,13 +140,12 @@ export default defineComponent({
     }
 
     return {
-      Img: require('@/assets/icons/img.svg'),
+      Img: require("@/assets/icons/img.svg"),
       news,
       save,
       selectedLanguage,
-      uploadFile
+      uploadFile,
     };
   },
 });
 </script>
-
