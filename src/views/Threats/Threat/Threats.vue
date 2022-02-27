@@ -1,10 +1,10 @@
 <template>
   <Layout Title="Threat Library">
-    <div class="threats">
+    <div class="threats m-10">
       <div>
         <div class="grid grid-cols-6 gap-4">
           <div>
-            <Input name="Search" placeholder="Search..." />
+            <Search type="text" name="Search" placeholder="Search..." />
           </div>
           <div>
             <span class="text-base font-semibold text-grey-grey"
@@ -83,7 +83,11 @@
         </div>
       </div>
       <div class="threat-content grid grid-cols-3 gap-x-4 mt-8 ml-6 mr-6">
-        <ThreatCard v-for="threat in threats" v-bind:key="threat" :threat="threat" />
+        <ThreatCard
+          v-for="threat in threats"
+          v-bind:key="threat"
+          :threat="threat"
+        />
       </div>
     </div>
   </Layout>
@@ -92,8 +96,9 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeMount } from "vue";
 import Layout from "@/components/Main.vue";
+import Search from "@/components/Search.vue";
 import Button from "@/components/Button.vue";
-import ThreatCard from "@/components/Threats/ThreatCard.vue"
+import ThreatCard from "@/components/Threats/ThreatCard.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
@@ -108,19 +113,43 @@ export default defineComponent({
     LanguageSelector,
     VSelect,
     Slider,
-    Button
+    Button,
+    Search,
   },
   setup() {
-    const store = useStore()
-    
+    const store = useStore();
+    const industries = [
+      { id: 1, name: "Industry 1" },
+      { id: 2, name: "Industry 2" },
+      { id: 3, name: "Industry 3" },
+    ];
+    const services = [
+      { id: 1, name: "Service 1" },
+      {
+        id: 2,
+        name: "Antivirus",
+      },
+    ];
+    const statuses = ["All", "Published", "Drafted", "Deleted"];
+    const sorts = ["Name", "Importance", "Recently Added"];
     onBeforeMount(() => {
-      store.dispatch(GET_THREATS)
-    })
-    
+      store.dispatch(GET_THREATS);
+    });
+
     return {
       threats: computed(() => store.state.threat.state.threats),
-      valueOfSlider: [0,500]
+      valueOfSlider: [0, 500],
+      industries,
+      services,
+      statuses,
+      sorts,
     };
   },
 });
 </script>
+<style>
+.style-chooser .vs__dropdown-toggle {
+  height: auto;
+  min-height: 45px;
+}
+</style>

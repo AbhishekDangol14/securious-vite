@@ -6,7 +6,7 @@
     <input
       :class="
         type == 'text'
-          ? 'appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'
+          ? 'appearance-none border input-field text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'
           : ''
       "
       :id="id"
@@ -18,7 +18,6 @@
     <p class="text-red-red text-base pl-1">{{ error }}</p>
   </div>
 </template>
-
 <script lang="ts">
 import { computed, defineComponent, defineEmits } from "vue";
 export default defineComponent({
@@ -31,20 +30,11 @@ export default defineComponent({
     error: String,
     modelValue: String,
   },
-  emits: ["update:modelValue"],
-  setup(props, context) {
-    return {
-      value: computed({
-        get() {
-          return props.modelValue;
-        },
-        set(value) {
-          context.emit("update:modelValue", value);
-        },
-      }),
-    };
-  },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.input-field {
+  height: 45px;
+}
+</style>
