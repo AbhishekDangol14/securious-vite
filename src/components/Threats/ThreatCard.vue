@@ -1,31 +1,66 @@
 <template>
-    <div v-if="threat" class="news-card h-full p-4 justify-between shadow-primary rounded bg-white">
-      <div class="relative bg-secondary">
-        <img
-          class="p-8"
-          :src="threat.image"
-          alt="icon"
-        />
-        <div class="absolute top-0 right-0"><Switch v-model="threat.is_display_active_always" /></div> 
+  <div class="shadow-secondary rounded bg-white">
+    <div class="flex p-10 mt-8 mx-3 justify-center relative bg-secondary-blue">
+      <div>
+        <div class="bg-contain">
+          <img
+            class="align-middle w-44"
+            src="@/assets/hacker.svg"
+            alt=""
+          />
+        </div>
+        <div class="absolute top-2 right-3">
+          <div class="mb-1">
+            <b
+              class="text-blue-blue text-base font-bold cursor-pointer"
+            >
+              EN
+            </b>
+            |
+            <b class="text-blue-blue text-base font-bold cursor-pointer"
+              >DE</b
+            >
+          </div>
+          <div class="-ml-1">
+            <Switch v-model="item.is_display_active_always" />
+          </div>
+          <div>
+            <div>
+              <p class="text-base text-grey-grey">Points</p>
+            </div>
+            <div class="ml-1">
+              <b class="text-blue-blue text-lg">60</b>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mt-2">
-        <span class="text-md text-justify leading-4 text-blue-blue font-semibold">{{ threat.friendlyTranslations[language+'.title'].value }}</span>
+    </div>
+    <div class="mx-3 mb-10">
+      <div class="flex-fill">
+        <div class="text-med text-blue-blue font-semibold mt-2">
+          <h>{{ item.friendlyTranslations[lang+'.title'].value }}</h
+          >
+        </div>
       </div>
-      <div class="flex pt-4 gap-2 justify-center items-center">
+
+      <div class="flex flex-row justify-center gap-4 my-10">
         <Button
-          name="ternary-button"
           :faIcon="'fa fa-pencil'"
+          class="primary-button px-6"
           title="Edit"
-          @my-event="editNews(threat.id)"
+          name="edit-button"
+          @click="edit(threat.id)"
         />
         <Button
-          name="ternary-button"
-          :faIcon="'fa fa-trash'"
-          title="Delete"
-          @my-event="deleteNews(threat.id)"
+          :faIcon="'fa fa-files-o'"
+          class="ternary-button px-6"
+          title="Duplicate"
+          name="edit-button"
+          @click="deleteThreat(threat.id)"
         />
       </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -38,7 +73,10 @@ import { DELETE_THREAT, GET_THREATS } from '@/store/modules/actions.type';
 
 export default defineComponent({
   props: {
-    item: Object
+    threat: {
+      type: Object,
+      required: true
+    }
   },
   components: {
     Switch,
@@ -46,36 +84,28 @@ export default defineComponent({
   },
   setup(props) {
 
-    let language = ref()
-
     const store = useStore()
 
     const router = useRouter()
 
-    const threat = toRef(props,'item')
+    const lang = localStorage.getItem('LANGUAGE')
 
-    const url = new Image()
+    const item = toRef(props,'threat')
 
-    threat.value ? url.src = threat.value.image : ''
-
-    if(localStorage.getItem('LANGUAGE'))
-      language.value = localStorage.getItem('LANGUAGE')
-
-    function editNews(id){
+    function edit(id){
       router.push({ name: 'threatUpdate', params: {id: id} })
     }
 
-    async function deleteNews(id){
+    async function deleteThreat(id){
       await store.dispatch(DELETE_THREAT,id)
       store.dispatch(GET_THREATS)
     }
      
     return {
-      editNews,
-      deleteNews,
-      language,
-      threat,
-      url
+      edit,
+      deleteThreat,
+      lang,
+      item
     }
   },
 });
