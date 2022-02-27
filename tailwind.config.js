@@ -1,7 +1,6 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   purge: ["./src/**/*.vue"],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
       sm: { max: "375px" },
@@ -97,6 +96,11 @@ module.exports = {
       white: "#ffffff",
       "ternary-blue": "#055CA80D",
     }),
+    extend: {
+      boxShadow: {
+        "sidebar-shadow": "5px 0 10px #e4e7ed;",
+      },
+    },
   },
   variants: {
     extend: {

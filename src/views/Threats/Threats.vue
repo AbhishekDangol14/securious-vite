@@ -4,7 +4,7 @@
       <div>
         <div class="grid grid-cols-6 gap-4">
           <div>
-            <Input name="Search" placeholder="Search..." />
+            <Search type="text" name="Search" placeholder="Search..." />
           </div>
           <div>
             <span class="text-base font-semibold text-grey-grey"
@@ -154,7 +154,7 @@
 </template>
 
 <script lang="ts">
-import Input from "@/components/Input.vue";
+import Search from "@/components/Search.vue";
 import { defineComponent } from "vue";
 import Layout from "@/components/Main.vue";
 import Button from "@/components/Button.vue";
@@ -167,7 +167,7 @@ import Switch from "@/components/Switch.vue";
 export default defineComponent({
   components: {
     Layout,
-    Input,
+    Search,
     Button,
     LanguageSelector,
     VSelect,
