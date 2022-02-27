@@ -55,7 +55,7 @@
       </div>
       <div>
         <div class="my-10">
-          <div class="flex gap-4">
+          <div class="flex gap-1">
             <span class="mr-auto text-base"
               ><b class="text-grey-grey">Show:</b>&nbsp;<b
                 class="text-blue-blue"

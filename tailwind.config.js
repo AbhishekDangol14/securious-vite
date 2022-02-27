@@ -100,11 +100,19 @@ module.exports = {
       boxShadow: {
         "sidebar-shadow": "5px 0 10px #e4e7ed;",
       },
+      height: {
+        "login-logo": "3.7rem;",
+      },
+      margin: {
+        "login-logo-margin": "4.8rem;",
+      },
     },
   },
   variants: {
     extend: {
       borderColor: ["responsive", "hover", "focus", "active", "group-hover"],
+      borderStyle: ["hover"],
     },
   },
+  plugins: [require("@vueform/slider/tailwind")],
 };
