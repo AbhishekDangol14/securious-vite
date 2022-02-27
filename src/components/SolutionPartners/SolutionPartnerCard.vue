@@ -4,7 +4,7 @@
             <div class="mr-10 bg-contain w-32 grow">
             <img
                 class="align-middle"
-                src="https://dev.securious.de/media/uploads/solutions_partners_products/HGdQnbAxGnGcRvJim8j1TTgUu5DmXHrc8tj63K3S.png"
+                src="@/assets/threats.png"
                 alt=""
             />
             </div>
@@ -48,7 +48,8 @@
             </div>
             <div class="my-4">
             <Button
-                :faIcon="'fa fa-pencil'"
+                path_name="editSolutionpartners"
+                :route_id="partner.id"
                 class="primary-button px-6"
                 title="Edit"
                 name="edit-button"

@@ -24,7 +24,7 @@
         <Button
           class="ternary-button"
           :faIcon="'fa fa-plus'"
-          title="Add new questions"
+          title="Add new answer"
           @click="addAnswer"
         />
       </div>
@@ -36,9 +36,9 @@
 import Button from "@/components/Button.vue";
 import { computed, defineComponent, WritableComputedRef } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
-import PossibleAnswer from "@/views/Threats/Analysis/PossibleAnswers/PossibleAnswer.vue";
+import PossibleAnswer from "@/views/Threats/Analysis/PossibleAnswers/PossibleAnswerEdit.vue";
 import { useStore } from "vuex";
-import { ADD_ANSWER, SET_ANSWER_LIST } from "@/store/modules/mutations.type";
+import { ADD_EDIT_ANSWER, SET_ANSWER_LIST } from "@/store/modules/mutations.type";
 import { useRoute } from "vue-router";
 
 export default defineComponent({
@@ -53,7 +53,7 @@ export default defineComponent({
 
     const answers: WritableComputedRef<string> = computed({
       get() {
-        return store.state.question.state.question.answers
+        return store.state.question.state.editQuestion.answers
       },
       set(value) {
         store.commit(SET_ANSWER_LIST,value)
@@ -65,19 +65,23 @@ export default defineComponent({
     }
 
     function addAnswer() {
-      store.commit(ADD_ANSWER,
+      store.commit(ADD_EDIT_ANSWER,
       {
         id: '',
         analysis_question_id: '',
         solution_partner_product_id: '',
         friendlyTranslations: {
-          EN: {
-            title: ''
-          },
-          DE: {
-            title: ''
-          },
-        },
+            "EN.title": {
+                id: '',
+                name: "title",
+                value: ""
+            },
+            "DE.title": {
+                id: '',
+                name: "title",
+                value: null
+            }
+        }
       })
     }
     return {

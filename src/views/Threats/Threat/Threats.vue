@@ -2,10 +2,8 @@
   <Layout Title="Threat Library">
     <div class="threats">
       <AddButton path="threat/create">Add new threat</AddButton>
-      <div class="threat-content grid grid-cols-3 mt-8 ml-6 mr-6" v-if="threat">
-        <div v-for="item in threat" v-bind:key="item">
-          <ThreatCard :item="item" />
-        </div>
+      <div class="threat-content grid grid-cols-3 gap-x-4 mt-8 ml-6 mr-6">
+        <ThreatCard v-for="item in threat" v-bind:key="item" :item="item" />
       </div>
     </div>
   </Layout>

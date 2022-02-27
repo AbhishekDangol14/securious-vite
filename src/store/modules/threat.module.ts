@@ -50,7 +50,6 @@ export const threat_module = {
     },
     [GET_THREATS] (context) {
       axios.get('http://127.0.0.1:8000/api/admin/threat').then((response) => {
-        console.log(response)
         context.commit(SET_THREATS,response.data.data.items)
       })
     },

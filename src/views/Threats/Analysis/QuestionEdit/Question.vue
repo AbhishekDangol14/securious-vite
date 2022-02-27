@@ -8,8 +8,9 @@
             name="Question Type"
             placeholder="Please select the company asset"
             :options="types"
+            :reduce="(item) => item.name"
             label="name"
-            v-model="question.assets"
+            v-model="question.question_type"
           />
         </div>
 
@@ -17,6 +18,7 @@
           <Vselect
             name="Detail level"
             :options="levels"
+            :reduce="(item) => item.name"
             label="name"
             v-model="question.details_level"
           />

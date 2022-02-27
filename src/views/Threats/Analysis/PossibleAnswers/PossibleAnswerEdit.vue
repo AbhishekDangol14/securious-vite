@@ -50,7 +50,7 @@
           >
             <div class="mx-6 font-bold text-medium text-left" v-if="question">
               <span class="text-base font-bold text-grey-grey">Answer</span>
-              <Input id="title" placeholder="Please Write the Answer" v-model="question[index].friendlyTranslations[language].title" type="text" />
+              <Input id="title" placeholder="Please Write the Answer" v-model="question[index].friendlyTranslations[language+'.title'].value" type="text" />
               <span class="text-base font-bold text-grey-grey">Associate answer with a company asset</span>
               <Input id="category" placeholder="Select" type="text" />
             </div>
@@ -107,7 +107,7 @@ export default defineComponent({
     }
     return {
       uploadFile,
-      question: computed(() => store.state.question.state.question.answers),
+      question: computed(() => store.state.question.state.editQuestion.answers),
       language
     }
   }

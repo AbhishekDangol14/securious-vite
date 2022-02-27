@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive,ref } from 'vue';
+import { defineComponent,ref } from 'vue';
 import { useStore } from 'vuex';
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
@@ -57,6 +57,7 @@ import CKEditor from '@/components/CKEditor.vue';
 import Layout from '@/components/Main.vue';
 import { STORE_NEWS } from '@/store/modules/actions.type';
 import router from '@/router';
+import { news_module } from '@/store/modules/news.module';
 // import NewsCard from '../components/NewsCard.vue';
 
 export default defineComponent({
@@ -71,7 +72,7 @@ export default defineComponent({
   },
 
   setup() {
-    const news = reactive({
+    const news = ref({
       friendlyTranslations: {
         EN: {
           title: '',
@@ -97,14 +98,17 @@ export default defineComponent({
     const store = useStore();
 
     function uploadFile(image){
-      news.image = image
+      const reader = new FileReader();
+      let rawImg;
+      reader.readAsDataURL(image);
+      reader.onloadend = () => {
+        rawImg = reader.result;
+        news.value.image = rawImg
+      };
     }
 
     function save() {
-      store.dispatch({
-        type: STORE_NEWS,
-        news
-      })
+      store.dispatch(STORE_NEWS, news.value)
     }
 
     return {

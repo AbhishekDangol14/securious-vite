@@ -62,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Threats/Analysis/QuestionEdit/Index.vue"),
   },
   {
-    path: "/threat/question/create",
+    path: "/threat/question/create/:id",
     name: "createThreatQuestion",
     component: () => import("@/views/Threats/Analysis/QuestionCreate/QuestionCreate.vue"),
   },
@@ -73,7 +73,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Threats/Recommendation/RecommendationUpdate/Edit.vue"),
   },
   {
-    path: "/threat/recommendation/create",
+    path: "/threat/recommendation/create/:id",
     name: "createThreatRecommendation",
     component: () => import("@/views/Threats/Recommendation/RecommendationCreate/Create.vue"),
   },
@@ -93,9 +93,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/SolutionPartners/Create.vue"),
   },
   {
-    path: "/solution-partners/edit",
+    path: "/solution-partners/edit/:id",
     name: "editSolutionpartners",
     component: () => import("@/views/SolutionPartners/Edit.vue"),
+    props: true
   },
   {
     path: "/news",

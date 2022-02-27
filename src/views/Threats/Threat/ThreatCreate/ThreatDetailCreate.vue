@@ -143,8 +143,7 @@ export default defineComponent({
         rawImg = reader.result;
         store.state.threat.state.threat.image = rawImg
         console.log(rawImg)
-      };
-        
+      };   
     }
 
     return {

@@ -27,6 +27,7 @@ export default defineComponent({
                 {
                     id: null,
                     details_level: 'low',
+                    rand: Math.random(),
                     is_active: 0,
                     friendlyTranslations: {
                         EN: {

@@ -1,4 +1,4 @@
-import { ADD_ANSWER, SET_ANSWER_LIST, SET_EDIT_QUESTION, SET_RECOMMENDATION_LIST } from "./mutations.type";
+import { ADD_ANSWER, ADD_EDIT_ANSWER, SET_ANSWER_LIST, SET_EDIT_QUESTION, SET_RECOMMENDATION_LIST } from "./mutations.type";
 import router from '@/router'
 import axios from 'axios'
 import { EDIT_QUESTION } from "./actions.type";
@@ -42,6 +42,9 @@ export const question_module = {
       state.question.status = 'publish'
       await axios.post('http://127.0.0.1:8000/api/admin/analysis_question',state.question).then()
     },
+    async update_question ({state}){
+      await axios.put('http://127.0.0.1:8000/api/admin/analysis_question/'+state.editQuestion.id,state.editQuestion).then()
+    },
     async [EDIT_QUESTION] (context,id){
       await axios.get('http://127.0.0.1:8000/api/admin/analysis_question/'+id+'/edit').then((response)=> {
         console.log(response.data.data)
@@ -52,6 +55,9 @@ export const question_module = {
   mutations: {
     [ADD_ANSWER] (state,answer){
       state.question.answers.push(answer)
+    },
+    [ADD_EDIT_ANSWER] (state,answer){
+      state.editQuestion.answers.push(answer)
     },
     [SET_ANSWER_LIST] (state, data) {
       if (router.currentRoute.value.params.id)

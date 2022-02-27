@@ -10,12 +10,12 @@ export const news_module = {
     },
     actions: {
         [STORE_NEWS] (context, news){
-            const data = new FormData();
-            data.append('image',news.news.image)
-            data.append('is_active',news.news.is_active ? '1' : '0')
-            data.append('news_category_id',news.news.news_category_id)
-            data.append('friendlyTranslations',JSON.stringify(news.news.friendlyTranslations))
-            axios.post('http://127.0.0.1:8000/api/admin/news', data).then((response) => {
+            // const data = new FormData();
+            // data.append('image',news.news.image)
+            // data.append('is_active',news.news.is_active ? '1' : '0')
+            // data.append('news_category_id',news.news.news_category_id)
+            // data.append('friendlyTranslations',JSON.stringify(news.news.friendlyTranslations))
+            axios.post('http://127.0.0.1:8000/api/admin/news', news).then((response) => {
                 console.log(response);
             })
         },

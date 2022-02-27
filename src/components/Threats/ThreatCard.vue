@@ -3,7 +3,7 @@
       <div class="relative bg-secondary">
         <img
           class="p-8"
-          src="@/assets/threats.png"
+          :src="threat.image"
           alt="icon"
         />
         <div class="absolute top-0 right-0"><Switch v-model="threat.is_display_active_always" /></div> 
@@ -54,6 +54,10 @@ export default defineComponent({
 
     const threat = toRef(props,'item')
 
+    const url = new Image()
+
+    threat.value ? url.src = threat.value.image : ''
+
     if(localStorage.getItem('LANGUAGE'))
       language.value = localStorage.getItem('LANGUAGE')
 
@@ -70,7 +74,8 @@ export default defineComponent({
       editNews,
       deleteNews,
       language,
-      threat
+      threat,
+      url
     }
   },
 });

@@ -31,9 +31,16 @@ export default defineComponent({
     modelValue: String,
   },
   emits: ["update:modelValue"],
-  setup(props, context) {
+  setup(props, {emit}) {
     return {
-      value: ref(new Date()),
+      value: computed({
+        get() {
+          return new Date()
+        },
+        set(value) {
+          emit("update:modelValue", value);
+        },
+      }),
     };
   },
 });

@@ -39,10 +39,14 @@ export const industry_module = {
             
         },
         [ADD_INDUSTRIES] (state, data){
+            console.log(data)
             state.industries.push(data)
         },
-        [REMOVE_INDUSTRY] (state, index:number){
-            state.industries.splice(index,1)
+        [REMOVE_INDUSTRY] (state,ind){
+            alert(ind)
+            console.log(state.industries)
+            state.industries = state.industries.filter((industry,index) => index!=ind)
+            console.log(state.industries)
         }
     }
 }

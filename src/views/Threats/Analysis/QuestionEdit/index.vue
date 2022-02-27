@@ -115,7 +115,7 @@
 import { defineComponent, onBeforeMount } from "vue";
 import Layout from "@/components/Main.vue";
 import Question from "@/views/Threats/Analysis/QuestionEdit/Question.vue";
-import PossibleAnswers from "@/views/Threats/Analysis/PossibleAnswers/Index.vue";
+import PossibleAnswers from "@/views/Threats/Analysis/PossibleAnswers/Edit.vue";
 import PossibleRecommendations from "@/views/Threats/Analysis/PossibleRecommendations/Index.vue";
 import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
 
