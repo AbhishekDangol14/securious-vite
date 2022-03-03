@@ -19,7 +19,7 @@
                         Noch kein Account? 
                     </div>
                     <div class="text-xs link-text"> 
-                        <router-link to="/">Registrieren</router-link>
+                        <router-link :to="{name:'Register'}">Registrieren</router-link>
                     </div>
                 </div>
             </div>

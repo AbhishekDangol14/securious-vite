@@ -6,22 +6,18 @@
       :placeholder="placeholder"
       :options="options"
       :label="label"
+      v-model="value"
+      @option:selecting="switchLang"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineEmits } from "vue";
+import { computed, defineComponent, defineEmits, ref } from "vue";
 import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default defineComponent({
-  setup() {
-    const options = ["DE", "EN"];
-    return {
-      options,
-    };
-  },
   components: {
     VSelect,
   },
@@ -30,6 +26,28 @@ export default defineComponent({
     placeholder: String,
     name: String,
     label: String,
+    modelValue: String
+  },
+  setup(props,{emit}) {
+    const options = ["DE", "EN"];
+    const value = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(value) {
+        emit("update:modelValue", value);
+      },
+    })
+    
+    function switchLang(value){
+      emit("option:selecting", value)
+    }
+
+    return {
+      value,
+      options,
+      switchLang,
+    };
   },
 });
 </script>

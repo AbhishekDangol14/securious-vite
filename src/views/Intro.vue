@@ -6,10 +6,10 @@
                     Zuerst möchten wir Sie besser kennenlernen. 
                 </template>
                 <template v-slot:content>
-                    <div class="salutation flex">
-                        <Input type="radio" id="Herr" name="Herr" />
-                        <Input type="radio" id="Frau" name="Frau" />
-                        <Input type="radio" id="Anders" name="Anders" /> 
+                    <div class="salutation flex space-x-4 mb-4">
+                        <div class="flex space-x-2"><input type="radio" id="Herr" /><div class="semibold">Herr</div></div>
+                        <div class="flex space-x-2"><input type="radio" id="Frau" /><div class="semibold">Frau</div></div>
+                        <div class="flex space-x-2"><input type="radio" id="Anders" /><div class="semibold">Anders</div></div>
                     </div>
                     <div class="grid grid-cols-4 space-x-6">
                         <div class="col-span-1">

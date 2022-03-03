@@ -30,6 +30,19 @@ export default defineComponent({
     error: String,
     modelValue: String,
   },
+  emits: ["update:modelValue"],
+  setup(props, context) {
+    return {
+      value: computed({
+        get() {
+          return props.modelValue;
+        },
+        set(value) {
+          context.emit("update:modelValue", value);
+        },
+      }),
+    };
+  },
 });
 </script>
 

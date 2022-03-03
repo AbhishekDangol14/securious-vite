@@ -194,6 +194,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'company-assets',
     component: () => import('@/views/test.vue')
   },
+  {
+    path: '/threat',
+    name: 'customerThreat',
+    component: () => import('@/views/Customer/Threats/Library.vue')
+  }
 ]
 
 const router = createRouter({

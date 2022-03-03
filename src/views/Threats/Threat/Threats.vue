@@ -4,7 +4,7 @@
       <div>
         <div class="grid grid-cols-6 gap-4">
           <div>
-            <Search type="text" name="Search" placeholder="Search..." />
+            <Search type="text" name="Search" placeholder="Search..." v-model="searchQuery" />
           </div>
           <div>
             <span class="text-base font-semibold text-grey-grey"
@@ -78,15 +78,16 @@
               :faIcon="'fa fa-plus'"
               >Add new threat</Button
             >
-            <LanguageSelector />
+           <LanguageSelector v-model="language" @option:selecting="switchLang" />
           </div>
         </div>
       </div>
       <div class="threat-content grid grid-cols-3 gap-x-4 mt-8 ml-6 mr-6">
         <ThreatCard
-          v-for="threat in threats"
+          v-for="threat in searchedProducts"
           v-bind:key="threat"
           :threat="threat"
+          :language="language"
         />
       </div>
     </div>
@@ -94,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount } from "vue";
+import { computed, defineComponent, onBeforeMount, ref } from "vue";
 import Layout from "@/components/Main.vue";
 import Search from "@/components/Search.vue";
 import Button from "@/components/Button.vue";
@@ -118,6 +119,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const threats = computed(() => store.state.threat.state.threats)
     const industries = [
       { id: 1, name: "Industry 1" },
       { id: 2, name: "Industry 2" },
@@ -132,17 +134,39 @@ export default defineComponent({
     ];
     const statuses = ["All", "Published", "Drafted", "Deleted"];
     const sorts = ["Name", "Importance", "Recently Added"];
+    let language = ref(localStorage.getItem('LANGUAGE'));
+    const searchQuery = ref("")
+
+    function switchLang(value){
+      language.value = value
+    }
+    const searchedProducts = computed(() => {
+      return threats.value.filter((threat) => {
+        return (
+          threat.friendlyTranslations[language.value+'.title'].value
+            .toLowerCase()
+            .indexOf(searchQuery.value.toLowerCase()) != -1
+        );
+      });
+    });
+
+    console.log(searchedProducts)
+
     onBeforeMount(() => {
       store.dispatch(GET_THREATS);
     });
 
     return {
-      threats: computed(() => store.state.threat.state.threats),
+      threats,
       valueOfSlider: [0, 500],
       industries,
       services,
       statuses,
       sorts,
+      language,
+      searchQuery,
+      searchedProducts,
+      switchLang,
     };
   },
 });
