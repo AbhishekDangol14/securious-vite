@@ -70,6 +70,7 @@ module.exports = {
       none: "0",
       sm: "0.5px",
       DEFAULT: "5px",
+      mid: "5px",
       md: "22px",
       lg: "50px",
       full: "50%",
@@ -96,6 +97,7 @@ module.exports = {
       ternary: "#7070701a",
       white: "#ffffff",
       "ternary-blue": "#055CA80D",
+      light: "#f5f8fc"
     }),
     extend: {
       boxShadow: {

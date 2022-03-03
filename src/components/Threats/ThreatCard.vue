@@ -11,14 +11,9 @@
         </div>
         <div class="absolute top-2 right-3">
           <div class="mb-1">
-            <b
-              class="text-blue-blue text-base font-bold cursor-pointer"
-            >
-              EN
-            </b>
+            <b @click="switchLang('EN')" class="text-blue-blue text-base font-bold cursor-pointer">EN</b>
             |
-            <b class="text-blue-blue text-base font-bold cursor-pointer"
-              >DE</b
+            <b @click="switchLang('DE')" class="text-blue-blue text-base font-bold cursor-pointer">DE</b
             >
           </div>
           <div class="-ml-1">
@@ -64,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRef } from 'vue';
+import { computed, defineComponent, ref, toRef, watch } from 'vue';
 import Switch from '@/components/Switch.vue';
 import Button from '@/components/Button.vue';
 import { useStore } from 'vuex';
@@ -75,6 +70,10 @@ export default defineComponent({
   props: {
     threat: {
       type: Object,
+      required: true
+    },
+    language: {
+      type: String,
       required: true
     }
   },
@@ -88,7 +87,7 @@ export default defineComponent({
 
     const router = useRouter()
 
-    const lang = localStorage.getItem('LANGUAGE')
+    const lang = ref(props.language)
 
     const item = toRef(props,'threat')
 
@@ -100,10 +99,19 @@ export default defineComponent({
       await store.dispatch(DELETE_THREAT,id)
       store.dispatch(GET_THREATS)
     }
+
+    function switchLang(value){
+      lang.value = value
+    }
+
+    watch(() => props.language, (first, second) => {
+      lang.value = first
+    });
      
     return {
       edit,
       deleteThreat,
+      switchLang,
       lang,
       item
     }

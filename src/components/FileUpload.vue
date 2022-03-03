@@ -43,7 +43,14 @@ export default defineComponent({
     function onChangeFile(event) {
       const file = event.target.files[0];
       url.value = URL.createObjectURL(file);
-      context.emit("myFile", event.target.files[0]);
+      const reader = new FileReader();
+      let rawImg;
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        rawImg = reader.result;
+        context.emit("myFile", rawImg);
+      };
+      
     }
 
     function removeFile() {
