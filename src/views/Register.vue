@@ -121,7 +121,6 @@ import store from "@/store";
 import { propsToAttrMap } from "@vue/shared";
 import registerService from "@/service/register.service";
 import { ref } from "vue";
-import sweetAlert from "@/partials/popup";
 
 export default defineComponent({
   props: {
@@ -148,12 +147,6 @@ export default defineComponent({
       showPassword.value = !showPassword.value;
     }
 
-    //if error
-    sweetAlert.alertPopup({
-      title: "Please use a password that is at least 8 characters long",
-      type: "error",
-    });
-    //
     onBeforeMount(() => {
       props.slug ? getRole(props.slug) : getRole();
     });

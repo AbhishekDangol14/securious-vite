@@ -38,8 +38,18 @@
               class="basis-1/2 border-r-2 border-blue-blue border-opacity-20 pr-4"
             >
               <span class="text-base font-semibold text-grey-grey">Title</span>
-              <Input id="title" placeholder="Possible Recommendation" type="text" v-model="recommendation.friendlyTranslations['EN'].title" />
-              <Switch :alternate="true" class="mt-2" name="Is Automated" v-model="recommendation.is_automated" />
+              <Input
+                id="title"
+                placeholder="Possible Recommendation"
+                type="text"
+                v-model="recommendation.friendlyTranslations['EN'].title"
+              />
+              <Switch
+                :alternate="true"
+                class="mt-2"
+                name="Is Automated"
+                v-model="recommendation.is_automated"
+              />
               <div class="flex gap-8 relative">
                 <div class="w-2/4">
                   <Vselect
@@ -77,7 +87,15 @@
                   <span class="text-base font-semibold text-grey-grey"
                     >Once sentence recommendation</span
                   >
-                  <Input id="category" placeholder="Short Description" type="text" v-model="recommendation.friendlyTranslations['EN'].one_sentence_recommendation" />
+                  <Input
+                    id="category"
+                    placeholder="Short Description"
+                    type="text"
+                    v-model="
+                      recommendation.friendlyTranslations['EN']
+                        .one_sentence_recommendation
+                    "
+                  />
                 </div>
 
                 <div class="w-2/4">
@@ -112,7 +130,12 @@
                 class="my-4"
                 v-model="recommendation.show_if_company_size"
               />
-              <Slider v-model="recommendation.company_size" :max="500" :min="0" :step="1" />
+              <Slider
+                v-model="recommendation.company_size"
+                :max="500"
+                :min="0"
+                :step="1"
+              />
 
               <Switch
                 :alternate="true"
@@ -139,7 +162,9 @@
               <span class="text-base font-bold text-grey-grey"
                 >Description</span
               >
-              <CKEditor v-model="recommendation.friendlyTranslations['EN'].description" />
+              <CKEditor
+                v-model="recommendation.friendlyTranslations['EN'].description"
+              />
               <div v-show="addDescription" class="flex gap-8 relative mt-3">
                 <div class="w-3/5">
                   <span class="text-base font-semibold text-grey-grey"
@@ -164,7 +189,10 @@
                 </div>
               </div>
               <div class="text-left mt-3">
-                <a class="text-blue-blue text-base cursor-pointer" @click="addDescriptionFor">+Add Description</a
+                <a
+                  class="text-blue-blue text-base cursor-pointer"
+                  @click="addDescriptionFor"
+                  >+Add Description</a
                 >
               </div>
             </div>
@@ -182,7 +210,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,computed, ref } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import Layout from "@/components/Main.vue";
 import Input from "@/components/Input.vue";
 import Switch from "@/components/Switch.vue";
@@ -204,49 +232,58 @@ export default defineComponent({
     DeleteEditSave,
     SolutionProducts,
     VueSelect,
-    Vselect
+    Vselect,
   },
 
   setup() {
-    const store = useStore()
-    const addDescription = ref(false)
+    const store = useStore();
+    const addDescription = ref(false);
     const questions = [
       { id: 1, question: "Wahat is Anti virus?" },
       { id: 2, question: "What do you mean by that ?" },
-    ]
+    ];
     const answers = [
       { id: 1, answer: "A software protect from virus" },
       { id: 2, answer: " I don't know" },
-    ]
+    ];
 
-    const points = [0, 10, 20, 30]
+    const points = [0, 10, 20, 30];
 
     const assets = [
       { id: 1, name: "Asset 1" },
       { id: 2, name: "Asset 2" },
-    ]
+    ];
     const industries = [
       { id: 1, name: "Industry 1" },
       { id: 2, name: "Industry 2" },
-    ]
+    ];
 
     function addDescriptionFor() {
-      addDescription.value = true
+      addDescription.value = true;
     }
     return {
-      recommendation: computed(() => store.state.recommendation.state.recommendation),
+      recommendation: computed(
+        () => store.state.recommendation.state.recommendation
+      ),
       questions,
       industries,
       assets,
       points,
       answers,
       addDescription,
-      addDescriptionFor
-    }
+      addDescriptionFor,
+    };
   },
 });
 </script>
 
 <style src="@vueform/slider/themes/default.css"></style>
 
-<style></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>

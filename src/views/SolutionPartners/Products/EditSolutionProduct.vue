@@ -1,5 +1,8 @@
 <template>
-  <div class="border relative border-grey-grey border-opacity-20 py-4 px-4 mb-2 rounded-sm my-5" v-if="product">
+  <div
+    class="border relative border-grey-grey border-opacity-20 py-4 px-4 mb-2 rounded-sm my-5"
+    v-if="product"
+  >
     <a
       @click="removeItem(index)"
       class="absolute -top-3 -right-2 cursor-pointer"
@@ -15,7 +18,9 @@
             type="text"
             v-if="productActive"
             v-on:keyup.enter="toggleActiveProductTitle"
-            v-model="product[index].friendlyTranslations[language+'.title'].value"
+            v-model="
+              product[index].friendlyTranslations[language + '.title'].value
+            "
             placeholder="Solution Products 147: please provide your product title here..."
           />
         </div>
@@ -24,7 +29,7 @@
           class="box-content text-medium font-semibold min-w-min"
           v-if="productActive === false"
         >
-          {{ product[index].friendlyTranslations[language+'.title'].value }}
+          {{ product[index].friendlyTranslations[language + ".title"].value }}
         </h>
         <a
           v-if="!productActive"
@@ -89,11 +94,19 @@
             </div>
           </div>
           <div class="mt-3">
-            <input type="checkbox" id="checkbox" v-model="product[index].is_solution_partner" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              v-model="product[index].is_solution_partner"
+            />
             <label class="ml-2" for="checkbox">Is Solution Partner</label>
           </div>
           <div class="my-2">
-            <input type="checkbox" id="checkbox" v-model="product[index].is_company_asset" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              v-model="product[index].is_company_asset"
+            />
             <label class="ml-2" for="checkbox">Is Company Asset</label>
           </div>
 
@@ -117,7 +130,13 @@
         </div>
         <div class="col-span-2">
           <div class="ml-10">
-            <CKEditor name="Description" v-model="product[index].friendlyTranslations[language+'.description'].value" />
+            <CKEditor
+              name="Description"
+              v-model="
+                product[index].friendlyTranslations[language + '.description']
+                  .value
+              "
+            />
             <!-- <Switch class="mt-2" name="Mark always as important" /> -->
 
             <Switch
@@ -127,7 +146,12 @@
               v-model="product[index].show_if_company_size"
             />
             <div class="my-8">
-              <Slider v-model="product[index].company_size" :max="500" :min="0" :step="1" />
+              <Slider
+                v-model="product[index].company_size"
+                :max="500"
+                :min="0"
+                :step="1"
+              />
             </div>
             <Switch
               :alternate="true"
@@ -205,14 +229,17 @@ import CKEditor from "@/components/CKEditor.vue";
 import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import Datepicker from "@/components/Datepicker.vue";
-import { defineComponent,onBeforeMount,ref,computed } from "vue";
+import { defineComponent, onBeforeMount, ref, computed } from "vue";
 import { useStore } from "vuex";
-import { ADD_ASSET_ALERT, DELETE_ASSET_ALERT } from "@/store/modules/mutations.type";
+import {
+  ADD_ASSET_ALERT,
+  DELETE_ASSET_ALERT,
+} from "@/store/modules/mutations.type";
 export default defineComponent({
   props: {
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     removeItem: Function,
   },
@@ -227,13 +254,13 @@ export default defineComponent({
     Datepicker,
   },
   setup(props) {
-    const store = useStore()
+    const store = useStore();
 
-    let productActive = ref(false)
-    let showDetail = ref(false)
-    const asset = ref([])
-    const language = localStorage.getItem('LANGUAGE')
-    
+    let productActive = ref(false);
+    let showDetail = ref(false);
+    const asset = ref([]);
+    const language = localStorage.getItem("LANGUAGE");
+
     function toggleActiveProductTitle() {
       productActive.value = true;
     }
@@ -248,25 +275,30 @@ export default defineComponent({
 
     function addAssetAlert(index) {
       let asset = {
-        id:'',
-        risk_level:'',
-        date:'',
-        link:''
-      }
-      let edit = true
+        id: "",
+        risk_level: "",
+        date: "",
+        link: "",
+      };
+      let edit = true;
       store.commit({
         type: ADD_ASSET_ALERT,
         asset,
         index,
-        edit})
+        edit,
+      });
     }
 
     function deleteAssetAlert(index) {
-      store.commit(DELETE_ASSET_ALERT,index)
+      store.commit(DELETE_ASSET_ALERT, index);
     }
 
     return {
-      product: computed(() => store.state.solutionPartner.state.editSolutionPartner.solutionPartnersProducts),
+      product: computed(
+        () =>
+          store.state.solutionPartner.state.editSolutionPartner
+            .solutionPartnersProducts
+      ),
       productActive,
       showDetail,
       asset,
@@ -279,9 +311,9 @@ export default defineComponent({
       setTitle,
       toggleThisDetail,
       addAssetAlert,
-      deleteAssetAlert
-    }
-  }  
+      deleteAssetAlert,
+    };
+  },
 });
 </script>
 <style>
@@ -291,3 +323,11 @@ export default defineComponent({
 }
 </style>
 <style src="@vueform/slider/themes/default.css"></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>
