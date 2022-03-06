@@ -80,9 +80,10 @@
       <div class="basis-1/2">
         <div>
           <h class="text-medium font-semibold -ml-2 text-blue-blue"
-            >Define Importance</h
-          >
+            >Define Importance</h>
         </div>
+
+
         <Switch
           class="mt-2"
           name="Mark always as important"
@@ -95,7 +96,7 @@
         />
 
         <Vselect
-          :options="industries"
+          :options="getIndustries"
           :reduce="(item) => item.id"
           label="name"
           v-model="threatDetail.important_industry_id"
@@ -210,19 +211,13 @@ export default defineComponent({
 
     let selectedLanguage = localStorage.getItem("LANGUAGE");
 
-    const industries = ref([
-      { id: 1, name: "Industry 1" },
-      { id: 2, name: "Industry 2" },
-    ]);
-
+    let selectedLanguage = ref(localStorage.getItem('LANGUAGE'))
+    const getIndustries = computed(() => store.state.threat.state.getIndustries)
+    const getAssets = computed(() => store.state.threat.state.getAssets)
+    
     const categories = ref([
       { id: 1, category: "Category 1" },
       { id: 2, category: "Category 2" },
-    ]);
-
-    const assets = ref([
-      { id: 1, name: "Asset 1" },
-      { id: 2, name: "Asset 2" },
     ]);
 
     function uploadFile(image) {
@@ -230,11 +225,11 @@ export default defineComponent({
     }
 
     return {
-      threatDetail: computed(() => store.state.threat.state.editThreat),
-      industries,
+      threatDetail: computed(() => store.state.threat.state.editThreat),  
+      getIndustries,
       categories,
       selectedLanguage,
-      assets,
+      getAssets,
       uploadFile,
     };
   },

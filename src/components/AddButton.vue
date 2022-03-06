@@ -1,9 +1,8 @@
 <template>
     <div class="grid place-items-end pt-16 pr-8">
-        <button v-if="path === 'industries'" class="add-button w-2/12 p-3 bg-primary rounded-lg text-white-white text-center" @click="addIndustry">
+        <button class="add-button w-2/12 p-3 bg-primary rounded-lg text-white-white text-center" @click="addIndustry">
             <slot></slot>
         </button>
-        <router-link class="button-text w-2/12 p-3 bg-primary rounded-lg text-white-white text-center" v-else :to="path_name"><slot></slot></router-link>
     </div>
 </template>
 
@@ -13,28 +12,22 @@ import { useStore } from 'vuex'
 import { NEW_INDUSTRY } from '@/store/modules/actions.type'
 
 export default defineComponent({
-    props: {
-        path: String
-    },
     setup(props) {
         const store = useStore()
-
-        let path_name = "/"+props.path
 
         function addIndustry() {
             store.dispatch(
                 NEW_INDUSTRY,
                 {
                     id: null,
-                    details_level: 'low',
-                    rand: Math.random(),
                     is_active: 0,
+                    details_level: 'low',
                     friendlyTranslations: {
                         EN: {
-                            name: ""
+                            title: ''
                         },
                         DE: {
-                            name: ""
+                            title: ''
                         }
                     }
                 }
@@ -43,7 +36,6 @@ export default defineComponent({
 
         return {
             addIndustry,
-            path_name
         }
     },
 })

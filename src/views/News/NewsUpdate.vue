@@ -1,6 +1,6 @@
 <template>
     <Layout Title="EDIT NEWS">
-    <div v-if="news">
+    <div v-if="news.friendlyTranslations">
       <div class="flex justify-center pt-10">
         <form class="news-create self-center align-middle">
           <div class="news-create-nav pb-4">
@@ -18,13 +18,13 @@
           <div class="news-body border-2 border-grey-100 shadow-primary">
             <div class="flex">
               <div class="w-2/3">
-                <Input type="text" id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations.EN_title.value" />
+                <Input type="text" id="title" name="Title" placeholder="News Title" v-model="news.friendlyTranslations[selectedLanguage+'.title'].value" />
               </div>
               <div
                 class="pl-8 flex gap-4 justify-center align-middle items-center"
               >
                 <span>
-                  <FileUpload @my-file="uploadFile" />
+                  <FileUpload :image="news.image" @my-file="uploadFile" />
                 </span>
                 <div class="gap-2 flex flex-col">
                   <Button name="ternary-button" :icon="Img" title="Upload" />
@@ -32,10 +32,10 @@
                 </div>
               </div>
             </div>
-            <Input type="text" id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations.EN_excerpt.value" />
+            <Input type="text" id="excerpt" name="Excerpt" placeholder="Excerpt" v-model="news.friendlyTranslations[selectedLanguage+'.excerpt'].value" />
             <Input type="text" id="category" name="Category" placeholder="Category" v-model="news.news_category_id" />
             <Switch name="Active" v-model="news.is_active" />
-            <CKEditor name="Description" v-model="news.friendlyTranslations.EN_description.value" />
+            <CKEditor name="Description" v-model="news.friendlyTranslations[selectedLanguage+'.description'].value" />
           </div>
 
 
@@ -77,18 +77,12 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
 
-    const user = localStorage.getItem('USER')
+    const selectedLanguage = localStorage.getItem('LANGUAGE')
 
-    const selectedLanguage = user ? JSON.parse(user).selected_language : 'EN'
-
-    const news = ref(computed(() => store.state.news.state.item))  
-
-    const item = ref(news.value)
-
+    const news = ref(computed(() => store.state.news.state.editNews))  
 
     function update(){
-      store.dispatch(UPDATE_NEWS, news.value)
-      router.push({ name:'news' })
+      store.dispatch(UPDATE_NEWS)
     }
 
     function uploadFile(image){
@@ -106,7 +100,6 @@ export default defineComponent({
       update,
       uploadFile,
       selectedLanguage,
-      item
     }
   },
 })

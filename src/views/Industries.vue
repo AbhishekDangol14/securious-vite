@@ -35,7 +35,7 @@
           v-for="(item, index) in industries"
           :item="item"
           :index="index"
-          v-bind:key="item.details_level"
+          :key="JSON.stringify(item)"
         />
       </div>
     </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from "vue";
+import { defineComponent, onMounted, computed, onBeforeMount } from "vue";
 import Layout from "../components/Main.vue";
 import Search from "@/components/Search.vue";
 import AddIndustryButton from "@/components/AddIndustryButton.vue";
@@ -61,9 +61,14 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    store.dispatch(GET_INDUSTRIES);
+
+    const industries = computed(() => store.state.industry.state.industries)
+    
+    onBeforeMount(() => {
+      store.dispatch(GET_INDUSTRIES)
+    })
     return {
-      industries: computed(() => store.state.industry.state.industries),
+      industries
     };
   },
 });

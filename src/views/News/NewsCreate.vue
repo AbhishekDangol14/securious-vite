@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import Button from "@/components/Button.vue";
 import Input from "@/components/Input.vue";
@@ -99,38 +99,18 @@ export default defineComponent({
     // NewsCard,
   },
   setup() {
-    const news = ref({
-      friendlyTranslations: {
-        EN: {
-          title: "",
-          excerpt: "",
-          description: "",
-        },
-        DE: {
-          title: "",
-          excerpt: "",
-          description: "",
-        },
-      },
-      news_category_id: "",
-      is_active: false,
-      image: "",
-    });
-    const user = localStorage.getItem("USER");
-    let selectedLanguage = "";
-    if (user) selectedLanguage = JSON.parse(user).selected_language;
     const store = useStore();
+
+    const news = computed(() => store.state.news.state.news)
+
+    const selectedLanguage = ref(localStorage.getItem('LANGUAGE'))
+    
     function uploadFile(image) {
-      const reader = new FileReader();
-      let rawImg;
-      reader.readAsDataURL(image);
-      reader.onloadend = () => {
-        rawImg = reader.result;
-        news.value.image = rawImg;
-      };
+      news.value.image = image
     }
+    
     function save() {
-      store.dispatch(STORE_NEWS, news.value);
+      store.dispatch(STORE_NEWS);
     }
     return {
       Img: require("@/assets/icons/img.svg"),

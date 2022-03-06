@@ -99,7 +99,7 @@ import Analysis from "@/views/Threats/Analysis/Analysis.vue";
 import Recommendation from "@/views/Threats/Recommendation/Index.vue";
 import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
 import { useStore } from "vuex";
-import { EDIT_THREAT } from "@/store/modules/actions.type";
+import { EDIT_THREAT, GET_DROPDOWN } from "@/store/modules/actions.type";
 import { useRoute } from "vue-router";
 
 export default defineComponent({ 
@@ -115,6 +115,7 @@ export default defineComponent({
     const route = useRoute()
     onBeforeMount(() => {
       store.dispatch(EDIT_THREAT,route.params.id)
+      store.dispatch(GET_DROPDOWN)
     })
     return {
     }
