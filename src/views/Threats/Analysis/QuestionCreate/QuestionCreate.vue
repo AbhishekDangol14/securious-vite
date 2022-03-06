@@ -112,12 +112,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, onBeforeMount, reactive } from "vue";
 import Layout from "@/components/Main.vue";
 import Question from "@/views/Threats/Analysis/QuestionCreate/Question.vue";
 import PossibleAnswers from "@/views/Threats/Analysis/PossibleAnswers/Index.vue";
 import PossibleRecommendations from "@/views/Threats/Analysis/PossibleRecommendations/Index.vue";
 import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
+import { useStore } from "vuex";
+import { GET_DROPDOWN } from "@/store/modules/actions.type";
 
 export default defineComponent({
   components: {
@@ -128,6 +130,10 @@ export default defineComponent({
     DeleteEditSave,
   },
   setup() {
+    const store = useStore()
+    onBeforeMount(() => {
+      store.dispatch(GET_DROPDOWN)
+    })
     return {
     };
   },

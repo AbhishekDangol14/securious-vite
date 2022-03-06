@@ -31,7 +31,7 @@
           name="Show if using the following asset(s):"
         />
         <div class="mt-3">
-          <VueSelect
+          <Vselect
             name="Assets"
             :options="assets"
             label="name"
@@ -48,7 +48,7 @@
 import Switch from "@/components/Switch.vue";
 import Slider from "@vueform/slider";
 import Vselect from "vue-select";
-import VueSelect from "@/components/Select.vue";
+import "vue-select/dist/vue-select.css";
 import { defineComponent } from "@vue/runtime-core";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
@@ -57,26 +57,18 @@ export default defineComponent ({
   components: {
     Switch,
     Slider,
-    VueSelect,
     Vselect
   },
-  setup(){
+  props: {
+    language: String,
+    industries: Array,
+    assets: Array
+  },
+  setup(props){
     const store = useStore()
-
-    const assets = ref([
-      { id: 1, name: "Asset 1" },
-      { id: 2, name: "Asset 2" },
-    ])
-
-    const industries = ref([
-      { id: 1, name: "Industry 1" },
-      { id: 2, name: "Industry 2" },
-    ])
 
     return {
       threat: computed(() => store.state.threat.state.threat),
-      assets,
-      industries
     }
   }
 });

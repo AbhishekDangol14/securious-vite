@@ -4,7 +4,7 @@
       <div>
         <div class="grid grid-cols-6 gap-4">
           <div>
-            <Search type="text" name="Search" placeholder="Search..." v-model="searchQuery" />
+            <Search type="text" name="Search" placeholder="Search..." v-model="searchQuery" @input="abc" />
           </div>
           <div>
             <span class="text-base font-semibold text-grey-grey"
@@ -13,8 +13,11 @@
             <VSelect
               multiple
               class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-              :options="industries"
+              :options="getIndustries"
               label="name"
+              :reduce="(item) => item.id"
+              @option:selected  ="industryFilter"
+              v-model="industries"
             />
           </div>
           <div>
@@ -22,7 +25,7 @@
             <VSelect
               multiple
               class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-              :options="services"
+              :options="getAssets"
               label="name"
             />
           </div>
@@ -84,7 +87,7 @@
       </div>
       <div class="threat-content grid grid-cols-3 gap-x-4 mt-8 ml-6 mr-6">
         <ThreatCard
-          v-for="threat in searchedProducts"
+          v-for="threat in threats"
           v-bind:key="threat"
           :threat="threat"
           :language="language"
@@ -95,7 +98,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, ref } from "vue";
+import { computed, defineComponent, onBeforeMount, ref, watch } from "vue";
 import Layout from "@/components/Main.vue";
 import Search from "@/components/Search.vue";
 import Button from "@/components/Button.vue";
@@ -105,7 +108,7 @@ import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import Slider from "@/components/Slider.vue";
 import { useStore } from "vuex";
-import { GET_THREATS } from "@/store/modules/actions.type";
+import { GET_DROPDOWN, GET_THREATS, DROPDOWN, SEARCH_THREAT } from "@/store/modules/actions.type";
 
 export default defineComponent({
   components: {
@@ -119,28 +122,45 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const threats = computed(() => store.state.threat.state.threats)
-    const industries = [
-      { id: 1, name: "Industry 1" },
-      { id: 2, name: "Industry 2" },
-      { id: 3, name: "Industry 3" },
-    ];
-    const services = [
-      { id: 1, name: "Service 1" },
-      {
-        id: 2,
-        name: "Antivirus",
-      },
-    ];
+    const threats = computed(() => store.state.threat.state.searchThreats)
+
     const statuses = ["All", "Published", "Drafted", "Deleted"];
     const sorts = ["Name", "Importance", "Recently Added"];
     let language = ref(localStorage.getItem('LANGUAGE'));
     const searchQuery = ref("")
+    const industries = ref()
+    let searchedProducts = ref()
+
+    const getIndustries = computed(() => store.state.threat.state.getIndustries)
+    const getAssets = computed(() => store.state.threat.state.getAssets)
 
     function switchLang(value){
       language.value = value
+      store.dispatch(DROPDOWN,language.value)
     }
-    const searchedProducts = computed(() => {
+
+    function abc(){
+      store.dispatch({
+        type: SEARCH_THREAT,
+        searchQuery,
+        language
+      })
+    }
+
+    function industryFilter(){
+      console.log(industries.value)
+      // searchedProducts.value = computed(() => {
+      //   return threats.value.filter((threat) => {
+      //     return (
+      //       threat.industries
+      //         .indexOf(industries.value) != -1
+      //     );
+      //   });
+      // });
+      // console.log(searchedProducts.value)
+    }
+    
+    searchedProducts = computed(() => {
       return threats.value.filter((threat) => {
         return (
           threat.friendlyTranslations[language.value+'.title'].value
@@ -150,23 +170,25 @@ export default defineComponent({
       });
     });
 
-    console.log(searchedProducts)
-
-    onBeforeMount(() => {
-      store.dispatch(GET_THREATS);
+    onBeforeMount(async() => {
+      store.dispatch(GET_THREATS)
+      await store.dispatch(GET_DROPDOWN)
+      store.dispatch(DROPDOWN,language.value)
     });
 
     return {
-      threats,
       valueOfSlider: [0, 500],
-      industries,
-      services,
       statuses,
       sorts,
       language,
       searchQuery,
-      searchedProducts,
+      threats,
       switchLang,
+      industryFilter,
+      abc,
+      getIndustries,
+      getAssets,
+      industries
     };
   },
 });

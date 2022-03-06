@@ -77,7 +77,7 @@
       <Switch :alternate="true" name="Mark as important if industry is:" v-model="threat.important_if_industry_id" />
 
       <Vselect 
-        :options="industries"
+        :options="getIndustries"
         :reduce="(item) => item.id"
         label="name"
         v-model="threat.important_industry"
@@ -95,7 +95,7 @@
   <div class="px-2 mb-2">
     <hr class="opacity-10" />
   </div>
-  <DisplayOption />
+  <DisplayOption :language="selectedLanguage" :industries="getIndustries" :assets="getAssets" />
 </template>
 
 <script lang="ts">
@@ -109,6 +109,7 @@ import DisplayOption from "@/views/Threats/Threat/DisplayOption.vue";
 import Vselect from "vue-select";
 import { computed, defineComponent,onBeforeMount,ref } from 'vue';
 import { useStore } from "vuex";
+import { GET_DROPDOWN } from "@/store/modules/actions.type";
 
 export default defineComponent({
   components: {
@@ -123,13 +124,10 @@ export default defineComponent({
   },
   setup() {   
     const store = useStore() 
-    let selectedLanguage = localStorage.getItem('LANGUAGE')
+    let selectedLanguage = ref(localStorage.getItem('LANGUAGE'))
+    const getIndustries = computed(() => store.state.threat.state.getIndustries)
+    const getAssets = computed(() => store.state.threat.state.getAssets)
     
-    const industries = ref([
-      { id: 1, name: "Industry 1" },
-      { id: 2, name: "Industry 2" },
-    ])
-
     const categories = ref([
       { id: 1, category: "Category 1" },
       { id: 2, category: "Category 2" },
@@ -139,11 +137,16 @@ export default defineComponent({
       store.state.threat.state.threat.image = image
     }
 
+    onBeforeMount(() => {
+      store.dispatch(GET_DROPDOWN)
+    })
+
     return {
       threat: computed(() => store.state.threat.state.threat),
-      industries,
       categories,
       selectedLanguage,
+      getIndustries,
+      getAssets,
       uploadFile,
     }
   },

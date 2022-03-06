@@ -22,15 +22,13 @@ export const industry_module = {
                     console.log(response)
                 })
         },
-        [NEW_INDUSTRY] (context, industry){
-            context.commit(ADD_INDUSTRIES, industry)
+        [NEW_INDUSTRY] (context, data){
+            context.commit(ADD_INDUSTRIES, data)
         },
-        [DELETE_INDUSTRY] (context, {industry, index}){
-            if(industry.id)
-                axios.delete('http://127.0.0.1:8000/api/admin/industries/'+industry.id).then(() => {
-                    context.commit(REMOVE_INDUSTRY, index)
-                })
-            context.commit(REMOVE_INDUSTRY, index)   
+        async [DELETE_INDUSTRY] (context, { id,index }){
+            if(id)
+                await axios.delete('http://127.0.0.1:8000/api/admin/industries/'+id)
+            context.commit(REMOVE_INDUSTRY,index)
         }
     },
     mutations: {
@@ -39,14 +37,10 @@ export const industry_module = {
             
         },
         [ADD_INDUSTRIES] (state, data){
-            console.log(data)
             state.industries.push(data)
         },
-        [REMOVE_INDUSTRY] (state,ind){
-            alert(ind)
-            console.log(state.industries)
-            state.industries = state.industries.filter((industry,index) => index!=ind)
-            console.log(state.industries)
+        [REMOVE_INDUSTRY] (state,index){
+            state.industries.splice(index,1)
         }
     }
 }

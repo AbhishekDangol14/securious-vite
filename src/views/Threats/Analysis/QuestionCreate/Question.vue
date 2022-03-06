@@ -46,7 +46,7 @@
       <div>
         <Switch :alternate="true" class="mt-2" name="Show if industry is" v-model="question.show_if_industry" />
       </div>
-      <Vselect multiple :options="industries" :reduce="(item) => item.id" label="name" v-model="question.industries" />
+      <Vselect multiple :options="getIndustries" :reduce="(item) => item.id" label="name" v-model="question.industries" />
 
       <Switch
         :alternate="true"
@@ -62,7 +62,7 @@
         <Switch :alternate="true" name="Show if using the following assets" />
       </div>
 
-      <VueSelect multiple :options="assets" label="name" v-model="question.assets" />
+      <VueSelect multiple :options="getAssets" label="name" v-model="question.assets" />
 
       <Switch
         :alternate="true"
@@ -88,7 +88,7 @@ import VueSelect from "@/components/Select.vue";
 import { defineComponent } from "@vue/runtime-core";
 import Vselect from "vue-select";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 export default defineComponent ({
   components: {
@@ -101,10 +101,10 @@ export default defineComponent ({
   },
   setup() {
     const store = useStore()
-    const industries = [
-      { id: 1, name: "Insutry 1" },
-      { id: 2, name: "Industry 2" },
-    ]
+    const selectedLanguage = ref(localStorage.getItem('LANGUAGE'))
+    const getIndustries = computed(() => store.state.threat.state.getIndustries)
+    const getAssets = computed(() => store.state.threat.state.getAssets)
+
     const type = [
       { name: "Radio" },
       { name: "Multiple Choice" },
@@ -119,16 +119,12 @@ export default defineComponent ({
       { name: "High" },
     ]
 
-    const assets = [
-      { id:1, name: "Solution" }
-    ]
-
     return {
       question: computed(() => store.state.question.state.question),
-      industries,
+      getIndustries,
       type,
       levels,
-      assets
+      getAssets
     }
   }
 });

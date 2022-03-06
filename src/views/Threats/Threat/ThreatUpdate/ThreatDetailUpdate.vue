@@ -78,7 +78,7 @@
             <Switch :alternate="true" name="Mark as important if industry is:" v-model="threatDetail.important_if_industry_id" />
 
             <Vselect 
-            :options="industries"
+            :options="getIndustries"
             :reduce="(item) => item.id"
             label="name"
             v-model="threatDetail.important_industry_id"
@@ -109,7 +109,7 @@
             </div>
             <div class="mt-3">
             <Vselect 
-                :options="industries"
+                :options="getIndustries"
                 :reduce="(item) => item.id"
                 label="name" 
                 v-model="threatDetail.industry_id" 
@@ -127,7 +127,7 @@
             <div class="mt-3">
                 <VueSelect
                 name="Assets"
-                :options="assets"
+                :options="getAssets"
                 label="name"
                 :data="threatDetail.assets"
                 :multiple="true"
@@ -166,21 +166,13 @@ export default defineComponent({
   setup() {   
     const store = useStore() 
 
-    let selectedLanguage = localStorage.getItem('LANGUAGE')
+    let selectedLanguage = ref(localStorage.getItem('LANGUAGE'))
+    const getIndustries = computed(() => store.state.threat.state.getIndustries)
+    const getAssets = computed(() => store.state.threat.state.getAssets)
     
-    const industries = ref([
-      { id: 1, name: "Industry 1" },
-      { id: 2, name: "Industry 2" },
-    ])
-
     const categories = ref([
       { id: 1, category: "Category 1" },
       { id: 2, category: "Category 2" },
-    ])
-
-    const assets = ref([
-      { id: 1, name: "Asset 1" },
-      { id: 2, name: "Asset 2" },
     ])
 
     function uploadFile(image) {
@@ -189,10 +181,10 @@ export default defineComponent({
 
     return {
       threatDetail: computed(() => store.state.threat.state.editThreat),  
-      industries,
+      getIndustries,
       categories,
       selectedLanguage,
-      assets,
+      getAssets,
       uploadFile,
     }
   },

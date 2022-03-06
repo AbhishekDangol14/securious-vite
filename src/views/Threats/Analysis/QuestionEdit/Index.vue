@@ -118,6 +118,8 @@ import Question from "@/views/Threats/Analysis/QuestionEdit/Question.vue";
 import PossibleAnswers from "@/views/Threats/Analysis/PossibleAnswers/Edit.vue";
 import PossibleRecommendations from "@/views/Threats/Analysis/PossibleRecommendations/Index.vue";
 import DeleteEditSave from "@/views/Threats/Threat/DeleteEditSave.vue";
+import { GET_DROPDOWN } from "@/store/modules/actions.type";
+import { useStore } from "vuex";
 
 export default defineComponent({
   components: {
@@ -128,6 +130,11 @@ export default defineComponent({
     DeleteEditSave,
   },
   setup() {
+    const store = useStore()
+    
+    onBeforeMount(() => {
+      store.dispatch(GET_DROPDOWN)
+    })
     return {};
   },
 });
