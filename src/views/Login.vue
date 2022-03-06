@@ -50,6 +50,7 @@
               @click="toggleShow"
               class="text-grey-grey text-base fa fa-fw field-icon absolute right-3 top-4 fa-eye-slash"
             ></span>
+            <password-meter :password="password" />
           </div>
           <div class="link-text text-right text-base">Passwort vergessen?</div>
           <div class="grid grid-cols-4">
@@ -59,6 +60,7 @@
               LOG IN
             </button>
           </div>
+          {{ error }}
         </form>
         <div class="register flex justify-center space-x-6 pt-6">
           <div class="text-base text-grey-grey">Noch kein Account?</div>
@@ -97,9 +99,12 @@
 import store from "../store";
 import { useForm, useField } from "vee-validate";
 import { LOGIN } from "../store/modules/actions.type";
+import { computed } from "vue";
 import { ref } from "vue";
-
+import PasswordMeter from "vue-simple-password-meter";
 export default {
+  components: { PasswordMeter },
+
   setup() {
     const { handleSubmit } = useForm();
     const login = handleSubmit((values) => {

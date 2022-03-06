@@ -1,6 +1,6 @@
 <template>
   <Layout Title="Company Assets & Solution Partners">
-    <div class="m-10">
+    <div class="m-11">
       <div>
         <div class="grid grid-cols-6 gap-4">
           <div>
