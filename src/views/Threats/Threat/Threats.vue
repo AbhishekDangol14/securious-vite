@@ -1,10 +1,10 @@
 <template>
   <Layout Title="Threat Library">
-    <div class="threats m-11">
+    <div class="threats m-10">
       <div>
-        <div class="grid grid-cols-6 gap-8">
+        <div class="grid grid-cols-6 gap-4">
           <div>
-            <Search type="text" name="Search" placeholder="Search..." v-model="searchQuery" @input="abc" />
+            <Search type="text" name="Search" placeholder="Search..." v-model="searchQuery" @input="industryFilter" />
           </div>
           <div>
             <span class="text-base font-semibold text-grey-grey"
@@ -16,8 +16,9 @@
               :options="getIndustries"
               label="name"
               :reduce="(item) => item.id"
-              @option:selected  ="industryFilter"
-              v-model="industries"
+              @option:selected ="industryFilter"
+              @option:deselected="industryFilter"
+              v-model="searchIndustries"
             />
           </div>
           <div>
@@ -26,7 +27,10 @@
               multiple
               class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
               :options="getAssets"
+              :reduce="(item) => item.id"
+              @option:selected  ="industryFilter"
               label="name"
+              v-model="assets"
             />
           </div>
           <div>
@@ -58,7 +62,7 @@
       </div>
       <div>
         <div class="my-10">
-          <div class="flex gap-1">
+          <div class="flex gap-4">
             <span class="mr-auto text-base"
               ><b class="text-grey-grey">Show:</b>&nbsp;<b
                 class="text-blue-blue"
@@ -72,7 +76,8 @@
               name="ternary-button"
               title="Import/Export Data"
               :faIcon="'fa fa-plus'"
-            ></Button>
+              >Add new threat</Button
+            >
             <Button
               path_name="createThreats"
               name="primary-button"
@@ -127,8 +132,8 @@ export default defineComponent({
     const sorts = ["Name", "Importance", "Recently Added"];
     let language = ref(localStorage.getItem('LANGUAGE'));
     const searchQuery = ref("")
-    const industries = ref()
-    let searchedProducts = ref()
+    const searchIndustries = ref([])
+    const assets = ref([])
 
     const getIndustries = computed(() => store.state.threat.state.getIndustries)
     const getAssets = computed(() => store.state.threat.state.getAssets)
@@ -138,36 +143,25 @@ export default defineComponent({
       store.dispatch(DROPDOWN,language.value)
     }
 
-    function abc(){
+    function industryFilter(){
       store.dispatch({
         type: SEARCH_THREAT,
         searchQuery,
+        searchIndustries,
+        assets,
         language
       })
     }
-
-    function industryFilter(){
-      console.log(industries.value)
-      // searchedProducts.value = computed(() => {
-      //   return threats.value.filter((threat) => {
-      //     return (
-      //       threat.industries
-      //         .indexOf(industries.value) != -1
-      //     );
-      //   });
-      // });
-      // console.log(searchedProducts.value)
-    }
     
-    searchedProducts = computed(() => {
-      return threats.value.filter((threat) => {
-        return (
-          threat.friendlyTranslations[language.value+'.title'].value
-            .toLowerCase()
-            .indexOf(searchQuery.value.toLowerCase()) != -1
-        );
-      });
-    });
+    // searchedProducts = computed(() => {
+    //   return threats.value.filter((threat) => {
+    //     return (
+    //       threat.friendlyTranslations[language.value+'.title'].value
+    //         .toLowerCase()
+    //         .indexOf(searchQuery.value.toLowerCase()) != -1
+    //     );
+    //   });
+    // });
 
     onBeforeMount(async() => {
       store.dispatch(GET_THREATS)
@@ -184,10 +178,10 @@ export default defineComponent({
       threats,
       switchLang,
       industryFilter,
-      abc,
+      assets,
       getIndustries,
       getAssets,
-      industries
+      searchIndustries
     };
   },
 });

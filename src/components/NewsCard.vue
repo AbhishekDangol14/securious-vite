@@ -1,5 +1,5 @@
 <template>
-  <div class="flex" v-if="item">
+  <div class="flex" v-if="item.friendlyTranslations">
     <div
       class="news-card flex h-full flex-col p-4 justify-between shadow-primary rounded bg-white"
     >
@@ -45,7 +45,10 @@ import { DELETE_NEWS } from '@/store/modules/actions.type';
 
 export default defineComponent({
   props: {
-    item: Object,
+    item: {
+      type: Object,
+      required: true
+    },
     selectedLanguage: String,
     index: Number
   },

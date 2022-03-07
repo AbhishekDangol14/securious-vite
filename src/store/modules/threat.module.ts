@@ -74,8 +74,8 @@ export const threat_module = {
         context.commit(SET_DROPDOWN,response.data.data)
       })
     },
-    [SEARCH_THREAT] (context, {searchQuery,language}){
-      context.commit(SET_SEARCH_THREAT,{searchQuery,language})
+    [SEARCH_THREAT] (context, {searchQuery,searchIndustries,searchAssets,language}){
+      context.commit(SET_SEARCH_THREAT,{searchQuery,searchIndustries,searchAssets,language})
     }
   },
   mutations: {
@@ -111,14 +111,18 @@ export const threat_module = {
       })
       console.log(state.industries)
     },
-    [SET_SEARCH_THREAT] (state,{searchQuery,language}) {
+    [SET_SEARCH_THREAT] (state,{searchQuery,searchIndustries,searchAssets,language}) {
       state.searchThreats = state.threats.filter((threat) => {
-        return (
-          threat.friendlyTranslations[language.value+'.title'].value
-            .toLowerCase()
-            .indexOf(searchQuery.value.toLowerCase()) != -1
-        );
+        if (threat.friendlyTranslations[language.value+'.title'].value.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
+          && searchIndustries.value.every(elem => threat.industries.includes(elem))
+        )
+          return true
+        return false
       });
+      // if(searchIndustries.value.every(elem => state.threats.includes(elem)))
+      //   console.log('hello')
+      // else
+      //   console.log('yolo')
     }
   }
 }

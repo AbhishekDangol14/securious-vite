@@ -141,7 +141,7 @@
         </div>
         <div class="mt-3">
           <Vselect
-            :options="industries"
+            :options="getIndustries"
             :reduce="(item) => item.id"
             label="name"
             v-model="threatDetail.industry_id"
@@ -171,7 +171,7 @@
           <div class="mt-3">
             <VueSelect
               name="Assets"
-              :options="assets"
+              :options="getAssets"
               label="name"
               :data="threatDetail.assets"
               :multiple="true"
@@ -182,7 +182,6 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import Button from "@/components/Button.vue";
 import Input from "@/components/Input.vue";
@@ -208,9 +207,6 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-
-    let selectedLanguage = localStorage.getItem("LANGUAGE");
-
     let selectedLanguage = ref(localStorage.getItem('LANGUAGE'))
     const getIndustries = computed(() => store.state.threat.state.getIndustries)
     const getAssets = computed(() => store.state.threat.state.getAssets)
@@ -244,3 +240,7 @@ export default defineComponent({
   top: -2px;
 }
 </style>
+
+
+
+

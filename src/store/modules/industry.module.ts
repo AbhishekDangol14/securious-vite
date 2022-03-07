@@ -1,28 +1,11 @@
-import axios from "axios";
-import {
-  GET_INDUSTRIES,
-  NEW_INDUSTRY,
-  DELETE_INDUSTRY,
-  STORE_INDUSTRY,
-} from "./actions.type";
-import {
-  SET_INDUSTRIES,
-  ADD_INDUSTRIES,
-  REMOVE_INDUSTRY,
-  SAVE_INDUSTRY,
-} from "./mutations.type";
+import axios from 'axios'
+import { GET_INDUSTRIES, NEW_INDUSTRY, DELETE_INDUSTRY, STORE_INDUSTRY } from './actions.type'
+import { SET_INDUSTRIES,ADD_INDUSTRIES, REMOVE_INDUSTRY, SAVE_INDUSTRY, CAN_ADD } from './mutations.type'
 
 export const industry_module = {
-  state: {
-    industries: [],
-  },
-  actions: {
-    [GET_INDUSTRIES](context, state) {
-      axios
-        .get("http://127.0.0.1:8000/api/admin/industries")
-        .then((response) => {
-          context.commit(SET_INDUSTRIES, response);
-        });
+    state: {
+        industries: [],
+        canAdd: true,
     },
     actions: {
         [GET_INDUSTRIES] (context, state){
@@ -46,6 +29,9 @@ export const industry_module = {
         async [DELETE_INDUSTRY] (context, { id,index }){
             if(id)
                 await axios.delete('http://127.0.0.1:8000/api/admin/industries/'+id)
+            else
+                context.commit(CAN_ADD,true)
+            
             context.commit(REMOVE_INDUSTRY,index)
         }
     },
@@ -55,10 +41,13 @@ export const industry_module = {
             
         },
         [ADD_INDUSTRIES] (state, data){
-            state.industries.push(data)
+            state.industries.unshift(data)
         },
         [REMOVE_INDUSTRY] (state,index){
-            state.industries.splice(index,1)
+           state.industries.splice(index,1)
+        },
+        [CAN_ADD] (state,value){
+            state.canAdd = value
         }
     }
 }
