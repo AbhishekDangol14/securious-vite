@@ -30,3 +30,7 @@ export const ADD_EDIT_SOLUTION_PARTNER = "addEditSolutionPartner"
 export const SET_DROPDOWN = "setDropdown"
 export const SET_DROPDOWN_FORMAT = "setDropdownFormat"
 export const SET_SEARCH_THREAT = "setSearchThreat"
+export const SET_LOGINERROR = "setLoginError";
+export const SET_REGISTERERROR = "setRegisterError";
+export const CAN_ADD = "canAdd"
+

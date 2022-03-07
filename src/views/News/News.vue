@@ -67,7 +67,7 @@ export default defineComponent({
     store.dispatch(GET_NEWS);
 
     return {
-      news: computed(() => store.state.news.state.news),
+      news: computed(() => store.state.news.state.getNews),
       selectedLanguage,
     };
   },
