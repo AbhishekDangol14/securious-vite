@@ -1,5 +1,6 @@
 import router from "../../router";
 import axios from "axios";
+import API_URL from "../../common/config";
 import {
   LOGIN,
   LOGOUT,
@@ -24,7 +25,7 @@ export const auth_module = {
   actions: {
     async [LOGIN](context, credentials) {
       await axios
-        .post("http://127.0.0.1:8000/api/login", {
+        .post(API_URL + "/login", {
           email: credentials.email,
           password: credentials.password,
         })
@@ -47,7 +48,7 @@ export const auth_module = {
     async [REGISTER](context, { credentials, role }) {
       credentials.role = role.value;
       await axios
-        .post("http://127.0.0.1:8000/api/register", credentials)
+        .post(API_URL + "/register", credentials)
         .then((response) => {
           localStorage.setItem("USER", JSON.stringify(response.data.data));
           localStorage.setItem("ID_TOKEN_KEY", response.data.data.token);
@@ -65,7 +66,7 @@ export const auth_module = {
       const user = localStorage.getItem("USER");
       const email = user ? JSON.parse(user).email : "";
       await axios
-        .post("http://127.0.0.1:8000/api/verification", {
+        .post(API_URL + "/verification", {
           email: email,
           code: code,
         })
