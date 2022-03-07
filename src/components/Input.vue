@@ -7,7 +7,7 @@
       :class="
         type == 'text'
           ? 'appearance-none border input-field text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'
-          : ''
+          : 'appearance-none border input-field text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'
       "
       :id="id"
       :type="type ? type : 'text'"

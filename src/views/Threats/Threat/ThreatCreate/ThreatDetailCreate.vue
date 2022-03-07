@@ -34,11 +34,12 @@
           >Max Points: <span class="text-blue-blue">0</span>
         </b>
       </div>
-      <div class="mt-4">
+      <div class="mt-4 mb-4">
+        <span class="text-base font-semibold text-grey-grey">Cateogry</span>
         <Vselect
-          name="Category"
           multiple
           placeholder="Please select the company asset"
+          class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
           :options="categories"
           label="category"
           :reduce="(item) => item.id"
@@ -46,7 +47,7 @@
         />
       </div>
       <Input
-        type="text"
+        type="number"
         name="Estimated time (in minutes)"
         placeholder="Please put estimated time in minutes here."
         v-model="threat.estimated_time_in_minutes"
@@ -57,7 +58,10 @@
           <span class="text-blue-blue"> N/A</span>
         </b>
       </div>
-      <CKEditor name="Description" v-model="threat.friendlyTranslations[selectedLanguage].description" />
+      <CKEditor
+        name="Description"
+        v-model="threat.friendlyTranslations[selectedLanguage].description"
+      />
       <Input
         type="text"
         class="mt-3"
@@ -73,23 +77,37 @@
           >Define Importance</h
         >
       </div>
-      <Switch class="mt-2" name="Mark always as important" v-model="threat.is_always_important" />
-      <Switch :alternate="true" name="Mark as important if industry is:" v-model="threat.important_if_industry_id" />
+      <Switch
+        class="mt-2"
+        name="Mark always as important"
+        v-model="threat.is_always_important"
+      />
+      <Switch
+        :alternate="true"
+        name="Mark as important if industry is:"
+        v-model="threat.important_if_industry_id"
+      />
 
-      <Vselect 
+      <Vselect
         :options="industries"
         :reduce="(item) => item.id"
         label="name"
         v-model="threat.important_industry"
+        class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
         multiple
-      />      
+      />
 
       <Switch
         :alternate="true"
         name="Mark as if company size is:"
         class="my-4"
       />
-      <Slider v-model="threat.important_company_size" :max="500" :min="0" :step="1" />
+      <Slider
+        v-model="threat.important_company_size"
+        :max="500"
+        :min="0"
+        :step="1"
+      />
     </div>
   </div>
   <div class="px-2 mb-2">
@@ -107,8 +125,9 @@ import CKEditor from "@/components/CKEditor.vue";
 import Slider from "@vueform/slider";
 import DisplayOption from "@/views/Threats/Threat/DisplayOption.vue";
 import Vselect from "vue-select";
-import { computed, defineComponent,onBeforeMount,ref } from 'vue';
+import { computed, defineComponent, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
+import "vue-select/dist/vue-select.css";
 
 export default defineComponent({
   components: {
@@ -119,21 +138,21 @@ export default defineComponent({
     CKEditor,
     Slider,
     DisplayOption,
-    Vselect
+    Vselect,
   },
-  setup() {   
-    const store = useStore() 
-    let selectedLanguage = localStorage.getItem('LANGUAGE')
-    
+  setup() {
+    const store = useStore();
+    let selectedLanguage = localStorage.getItem("LANGUAGE");
+
     const industries = ref([
       { id: 1, name: "Industry 1" },
       { id: 2, name: "Industry 2" },
-    ])
+    ]);
 
     const categories = ref([
       { id: 1, category: "Category 1" },
       { id: 2, category: "Category 2" },
-    ])
+    ]);
 
     function uploadFile(image) {
       const reader = new FileReader();
@@ -141,9 +160,9 @@ export default defineComponent({
       reader.readAsDataURL(image);
       reader.onloadend = () => {
         rawImg = reader.result;
-        store.state.threat.state.threat.image = rawImg
-        console.log(rawImg)
-      };   
+        store.state.threat.state.threat.image = rawImg;
+        console.log(rawImg);
+      };
     }
 
     return {
@@ -152,8 +171,16 @@ export default defineComponent({
       categories,
       selectedLanguage,
       uploadFile,
-    }
+    };
   },
 });
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>

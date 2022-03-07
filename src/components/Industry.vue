@@ -1,9 +1,9 @@
 <template>
-  <div class="input-box bg-white h-fit ml-8 shadow-xl rounded">
-    <div class="form pl-6">
+  <div class="input-box bg-white h-fit shadow-lg rounded">
+    <div class="form px-6 mx-2">
       <div class="input-title">
-        <div class="text-sm font-semibold pt-3">Title</div>
-        <div class="input-field pt-2 flex">
+        <div class="text-base font-semibold pt-3 text-grey-grey">Title</div>
+        <div class="input-field pt-2 flex space-x-5">
           <Input
             type="text"
             placeholder="Enter Industry"
@@ -14,25 +14,25 @@
         </div>
       </div>
       <div class="input-details">
-        <div class="text-sm font-semibold pt-3">Details Level</div>
+        <div class="text-base font-semibold text-grey-grey">Details Level</div>
         <VSelect
           v-model="details"
           class="style-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
           :options="['Low', 'Mid', 'High']"
         />
       </div>
-      <div class="buttons grid space-y-2 pt-4 pb-4 justify-items-center">
+      <div class="buttons grid space-y-1 pt-4 pb-4 justify-items-center mx-3">
         <button
           @click="deleteIndustry(item, index)"
-          class="border rounded-lg p-2 w-1/2"
+          class="border rounded-lg py-3 p-2 w-4/6 border-grey-grey text-grey-grey text-base border-opacity-20"
         >
-          Delete
+          Delete&nbsp;&nbsp;<i class="fa fa-trash ml-1"></i>
         </button>
         <button
           @click="saveIndustry()"
-          class="text-white-white border rounded-lg bg-primary p-2 w-1/2"
+          class="text-white-white py-3 border rounded-lg bg-primary p-2 w-4/6 y text-base"
         >
-          Save
+          Save&nbsp;&nbsp;<i class="fa fa-save ml-1"></i>
         </button>
       </div>
     </div>

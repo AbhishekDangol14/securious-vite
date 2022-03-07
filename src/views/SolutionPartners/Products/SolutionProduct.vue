@@ -1,5 +1,8 @@
 <template>
-  <div class="border relative border-grey-grey border-opacity-20 py-4 px-4 mb-2 rounded-sm my-5" v-if="product[index].friendlyTranslations" >
+  <div
+    class="border relative border-grey-grey border-opacity-20 py-4 px-4 mb-2 rounded-sm my-5"
+    v-if="product[index].friendlyTranslations"
+  >
     <a
       @click="removeItem(index)"
       class="absolute -top-3 -right-2 cursor-pointer"
@@ -89,11 +92,19 @@
             </div>
           </div>
           <div class="mt-3">
-            <input type="checkbox" id="checkbox" v-model="product[index].is_solution_partner" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              v-model="product[index].is_solution_partner"
+            />
             <label class="ml-2" for="checkbox">Is Solution Partner</label>
           </div>
           <div class="my-2">
-            <input type="checkbox" id="checkbox" v-model="product[index].is_company_asset" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              v-model="product[index].is_company_asset"
+            />
             <label class="ml-2" for="checkbox">Is Company Asset</label>
           </div>
 
@@ -117,7 +128,12 @@
         </div>
         <div class="col-span-2">
           <div class="ml-10">
-            <CKEditor name="Description" v-model="product[index].friendlyTranslations[language].description" />
+            <CKEditor
+              name="Description"
+              v-model="
+                product[index].friendlyTranslations[language].description
+              "
+            />
             <!-- <Switch class="mt-2" name="Mark always as important" /> -->
 
             <Switch
@@ -127,7 +143,12 @@
               v-model="product[index].show_if_company_size"
             />
             <div class="my-8">
-              <Slider v-model="product[index].company_size" :max="500" :min="0" :step="1" />
+              <Slider
+                v-model="product[index].company_size"
+                :max="500"
+                :min="0"
+                :step="1"
+              />
             </div>
             <Switch
               :alternate="true"
@@ -208,12 +229,15 @@ import Datepicker from "@/components/Datepicker.vue";
 import { defineComponent, onBeforeMount } from "@vue/runtime-core";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import { ADD_ASSET_ALERT, DELETE_ASSET_ALERT } from "@/store/modules/mutations.type";
+import {
+  ADD_ASSET_ALERT,
+  DELETE_ASSET_ALERT,
+} from "@/store/modules/mutations.type";
 export default defineComponent({
   props: {
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     removeItem: Function,
   },
@@ -228,13 +252,13 @@ export default defineComponent({
     Datepicker,
   },
   setup(props) {
-    const store = useStore()
+    const store = useStore();
 
-    let productActive = ref(false)
-    let showDetail = ref(false)
-    const asset = ref([])
-    const language = localStorage.getItem('LANGUAGE')
-    
+    let productActive = ref(false);
+    let showDetail = ref(false);
+    const asset = ref([]);
+    const language = localStorage.getItem("LANGUAGE");
+
     function toggleActiveProductTitle() {
       productActive.value = true;
     }
@@ -249,23 +273,28 @@ export default defineComponent({
 
     function addAssetAlert(index) {
       let asset = {
-        id:'',
-        risk_level:'',
-        date:'',
-        link:''
-      }
+        id: "",
+        risk_level: "",
+        date: "",
+        link: "",
+      };
       store.commit({
         type: ADD_ASSET_ALERT,
         asset,
-        index})
+        index,
+      });
     }
 
     function deleteAssetAlert(index) {
-      store.commit(DELETE_ASSET_ALERT,index)
+      store.commit(DELETE_ASSET_ALERT, index);
     }
 
     return {
-      product: computed(() => store.state.solutionPartner.state.solutionPartner.solution_partner_products),
+      product: computed(
+        () =>
+          store.state.solutionPartner.state.solutionPartner
+            .solution_partner_products
+      ),
       productActive,
       showDetail,
       asset,
@@ -278,9 +307,9 @@ export default defineComponent({
       setTitle,
       toggleThisDetail,
       addAssetAlert,
-      deleteAssetAlert
-    }
-  }  
+      deleteAssetAlert,
+    };
+  },
 });
 </script>
 <style>
@@ -290,3 +319,11 @@ export default defineComponent({
 }
 </style>
 <style src="@vueform/slider/themes/default.css"></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>

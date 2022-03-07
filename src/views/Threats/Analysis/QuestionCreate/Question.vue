@@ -1,7 +1,13 @@
 <template>
   <div class="grid grid-cols-2 space-x-8 py-10">
     <div class="basis-1/2">
-      <Input type="text" id="title" name="Question Title" placeholder="New Question" v-model="question.friendlyTranslations['EN'].title" />
+      <Input
+        type="text"
+        id="title"
+        name="Question Title"
+        placeholder="New Question"
+        v-model="question.friendlyTranslations['EN'].title"
+      />
       <div class="flex gap-8 relative">
         <div class="w-2/4">
           <Vselect
@@ -17,7 +23,7 @@
         <div class="w-2/4">
           <Vselect
             name="Detail level"
-             placeholder="Please select level"
+            placeholder="Please select level"
             :options="levels"
             :reduce="(item) => item.name"
             label="name"
@@ -44,9 +50,20 @@
     </div>
     <div class="basis-1/2">
       <div>
-        <Switch :alternate="true" class="mt-2" name="Show if industry is" v-model="question.show_if_industry" />
+        <Switch
+          :alternate="true"
+          class="mt-2"
+          name="Show if industry is"
+          v-model="question.show_if_industry"
+        />
       </div>
-      <Vselect multiple :options="industries" :reduce="(item) => item.id" label="name" v-model="question.industries" />
+      <Vselect
+        multiple
+        :options="industries"
+        :reduce="(item) => item.id"
+        label="name"
+        v-model="question.industries"
+      />
 
       <Switch
         :alternate="true"
@@ -62,7 +79,12 @@
         <Switch :alternate="true" name="Show if using the following assets" />
       </div>
 
-      <VueSelect multiple :options="assets" label="name" v-model="question.assets" />
+      <VueSelect
+        multiple
+        :options="assets"
+        label="name"
+        v-model="question.assets"
+      />
 
       <Switch
         :alternate="true"
@@ -90,21 +112,21 @@ import Vselect from "vue-select";
 import { useStore } from "vuex";
 import { computed } from "vue";
 
-export default defineComponent ({
+export default defineComponent({
   components: {
     Input,
     Switch,
     CKEditor,
     Slider,
     VueSelect,
-    Vselect
+    Vselect,
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
     const industries = [
       { id: 1, name: "Insutry 1" },
       { id: 2, name: "Industry 2" },
-    ]
+    ];
     const type = [
       { name: "Radio" },
       { name: "Multiple Choice" },
@@ -112,25 +134,27 @@ export default defineComponent ({
       { name: "DropDown" },
       { name: "DropDown Multiple Choice" },
       { name: "Slider" },
-    ]
-    const levels = [
-      { name: "Low" },
-      { name: "Medium" },
-      { name: "High" },
-    ]
+    ];
+    const levels = [{ name: "Low" }, { name: "Medium" }, { name: "High" }];
 
-    const assets = [
-      { id:1, name: "Solution" }
-    ]
+    const assets = [{ id: 1, name: "Solution" }];
 
     return {
       question: computed(() => store.state.question.state.question),
       industries,
       type,
       levels,
-      assets
-    }
-  }
+      assets,
+    };
+  },
 });
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>

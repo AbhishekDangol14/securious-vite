@@ -4,27 +4,27 @@
     :class="name ? `${name + ' button'}` : 'button primary-button'"
     :to="{ name: path_name, params: { id: route_id } }"
   >
-  <span class="self-center">{{ title }}</span>
+    <span class="self-center text-base">{{ title }}</span>
     <i v-if="faIcon" :class="faIcon"></i>
     <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
   </router-link>
- 
+
   <router-link
     v-else-if="path_name"
     :class="name ? `${name + ' button'}` : 'button primary-button'"
     :to="{ name: path_name }"
   >
-    <span class="self-center">{{ title }}</span>
+    <span class="self-center text-base">{{ title }}</span>
     <i v-if="faIcon" :class="faIcon"></i>
     <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
   </router-link>
-  
+
   <button
     v-else
     :class="name ? `${name + ' button'}` : 'button primary-button'"
     @click.prevent="save"
   >
-    <span class="self-center">{{ title }}</span>
+    <span class="self-center text-base">{{ title }}</span>
     <i v-if="faIcon" :class="faIcon"></i>
     <img v-if="icon" class="w-5 h-5 self-center" :src="icon" alt="icon" />
   </button>
@@ -55,7 +55,7 @@ export default defineComponent({
 <style scoped>
 .button {
   border: 1px solid;
-  height: 45px;
+  height: 48px;
   min-width: 3rem;
   display: flex;
   justify-content: center;
@@ -68,7 +68,7 @@ export default defineComponent({
 }
 .edit-button {
   border: 1px solid;
-  height: 45px;
+  height: 48px;
   min-width: 3rem;
   display: flex;
   justify-content: center;

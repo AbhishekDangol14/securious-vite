@@ -1,8 +1,8 @@
 <template>
   <Layout Title="Threat Library">
-    <div class="threats m-10">
+    <div class="threats m-11">
       <div>
-        <div class="grid grid-cols-6 gap-4">
+        <div class="grid grid-cols-6 gap-8">
           <div>
             <Search type="text" name="Search" placeholder="Search..." />
           </div>
@@ -69,15 +69,13 @@
               name="ternary-button"
               title="Import/Export Data"
               :faIcon="'fa fa-plus'"
-              >Add new threat</Button
-            >
+            ></Button>
             <Button
               path_name="createThreats"
               name="primary-button"
               title="Add new threat"
               :faIcon="'fa fa-plus'"
-              >Add new threat</Button
-            >
+            ></Button>
             <LanguageSelector />
           </div>
         </div>

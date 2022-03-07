@@ -1,7 +1,16 @@
 <template>
-  <div v-if="question.friendlyTranslations" class="grid grid-cols-2 space-x-8 py-10">
+  <div
+    v-if="question.friendlyTranslations"
+    class="grid grid-cols-2 space-x-8 py-10"
+  >
     <div class="basis-1/2">
-      <Input id="title" name="Question Title" placeholder="New Question" type="text" v-model="question.friendlyTranslations[language+'.title'].value" />
+      <Input
+        id="title"
+        name="Question Title"
+        placeholder="New Question"
+        type="text"
+        v-model="question.friendlyTranslations[language + '.title'].value"
+      />
       <div class="flex gap-8 relative">
         <div class="w-2/4">
           <Vselect
@@ -26,11 +35,19 @@
       </div>
       <div class="mt-3">
         <span class="text-base font-semibold text-grey-grey">Description</span>
-        <CKEditor v-model="question.friendlyTranslations[language+'.description'].value" />
+        <CKEditor
+          v-model="
+            question.friendlyTranslations[language + '.description'].value
+          "
+        />
       </div>
       <div class="mt-3">
         <span class="text-base font-semibold text-grey-grey">Explanation</span>
-        <CKEditor v-model="question.friendlyTranslations[language+'.explanation'].value" />
+        <CKEditor
+          v-model="
+            question.friendlyTranslations[language + '.explanation'].value
+          "
+        />
       </div>
       <Input
         class="mt-3"
@@ -43,9 +60,18 @@
     </div>
     <div class="basis-1/2">
       <div>
-        <Switch class="mt-2" name="Show if industry is" v-model="question.show_if_industry" />
+        <Switch
+          class="mt-2"
+          name="Show if industry is"
+          v-model="question.show_if_industry"
+        />
       </div>
-      <Vselect :multiple="true" :options="industries" label="name" v-model="question.industries" />
+      <Vselect
+        :multiple="true"
+        :options="industries"
+        label="name"
+        v-model="question.industries"
+      />
 
       <Switch
         :alternate="true"
@@ -58,10 +84,19 @@
       </div>
 
       <div class="my-2">
-        <Switch :alternate="true" name="Show if using the following assets" v-model="question.show_if_using_asset" />
+        <Switch
+          :alternate="true"
+          name="Show if using the following assets"
+          v-model="question.show_if_using_asset"
+        />
       </div>
 
-      <VueSelect :multiple="true" :options="assets" label="name" v-model="question.assets" />
+      <VueSelect
+        :multiple="true"
+        :options="assets"
+        label="name"
+        v-model="question.assets"
+      />
 
       <Switch
         :alternate="true"
@@ -137,25 +172,25 @@ import { computed, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
 import { EDIT_QUESTION } from "@/store/modules/actions.type";
 
-export default defineComponent ({
+export default defineComponent({
   components: {
     Input,
     Switch,
     CKEditor,
     Slider,
     VueSelect,
-    Vselect
+    Vselect,
   },
   setup() {
-    const store = useStore()
-    const route = useRoute()
-    const language = localStorage.getItem('LANGUAGE')
-    
+    const store = useStore();
+    const route = useRoute();
+    const language = localStorage.getItem("LANGUAGE");
+
     onBeforeMount(() => {
-      store.dispatch(EDIT_QUESTION,route.params.id)
-    })
+      store.dispatch(EDIT_QUESTION, route.params.id);
+    });
     return {
-      question: computed(() => store.state.question.state.editQuestion ),
+      question: computed(() => store.state.question.state.editQuestion),
       language,
       valueOfSlider: [0, 500],
 
@@ -193,3 +228,11 @@ export default defineComponent ({
 });
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>

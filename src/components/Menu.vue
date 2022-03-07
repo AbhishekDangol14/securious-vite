@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-2 pl-4 pb-2">
+  <div class="pt-2 pl-4" :class="{ 'menu-item': $route.name == item.link }">
     <div :class="{ 'p-3': isChild }" v-if="item.items">
       <a href="#" v-text="item.label"></a>
       <Menu
@@ -9,9 +9,9 @@
         :is-child="true"
       />
     </div>
-    <div v-else :class="{ 'p-3': isChild }">
-      <div class="flex text-grey-grey space-x-2 text-base items-center pl-2">
-        <div>
+    <div v-else :class="{ 'p-3': isChild }" class="pb-2">
+      <div class="flex text-grey-grey text-15 items-center pl-2">
+        <div class="pr-2">
           <img class="" src="../assets/components/alarm.svg" />
         </div>
         <router-link

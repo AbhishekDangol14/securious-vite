@@ -1,6 +1,6 @@
 <template>
   <Layout Title="Company Assets & Solution Partners">
-    <div class="m-10">
+    <div class="m-11">
       <div>
         <div class="grid grid-cols-6 gap-4">
           <div>
@@ -50,7 +50,11 @@
         </div>
       </div>
       <div class="flex flex-row gap-8 flex-wrap">
-        <SolutionPartner v-for="(item) in products" :item="item" v-bind:key="item" />
+        <SolutionPartner
+          v-for="item in products"
+          :item="item"
+          v-bind:key="item"
+        />
       </div>
       <div class="grid place-items-center my-10">
         <Button
@@ -73,7 +77,7 @@ import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import { useStore } from "vuex";
 import { GET_SOLUTION_PARTNER } from "@/store/modules/actions.type";
-import SolutionPartner from "@/components/SolutionPartners/SolutionPartnerCard.vue"
+import SolutionPartner from "@/components/SolutionPartners/SolutionPartnerCard.vue";
 
 export default defineComponent({
   components: {
@@ -82,20 +86,22 @@ export default defineComponent({
     VSelect,
     // Switch,
     Search,
-    SolutionPartner
+    SolutionPartner,
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
     var options = [
       { id: 1, name: "Example 1" },
       { id: 2, name: "Example 2" },
-    ]
+    ];
     onBeforeMount(() => {
-      store.dispatch(GET_SOLUTION_PARTNER)
-    })
-    return { 
-      products: computed(() => store.state.solutionPartner.state.solutionPartners),
-      options
+      store.dispatch(GET_SOLUTION_PARTNER);
+    });
+    return {
+      products: computed(
+        () => store.state.solutionPartner.state.solutionPartners
+      ),
+      options,
     };
   },
 });
@@ -106,4 +112,3 @@ export default defineComponent({
   min-height: 45px;
 }
 </style>
-<style src="@vueform/slider/themes/default.css"></style>
