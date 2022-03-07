@@ -8,9 +8,14 @@ import {
   VERIFY,
   VERIFY_EMAIL_CODE,
 } from "./actions.type";
-import { SET_AUTH, PURGE_AUTH, SET_ERROR } from "./mutations.type";
+import {
+  SET_AUTH,
+  PURGE_AUTH,
+  SET_LOGINERROR,
+  SET_REGISTERERROR,
+} from "./mutations.type";
 import popupService from "../../service/popup.service";
-const { onError } = popupService();
+const { onError, onRegisterError } = popupService();
 export const auth_module = {
   state: {
     user: {},
@@ -19,14 +24,17 @@ export const auth_module = {
   actions: {
     async [LOGIN](context, credentials) {
       await axios
-        .post("http://127.0.0.1:8000/api/login", credentials.values)
+        .post("http://127.0.0.1:8000/api/login", {
+          email: credentials.email,
+          password: credentials.password,
+        })
         .then((response) => {
           console.log("response " + response);
           context.commit(SET_AUTH, response);
           router.push("/dashboard");
         })
         .catch((error) => {
-          context.commit(SET_ERROR, error);
+          context.commit(SET_LOGINERROR, error);
         });
     },
     [LOGOUT](context) {
@@ -50,7 +58,7 @@ export const auth_module = {
           router.push("/verify");
         })
         .catch((error) => {
-          context.commit(SET_ERROR, error);
+          context.commit(SET_REGISTERERROR, error);
         });
     },
     async [VERIFY](context, code) {
@@ -89,10 +97,15 @@ export const auth_module = {
       localStorage.clear();
       router.push("/login");
     },
-    [SET_ERROR](state, error) {
-      onError(error);
+    [SET_REGISTERERROR](state, error) {
+      onRegisterError(error);
       if (error.response) {
-        state.error = error.response.data;
+        state.error = error.response.data.errors;
+      }
+    },
+    [SET_LOGINERROR](state, error) {
+      if (error.response) {
+        state.error = error.response.data.message;
       }
     },
   },

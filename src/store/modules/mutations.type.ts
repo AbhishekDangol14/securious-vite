@@ -27,4 +27,5 @@ export const SET_RECOMMENDATION_LIST = "setRecommendationList";
 export const SET_EDIT_QUESTION = "setEditQuestion";
 export const SET_EDIT_SOLUTION_PARTNER = "setEditSolutionPartner";
 export const ADD_EDIT_SOLUTION_PARTNER = "addEditSolutionPartner";
-export const SET_ERROR = "setError";
+export const SET_LOGINERROR = "setLoginError";
+export const SET_REGISTERERROR = "setRegisterError";

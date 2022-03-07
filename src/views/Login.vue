@@ -10,49 +10,30 @@
       </div>
       <div class="login-form flex flex-col">
         <div class="form-title">Einloggen</div>
-        <form class="flex flex-col space-y-4 mt-4" @submit.prevent="login">
-          <input
-            class="inp rounded-none p-2 text-xs"
-            name="email"
-            v-model="email"
-            :error="emailError"
-            type="email"
-            placeholder="Ihre@email.com"
-            required
-          />
 
-          <div class="relative flex flex-col">
-            <input
-              v-if="showPassword"
-              class="inp rounded-none p-2 text-xs"
-              name="password"
-              v-model="password"
-              :error="passwordError"
-              type="text"
-              placeholder="Passwort"
-            />
-            <input
-              v-else
-              class="inp rounded-none p-2 text-xs"
-              name="password"
-              v-model="password"
-              :error="passwordError"
-              type="password"
-              placeholder="Passwort"
-            />
-            <span
-              @click="toggleShow"
-              v-if="showPassword"
-              class="text-grey-grey text-base fa fa-fw field-icon absolute right-3 top-4 fa-eye"
-            ></span>
-            <span
-              v-else
-              @click="toggleShow"
-              class="text-grey-grey text-base fa fa-fw field-icon absolute right-3 top-4 fa-eye-slash"
-            ></span>
-            <password-meter :password="password" />
-          </div>
+        <Form
+          class="flex flex-col space-y-3 mt-4"
+          @submit="handleSubmit"
+          :validation-schema="schema"
+        >
+          <Field
+            class="inp rounded-none p-2 text-xs"
+            id="email"
+            name="email"
+            type="email"
+          />
+          <ErrorMessage name="email" class="text-base text-red-red" />
+          <Field
+            class="inp rounded-none p-2 text-xs"
+            id="password"
+            name="password"
+            type="password"
+          />
+          <ErrorMessage name="password" class="text-base text-red-red" />
           <div class="link-text text-right text-base">Passwort vergessen?</div>
+          <span class="text-base text-red-red" v-if="backendError.length">{{
+            backendError
+          }}</span>
           <div class="grid grid-cols-4">
             <button
               class="login-btn col-start-2 col-end-4 rounded-lg text-white-white text-md border-2 border-grey-grey border-opacity-40"
@@ -60,8 +41,8 @@
               LOG IN
             </button>
           </div>
-          {{ error }}
-        </form>
+        </Form>
+
         <div class="register flex justify-center space-x-6 pt-6">
           <div class="text-base text-grey-grey">Noch kein Account?</div>
           <div class="text-base link-text font-semibold">
@@ -94,49 +75,39 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import store from "../store";
-import { useForm, useField } from "vee-validate";
+// import { useForm,useField } from 'vee-validate'
+import { Field, Form, ErrorMessage, useField } from "vee-validate";
+import * as Yup from "yup";
 import { LOGIN } from "../store/modules/actions.type";
 import { computed } from "vue";
-import { ref } from "vue";
-import PasswordMeter from "vue-simple-password-meter";
 export default {
-  components: { PasswordMeter },
-
+  components: {
+    Field,
+    Form,
+    ErrorMessage,
+  },
   setup() {
-    const { handleSubmit } = useForm();
-    const login = handleSubmit((values) => {
-      store.dispatch({
-        type: LOGIN,
-        values,
-      });
+    const schema = Yup.object().shape({
+      email: Yup.string().email().required().label("Email Address"),
+      password: Yup.string().min(5).required().label("Your Password"),
     });
 
-    const email = useField("email");
-
-    const password = useField("password");
-
-    const showPassword = ref(false);
-
-    function toggleShow() {
-      showPassword.value = !showPassword.value;
+    function handleSubmit(values) {
+      store.dispatch(LOGIN, values);
     }
 
+    const backendError = computed(() => store.state.auth.state.error);
+
     return {
-      toggleShow,
-      showPassword,
-      login,
-      email: email.value,
-      password: password.value,
-      emailError: email.errorMessage,
-      passwordError: password.errorMessage,
+      backendError,
+      schema,
+      handleSubmit,
     };
   },
 };
 </script>
-
 <style scoped>
 @media (max-width: 576px) {
   .right_content {

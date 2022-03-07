@@ -23,7 +23,9 @@
             type="email"
             placeholder="Ihre@email.com"
           />
-          <span class="text-lg">{{ emailError }}</span>
+          <span class="text-base text-red-red" v-if="mailError.email">{{
+            mailError.email[0]
+          }}</span>
           <div class="relative flex flex-col">
             <input
               v-if="showPassword"
@@ -55,7 +57,6 @@
             ></span>
           </div>
 
-          <span class="text-lg">{{ passwordError }}</span>
           <div class="text-base text-grey-grey pt-5 pb-6">
             Mit der Anmeldung stimmen Sie
             <router-link class="link-text font-normal" to="/login"
@@ -116,7 +117,7 @@
 <script lang="ts">
 import { useForm, useField } from "vee-validate";
 import { REGISTER } from "@/store/modules/actions.type";
-import { defineComponent, onBeforeMount } from "vue";
+import { defineComponent, onBeforeMount, computed } from "vue";
 import store from "@/store";
 import { propsToAttrMap } from "@vue/shared";
 import registerService from "@/service/register.service";
@@ -150,8 +151,10 @@ export default defineComponent({
     onBeforeMount(() => {
       props.slug ? getRole(props.slug) : getRole();
     });
+    const mailError = computed(() => store.state.auth.state.error);
 
     return {
+      mailError,
       showPassword,
       toggleShow,
       register,
