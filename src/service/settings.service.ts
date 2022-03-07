@@ -1,17 +1,17 @@
-import axios from 'axios'
-import { ref } from 'vue'
+import axios from "axios";
+import { ref } from "vue";
+import API_URL from "../common/config";
 
 export default function settingsService() {
-    const data = ref({})
+  const data = ref({});
 
-    const getCode = async() => {
-        const response = await axios.post('http://127.0.0.1:8000/api/admin/register/google2fa')
-        data.value = response.data
-    }
+  const getCode = async () => {
+    const response = await axios.post(API_URL + "/admin/register/google2fa");
+    data.value = response.data;
+  };
 
-    return {
-        data,
-        getCode
-
-    }
+  return {
+    data,
+    getCode,
+  };
 }

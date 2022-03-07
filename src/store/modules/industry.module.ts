@@ -5,6 +5,7 @@ import {
   DELETE_INDUSTRY,
   STORE_INDUSTRY,
 } from "./actions.type";
+import API_URL from "../../common/config";
 import {
   SET_INDUSTRIES,
   ADD_INDUSTRIES,
@@ -18,39 +19,30 @@ export const industry_module = {
   },
   actions: {
     [GET_INDUSTRIES](context, state) {
-      axios
-        .get("http://127.0.0.1:8000/api/admin/industries")
-        .then((response) => {
-          context.commit(SET_INDUSTRIES, response);
-        });
+      axios.get(API_URL + "/admin/industries").then((response) => {
+        context.commit(SET_INDUSTRIES, response);
+      });
     },
     [STORE_INDUSTRY](context, industry) {
       if (industry.id)
         axios
-          .put(
-            "http://127.0.0.1:8000/api/admin/industries/" + industry.id,
-            industry
-          )
+          .put(API_URL + "/admin/industries/" + industry.id, industry)
           .then((response) => {
             console.log(response);
           });
       else
-        axios
-          .post("http://127.0.0.1:8000/api/admin/industries", industry)
-          .then((response) => {
-            console.log(response);
-          });
+        axios.post(API_URL + "/admin/industries", industry).then((response) => {
+          console.log(response);
+        });
     },
     [NEW_INDUSTRY](context, industry) {
       context.commit(ADD_INDUSTRIES, industry);
     },
     [DELETE_INDUSTRY](context, { industry, index }) {
       if (industry.id)
-        axios
-          .delete("http://127.0.0.1:8000/api/admin/industries/" + industry.id)
-          .then(() => {
-            context.commit(REMOVE_INDUSTRY, index);
-          });
+        axios.delete(API_URL + "/admin/industries/" + industry.id).then(() => {
+          context.commit(REMOVE_INDUSTRY, index);
+        });
       context.commit(REMOVE_INDUSTRY, index);
     },
   },
