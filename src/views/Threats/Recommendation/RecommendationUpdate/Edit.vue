@@ -235,3 +235,11 @@ export default defineComponent({
   min-height: 45px;
 }
 </style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>

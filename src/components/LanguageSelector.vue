@@ -1,69 +1,39 @@
 <template>
-  <div>
-    <VSelect
-      class="language-chooser text-base text-black focus:bg-white bg-secondary-blue border-blue-100 leading-tight"
-      :id="id"
-      :placeholder="placeholder"
-      :options="options"
-      :label="label"
-      v-model="value"
-      @option:selecting="switchLang"
-    />
+  <div class="cursor-pointer">
+    <div
+      class="pt-2.5 align-middle pb-2 px-6 rounded-md outline-none hover:border-grey-grey border-transparent border hover:border-opacity-20"
+    >
+      <a
+        @click="toggleSelector"
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="text-blue-blue font-semibold text-base"
+        data-toggle="dropdown"
+        role="button"
+      >
+        <span class="control-label"> DE </span>
+        <i class="fa fa-angle-down ml-1 text-grey-grey"></i>
+      </a>
+    </div>
+    <div v-if="selector"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineEmits, ref } from "vue";
-import VSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
+import { defineComponent } from "vue";
+import { ref } from "vue";
 
 export default defineComponent({
-  components: {
-    VSelect,
-  },
-  props: {
-    id: String,
-    placeholder: String,
-    name: String,
-    label: String,
-    modelValue: String
-  },
-  setup(props,{emit}) {
-    const options = ["DE", "EN"];
-    const value = computed({
-      get() {
-        return props.modelValue;
-      },
-      set(value) {
-        emit("update:modelValue", value);
-      },
-    })
-    
-    function switchLang(value){
-      emit("option:selecting", value)
-    }
+  setup() {
+    const selector = ref(false);
 
+    function toggleSelector() {
+      selector.value = !selector.value;
+    }
     return {
-      value,
-      options,
-      switchLang,
+      selector,
+      toggleSelector,
     };
   },
 });
 </script>
-
-<style scoped>
-.language-chooser .vs__dropdown-toggle {
-  height: auto;
-  min-height: 35px;
-}
-.vs--searchable .vs__dropdown-toggle {
-  border-radius: 50px;
-  padding: 8px 20px;
-}
-.vs__selected {
-  font-size: 14px;
-  font-weight: 600;
-  color: #055ca8;
-}
-</style>

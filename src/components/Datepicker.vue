@@ -5,7 +5,7 @@
     </label>
 
     <datepicker
-      :class="'appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'"
+      :class="'datepicker appearance-none border h-10 text-base text-black focus:border-grey-grey focus:bg-white bg-secondary-blue border-blue-100 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline'"
       v-model="value"
     />
     <p class="text-green-green text-base pl-1">{{ message }}</p>
@@ -31,11 +31,11 @@ export default defineComponent({
     modelValue: String,
   },
   emits: ["update:modelValue"],
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     return {
       value: computed({
         get() {
-          return new Date()
+          return new Date();
         },
         set(value) {
           emit("update:modelValue", value);
@@ -46,4 +46,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style>
+.datepicker {
+  height: 45px;
+}
+</style>

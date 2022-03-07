@@ -1,29 +1,37 @@
 <template>
-  <div class="sidebar bg-white shadow-sidebar-shadow h-screen" v-if="menu">
+  <div
+    class="sidebar bg-white shadow-sidebar-shadow h-screen fixed"
+    v-if="menu"
+  >
     <div class="logo pt-4 w-56 pl-3 pb-3">
       <img src="../assets/views/securious-logo.svg" />
     </div>
     <div class="border-b border-grey-grey border-opacity-20 my-6"></div>
     <Menu v-for="item in menu" :item="item" v-bind:key="item" />
     <div v-if="role == 'Admin'">
-      <div class="border-b border-grey-grey border-opacity-20 pt-4"></div>
-      <div class="pt-4 pl-6 flex-cols space-y-4">
-        <div class="flex text-grey-grey space-x-2 pb-3 text-base">
-          <img src="../assets/components/user.svg" /><router-link
-            :to="{ name: 'users' }"
-            >Users</router-link
-          >
+      <div class="border-b border-grey-grey border-opacity-20 pt-2"></div>
+      <div :class="{ 'menu-item': $route.name == 'users' }">
+        <div class="pt-2 pl-6 mt-1 pb-2 flex-cols space-y-2">
+          <div class="flex text-grey-grey space-x-2 text-base items-center">
+            <div>
+              <img src="../assets/components/user.svg" />
+            </div>
+            <router-link :to="{ name: 'users' }">Users</router-link>
+          </div>
         </div>
-        <div class="flex text-grey-grey space-x-2 text-base pb-3">
-          <img src="../assets/components/setting.svg" /><router-link
-            :to="{ name: 'settings' }"
-            >Setting</router-link
-          >
+      </div>
+      <div :class="{ 'menu-item': $route.name == 'settings' }">
+        <div class="pt-2 pl-6 mt-1 pb-2 flex-cols space-y-2">
+          <div class="flex text-grey-grey space-x-2 text-base items-center">
+            <div>
+              <img src="../assets/components/setting.svg" />
+            </div>
+            <router-link :to="{ name: 'settings' }">Setting</router-link>
+          </div>
         </div>
-        <button
-          class="flex text-grey-grey space-x-2 text-base pb-3"
-          @click="logout"
-        >
+      </div>
+      <div class="pt-2 pl-6 flex-cols space-y-2">
+        <button class="flex text-grey-grey space-x-2 text-base" @click="logout">
           <img src="../assets/components/logout.svg" />
           <div>Logout</div>
         </button>
@@ -89,8 +97,23 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
+<style>
 .sidebar {
   width: 244px;
+}
+.menu-item {
+  color: #055ca8 !important;
+  background-color: #e6eff6 !important;
+  border-left: 4px solid #055ca8;
+}
+
+.menu-item > div > div > div > img {
+  filter: invert(18%) sepia(70%) saturate(3298%) hue-rotate(195deg)
+    brightness(100%) contrast(96%);
+  height: 15px;
+  width: 15px;
+}
+.menu-item > div > div {
+  color: #055ca8 !important;
 }
 </style>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1472.992" height="1534" viewBox="0 0 1472.992 1534">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.922" y1="0.079" x2="0" y2="0.925" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1492e6"/>
+      <stop offset="0.1" stop-color="#2592d1"/>
+      <stop offset="0.2" stop-color="#2089cb"/>
+      <stop offset="0.3" stop-color="#1c7fc5"/>
+      <stop offset="0.4" stop-color="#1775bf"/>
+      <stop offset="0.5" stop-color="#136cba"/>
+      <stop offset="0.6" stop-color="#1062b3"/>
+      <stop offset="0.7" stop-color="#0e58ac"/>
+      <stop offset="0.8" stop-color="#0d4ea4"/>
+      <stop offset="0.9" stop-color="#0c449d"/>
+      <stop offset="1" stop-color="#0b3a96"/>
+    </linearGradient>
+  </defs>
+  <g id="background" transform="translate(-664 217)">
+    <g id="Background-2" data-name="Background" transform="translate(801.068 -0.129)">
+      <rect id="Rectangle_650" data-name="Rectangle 650" width="1039.5" height="1080" transform="translate(79.932 0.129)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Ellipse_59" data-name="Ellipse 59" transform="translate(1483 883)" fill="none" stroke="#fff" stroke-width="60" opacity="0.1">
+      <circle cx="217" cy="217" r="217" stroke="none"/>
+      <circle cx="217" cy="217" r="187" fill="none"/>
+    </g>
+    <g id="Ellipse_62" data-name="Ellipse 62" transform="translate(664 -217)" fill="none" stroke="#fff" stroke-width="60" opacity="0.1">
+      <circle cx="217" cy="217" r="217" stroke="none"/>
+      <circle cx="217" cy="217" r="187" fill="none"/>
+    </g>
+    <g id="Ellipse_60" data-name="Ellipse 60" transform="translate(1574 972)" fill="none" stroke="#fff" stroke-width="40" opacity="0.1">
+      <circle cx="126" cy="126" r="126" stroke="none"/>
+      <circle cx="126" cy="126" r="106" fill="none"/>
+    </g>
+    <g id="Path_564" data-name="Path 564" transform="translate(755 -128)" fill="none" opacity="0.1">
+      <path d="M126,0A126,126,0,1,1,0,126,126,126,0,0,1,126,0Z" stroke="none"/>
+      <path d="M 126 100 C 111.6636047363281 100 100 111.6636047363281 100 126 C 100 140.3363952636719 111.6636047363281 152 126 152 C 140.3363952636719 152 152 140.3363952636719 152 126 C 152 111.6636047363281 140.3363952636719 100 126 100 M 126 0 C 195.5878601074219 0 252 56.41213989257813 252 126 C 252 195.5878601074219 195.5878601074219 252 126 252 C 56.41213989257813 252 0 195.5878601074219 0 126 C 0 56.41213989257813 56.41213989257813 0 126 0 Z" stroke="none" fill="#fff"/>
+    </g>
+    <rect id="Rectangle_667" data-name="Rectangle 667" width="10" height="563" transform="translate(1219.921 748.224) rotate(45)" fill="#fff" opacity="0.1"/>
+    <rect id="Rectangle_671" data-name="Rectangle 671" width="10" height="563" transform="translate(2129.921 -91.776) rotate(45)" fill="#fff" opacity="0.1"/>
+    <rect id="Rectangle_668" data-name="Rectangle 668" width="10" height="563" transform="translate(1160.921 863.224) rotate(45)" fill="#fff" opacity="0.1"/>
+    <rect id="Rectangle_670" data-name="Rectangle 670" width="10" height="563" transform="translate(2100.921 -5.776) rotate(45)" fill="#fff" opacity="0.1"/>
+    <rect id="Rectangle_669" data-name="Rectangle 669" width="10" height="563" transform="translate(1130.921 774.224) rotate(45)" fill="#fff" opacity="0.1"/>
+    <rect id="Rectangle_672" data-name="Rectangle 672" width="10" height="563" transform="translate(2070.921 -94.776) rotate(45)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_63" data-name="Ellipse 63" cx="35" cy="35" r="35" transform="translate(1227 859)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_107" data-name="Ellipse 107" cx="5" cy="5" r="5" transform="translate(1069 640)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_111" data-name="Ellipse 111" cx="5" cy="5" r="5" transform="translate(1182 384)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_120" data-name="Ellipse 120" cx="5" cy="5" r="5" transform="translate(1580 201)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_105" data-name="Ellipse 105" cx="2.5" cy="2.5" r="2.5" transform="translate(1160 987)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_116" data-name="Ellipse 116" cx="2.5" cy="2.5" r="2.5" transform="translate(1115 632)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_109" data-name="Ellipse 109" cx="2.5" cy="2.5" r="2.5" transform="translate(1177 703)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_117" data-name="Ellipse 117" cx="2.5" cy="2.5" r="2.5" transform="translate(1132 348)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_112" data-name="Ellipse 112" cx="2.5" cy="2.5" r="2.5" transform="translate(1755 540)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_115" data-name="Ellipse 115" cx="2.5" cy="2.5" r="2.5" transform="translate(1710 185)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_122" data-name="Ellipse 122" cx="2.5" cy="2.5" r="2.5" transform="translate(1557 371)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_121" data-name="Ellipse 121" cx="2.5" cy="2.5" r="2.5" transform="translate(1746 64)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_110" data-name="Ellipse 110" cx="2.5" cy="2.5" r="2.5" transform="translate(1024 434)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_118" data-name="Ellipse 118" cx="2.5" cy="2.5" r="2.5" transform="translate(979 79)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_108" data-name="Ellipse 108" cx="2.5" cy="2.5" r="2.5" transform="translate(965 788)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_119" data-name="Ellipse 119" cx="2.5" cy="2.5" r="2.5" transform="translate(920 433)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_104" data-name="Ellipse 104" cx="5" cy="5" r="5" transform="translate(1317 1051)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_113" data-name="Ellipse 113" cx="5" cy="5" r="5" transform="translate(1843 437)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_103" data-name="Ellipse 103" cx="5" cy="5" r="5" transform="translate(1423 977)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_114" data-name="Ellipse 114" cx="5" cy="5" r="5" transform="translate(1821 661)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_64" data-name="Ellipse 64" cx="118" cy="118" r="118" transform="translate(763 512)" fill="#fff" opacity="0.1"/>
+    <circle id="Ellipse_65" data-name="Ellipse 65" cx="74" cy="74" r="74" transform="translate(1355 78)" fill="#fff" opacity="0.1"/>
+  </g>
+</svg>

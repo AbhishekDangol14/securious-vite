@@ -1,7 +1,13 @@
 <template>
   <div class="grid grid-cols-2 space-x-8 py-10">
     <div class="basis-1/2">
-      <Input type="text" id="title" name="Question Title" placeholder="New Question" v-model="question.friendlyTranslations['EN'].title" />
+      <Input
+        type="text"
+        id="title"
+        name="Question Title"
+        placeholder="New Question"
+        v-model="question.friendlyTranslations['EN'].title"
+      />
       <div class="flex gap-8 relative">
         <div class="w-2/4">
           <Vselect
@@ -17,7 +23,7 @@
         <div class="w-2/4">
           <Vselect
             name="Detail level"
-             placeholder="Please select level"
+            placeholder="Please select level"
             :options="levels"
             :reduce="(item) => item.name"
             label="name"
@@ -44,7 +50,12 @@
     </div>
     <div class="basis-1/2">
       <div>
-        <Switch :alternate="true" class="mt-2" name="Show if industry is" v-model="question.show_if_industry" />
+        <Switch
+          :alternate="true"
+          class="mt-2"
+          name="Show if industry is"
+          v-model="question.show_if_industry"
+        />
       </div>
       <Vselect multiple :options="getIndustries" :reduce="(item) => item.id" label="name" v-model="question.industries" />
 
@@ -90,14 +101,14 @@ import Vselect from "vue-select";
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
 
-export default defineComponent ({
+export default defineComponent({
   components: {
     Input,
     Switch,
     CKEditor,
     Slider,
     VueSelect,
-    Vselect
+    Vselect,
   },
   setup() {
     const store = useStore()
@@ -112,12 +123,8 @@ export default defineComponent ({
       { name: "DropDown" },
       { name: "DropDown Multiple Choice" },
       { name: "Slider" },
-    ]
-    const levels = [
-      { name: "Low" },
-      { name: "Medium" },
-      { name: "High" },
-    ]
+    ];
+    const levels = [{ name: "Low" }, { name: "Medium" }, { name: "High" }];
 
     return {
       question: computed(() => store.state.question.state.question),
@@ -130,3 +137,11 @@ export default defineComponent ({
 });
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
+<style>
+.slider-base {
+  height: 12px;
+}
+.slider-horizontal .slider-handle {
+  top: -2px;
+}
+</style>
