@@ -50,11 +50,7 @@
         </div>
       </div>
       <div class="flex flex-row gap-8 flex-wrap">
-        <SolutionPartner
-          v-for="item in products"
-          :item="item"
-          v-bind:key="item"
-        />
+        <SolutionPartner v-for="(item,index) in products" :item="item" :index="index" v-bind:key="item" />
       </div>
       <div class="grid place-items-center my-10">
         <Button
